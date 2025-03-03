@@ -11,6 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/NewMicrogame/NewMicrogame.unity
     guid: 0316e775d6d7d7847bc36cd00053fe1e
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/testingMicrogame/testingMicrogame.unity
+    guid: e591db11757f895429feef78505032e5
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/testingMicrogame2/testingMicrogame2.unity
+    guid: 17156e95ffae39e4dbad1a4659592080
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/testingMicrogame3/testingMicrogame3.unity
+    guid: 2e2fa7d1366650b429b7473e00f08ced
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

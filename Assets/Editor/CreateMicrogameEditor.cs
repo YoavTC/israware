@@ -25,7 +25,6 @@ namespace Editor
 
             MicrogameScriptableObject microgame = ScriptableObject.CreateInstance<MicrogameScriptableObject>();
             microgame.id = microgameName;
-            microgame.sceneName = microgameName;
             AssetDatabase.CreateAsset(microgame, resourcesPath + microgameName + ".asset");
             AssetDatabase.SaveAssets();
 
