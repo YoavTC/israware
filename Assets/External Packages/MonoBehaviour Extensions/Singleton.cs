@@ -1,39 +1,42 @@
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+namespace External_Packages.MonoBehaviour_Extensions
 {
-    private static T _instance;
-
-    public static T Instance
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<T>();
+        private static T _instance;
 
+        public static T Instance
+        {
+            get
+            {
                 if (_instance == null)
                 {
-                    GameObject singletonObject = new GameObject(typeof(T).Name);
-                    _instance = singletonObject.AddComponent<T>();
+                    _instance = FindFirstObjectByType<T>();
+
+                    if (_instance == null)
+                    {
+                        GameObject singletonObject = new GameObject(typeof(T).Name);
+                        _instance = singletonObject.AddComponent<T>();
+                    }
                 }
+
+                return _instance;
+            }
+        }
+
+        protected virtual void Awake()
+        {
+            if (_instance != null && _instance != this)
+            {
+                // If an instance already exists, destroy this new instance
+                Destroy(gameObject);
+                return;
             }
 
-            return _instance;
+            // This is the first instance or the assigned instance, don't destroy it on scene load
+            _instance = this as T;
+            //DontDestroyOnLoad(gameObject);
         }
-    }
-
-    protected virtual void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            // If an instance already exists, destroy this new instance
-            Destroy(gameObject);
-            return;
-        }
-
-        // This is the first instance or the assigned instance, don't destroy it on scene load
-        _instance = this as T;
-        //DontDestroyOnLoad(gameObject);
     }
 }
