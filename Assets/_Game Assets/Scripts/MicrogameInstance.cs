@@ -12,26 +12,18 @@ namespace _Game_Assets.Scripts
         private int negativeFeedbacksCount;
         private int positiveFeedbacksCount;
         
-        private IEnumerator Start()
+        private void Start()
         {
             gameManager = GameManager.Instance;
             microgame = gameManager.CurrentMicrogame;
 
             microgameSettings = microgame.GetSettings();
 
-            yield return new WaitForSeconds(microgameSettings.maxMicrogameTime);
-            Feedback(false, true);
+            Timer.Timer.Instance.StartTimer(microgameSettings.maxMicrogameTime);
         }
-
-        public void Feedback(bool positive) => Feedback(positive, false);
-        private void Feedback(bool positive, bool force)
+        
+        public void Feedback(bool positive)
         {
-            if (force)
-            {
-                Finish(positive);
-                return;
-            }
-            
             if (positive) positiveFeedbacksCount++;
             else negativeFeedbacksCount++;
 

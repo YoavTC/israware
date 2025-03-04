@@ -25,7 +25,6 @@ namespace _Game_Assets.Scripts
         
         private IEnumerator Start()
         {
-            Debug.Log("Start..");
             InitializeGameManager();
             
             while (gameActive)
