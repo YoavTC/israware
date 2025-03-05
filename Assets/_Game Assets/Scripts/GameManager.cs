@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using _Game_Assets.Scripts.Transition;
 using External_Packages.MonoBehaviour_Extensions;
 using NaughtyAttributes;
 using UnityEngine;
@@ -14,14 +13,12 @@ namespace _Game_Assets.Scripts
     public class GameManager : Singleton<GameManager>
     {
         [SerializeField] private bool gameActive;
-        
         [SerializeField] private List<MicrogameScriptableObject> microgames;
-        [SerializeField, ReadOnly] private MicrogameScriptableObject currentMicrogame;
-        public MicrogameScriptableObject CurrentMicrogame => currentMicrogame;
-        private MicrogameScriptableObject lastMicrogame;
+        public MicrogameScriptableObject CurrentMicrogame { get; private set; }
 
         [Header("Components")] 
         [SerializeField] private TransitionDoor transitionDoor;
+        [SerializeField] private BetweenHandler betweenHandler;
 
         private void InitializeGameManager()
         {
@@ -29,69 +26,57 @@ namespace _Game_Assets.Scripts
             microgames = Resources.LoadAll<MicrogameScriptableObject>("Microgames/").ToList();
         }
         
-        private IEnumerator Start()
+        private void Start()
         {
             InitializeGameManager();
-            
-            while (gameActive)
-            {
-                StartMicrogame(GetRandomMicrogame());
-                yield return new WaitUntil(() => currentMicrogame == null);
-            }
-        }
 
-        private MicrogameScriptableObject GetRandomMicrogame()
-        {
-            if (microgames.Count <= 1) return microgames.FirstOrDefault();
-
-            MicrogameScriptableObject microgame;
-            do
-            {
-                microgame = microgames[Random.Range(0, microgames.Count)];
-            } 
-            while (microgame == lastMicrogame);
-
-            return microgame;
+            StartCoroutine(TransitionMicrogame());
         }
         
-        private void StartMicrogame(MicrogameScriptableObject microgame)
+        public void FinishedMicrogame(bool win)
         {
-            currentMicrogame = microgame;
-            SceneManager.LoadScene(currentMicrogame.id);
-        }
-        
-        public void FinishMicrogame(bool win)
-        {
-            Debug.Log($"{(win ? "Won" : "Lost")} microgame [{currentMicrogame.id}]");
-
-            StartCoroutine(Transition());
+            betweenHandler.SetLastMicrogameResult(win);
+            StartCoroutine(TransitionMicrogame());
             
-            // lastMicrogame = currentMicrogame;
-            // currentMicrogame = null;
+            Timer.Instance.DisableTimer();
         }
 
-        private IEnumerator Transition()
+        private IEnumerator TransitionMicrogame()
         {
+            // Get random microgame
             MicrogameScriptableObject microgame = GetRandomMicrogame();
-            lastMicrogame = currentMicrogame;
-            currentMicrogame = microgame;
+            CurrentMicrogame = microgame;
             
+            // Start loading the microgame scene
             var loadSceneAsync = SceneManager.LoadSceneAsync(microgame.id);
             if (loadSceneAsync == null) yield break;
-            
-            transitionDoor.Close();
             loadSceneAsync.allowSceneActivation = false;
-            Stopwatch stopwatch = Stopwatch.StartNew();
             
+            // Close and open the transition door
+            yield return StartCoroutine(transitionDoor.Toggle(() =>
+            {
+                // Enable the between-screen
+                betweenHandler.ToggleVisibility(true);
+            }));
+
+            // Animate the between-screen
+            yield return StartCoroutine(betweenHandler.Animate());
+ 
+            // When the screen is finished animating, wait until the scene is fully loaded if it already isn't
             yield return new WaitUntil(() => loadSceneAsync.progress >= 0.9f);
             
-            stopwatch.Stop();
-            float elapsedSeconds = (float) stopwatch.Elapsed.TotalSeconds;
-            if (elapsedSeconds < 0.5f) yield return new WaitForSeconds((0.5f - elapsedSeconds) + elapsedSeconds);
-            
-            loadSceneAsync.allowSceneActivation = true;
-            transitionDoor.Open();
-            
+            // Close and open the transition door
+            yield return StartCoroutine(transitionDoor.Toggle(() =>
+            {
+                // Disable the between-screen & allow the scene to be loaded
+                betweenHandler.ToggleVisibility(false);
+                loadSceneAsync.allowSceneActivation = true;
+            }));
+        }
+        
+        private MicrogameScriptableObject GetRandomMicrogame()
+        {
+            return microgames[Random.Range(0, microgames.Count)];
         }
     }
 }

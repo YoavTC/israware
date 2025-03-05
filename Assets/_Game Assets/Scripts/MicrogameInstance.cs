@@ -19,7 +19,7 @@ namespace _Game_Assets.Scripts
 
             microgameSettings = microgame.GetSettings();
 
-            Timer.Timer.Instance.StartTimer(microgameSettings.maxMicrogameTime);
+            Timer.Instance.StartTimer(microgameSettings.maxMicrogameTime);
         }
         
         public void Feedback(bool positive)
@@ -40,7 +40,7 @@ namespace _Game_Assets.Scripts
 
         private void Finish(bool win = false)
         {
-            gameManager.FinishMicrogame(win);
+            gameManager.FinishedMicrogame(win);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace _Game_Assets.Scripts.Timer
+namespace _Game_Assets.Scripts
 {
     public class Timer : Singleton<Timer>
     {
@@ -46,6 +46,8 @@ namespace _Game_Assets.Scripts.Timer
             leftSlider.value = easedProgress;
             rightSlider.value = easedProgress;
         }
+
+        public void DisableTimer() => timerActive = false;
 
         #if UNITY_EDITOR
         [Button]
