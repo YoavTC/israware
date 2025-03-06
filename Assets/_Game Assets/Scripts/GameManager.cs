@@ -18,7 +18,7 @@ namespace _Game_Assets.Scripts
 
         [Header("Components")] 
         [SerializeField] private TransitionDoor transitionDoor;
-        [SerializeField] private BetweenHandler betweenHandler;
+        [SerializeField] private ResultScreenHandler resultScreenHandler;
 
         private void InitializeGameManager()
         {
@@ -35,7 +35,7 @@ namespace _Game_Assets.Scripts
         
         public void FinishedMicrogame(bool win)
         {
-            betweenHandler.SetLastMicrogameResult(win);
+            resultScreenHandler.SetLastMicrogameResult(win);
             StartCoroutine(TransitionMicrogame());
             
             Timer.Instance.DisableTimer();
@@ -56,11 +56,11 @@ namespace _Game_Assets.Scripts
             yield return StartCoroutine(transitionDoor.Toggle(() =>
             {
                 // Enable the between-screen
-                betweenHandler.ToggleVisibility(true);
+                resultScreenHandler.ToggleVisibility(true);
             }));
 
             // Animate the between-screen
-            yield return StartCoroutine(betweenHandler.Animate());
+            yield return StartCoroutine(resultScreenHandler.Animate());
  
             // When the screen is finished animating, wait until the scene is fully loaded if it already isn't
             yield return new WaitUntil(() => loadSceneAsync.progress >= 0.9f);
@@ -69,7 +69,7 @@ namespace _Game_Assets.Scripts
             yield return StartCoroutine(transitionDoor.Toggle(() =>
             {
                 // Disable the between-screen & allow the scene to be loaded
-                betweenHandler.ToggleVisibility(false);
+                resultScreenHandler.ToggleVisibility(false);
                 loadSceneAsync.allowSceneActivation = true;
             }));
         }

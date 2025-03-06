@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Game_Assets.Scripts
 {
-    public class BetweenHandler : MonoBehaviour
+    public class ResultScreenHandler : MonoBehaviour
     {
         [SerializeField] private GameObject parent;
         [SerializeField] private TMP_Text titleDisplay;
@@ -18,6 +18,7 @@ namespace _Game_Assets.Scripts
         private void Start()
         {
             originalTitleScale = titleDisplay.transform.localScale;
+            ToggleVisibility(false);
         }
 
         public void ToggleVisibility(bool visible)
