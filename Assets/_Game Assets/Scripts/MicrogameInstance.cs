@@ -40,7 +40,7 @@ namespace _Game_Assets.Scripts
 
         private void Finish(bool win = false)
         {
-            gameManager.FinishedMicrogame(win);
+            StartCoroutine(gameManager.FinishedMicrogame(win));
         }
     }
 }

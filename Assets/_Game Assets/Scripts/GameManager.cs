@@ -33,12 +33,25 @@ namespace _Game_Assets.Scripts
             StartCoroutine(TransitionMicrogame());
         }
         
-        public void FinishedMicrogame(bool win)
+        public IEnumerator FinishedMicrogame(bool win)
         {
-            resultScreenHandler.SetLastMicrogameResult(win);
-            StartCoroutine(TransitionMicrogame());
-            
+            bool stopGame = resultScreenHandler.SetLastMicrogameResult(win);
             Timer.Instance.DisableTimer();
+            
+            // Close and open the transition door
+            yield return StartCoroutine(transitionDoor.Toggle(() =>
+            {
+                // Enable the between-screen
+                resultScreenHandler.ToggleVisibility(true);
+            }));
+
+            // Animate the between-screen
+            yield return StartCoroutine(resultScreenHandler.Animate());
+
+            if (!stopGame)
+            {
+                StartCoroutine(TransitionMicrogame());
+            }
         }
 
         private IEnumerator TransitionMicrogame()
@@ -52,16 +65,6 @@ namespace _Game_Assets.Scripts
             if (loadSceneAsync == null) yield break;
             loadSceneAsync.allowSceneActivation = false;
             
-            // Close and open the transition door
-            yield return StartCoroutine(transitionDoor.Toggle(() =>
-            {
-                // Enable the between-screen
-                resultScreenHandler.ToggleVisibility(true);
-            }));
-
-            // Animate the between-screen
-            yield return StartCoroutine(resultScreenHandler.Animate());
- 
             // When the screen is finished animating, wait until the scene is fully loaded if it already isn't
             yield return new WaitUntil(() => loadSceneAsync.progress >= 0.9f);
             
