@@ -52,6 +52,9 @@ namespace _Game_Assets.Scripts
             var loadSceneAsync = SceneManager.LoadSceneAsync(microgame.id);
             if (loadSceneAsync == null) yield break;
             loadSceneAsync.allowSceneActivation = false;
+            
+            // Hide the status overlay when the scene finishes loading
+            loadSceneAsync.completed += operation => HideScreen(ScreenType.STATUS); 
 
             StartCoroutine(ShowScreen(ScreenType.STATUS, -1f));
                 
@@ -62,12 +65,6 @@ namespace _Game_Assets.Scripts
             // Activate the scene
             gameActive = true;
             loadSceneAsync.allowSceneActivation = true;
-            
-            // Small delay to make sure the scene is visually loaded
-            yield return new WaitForSeconds(0.1f);
-            
-            // Hide the status overlay
-            HideScreen(ScreenType.STATUS);
         }
 
         public void OnTimerFinished() => StartCoroutine(OnMicrogameFinished(false));
