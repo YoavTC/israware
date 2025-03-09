@@ -1,5 +1,4 @@
 ﻿using System;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace _Game_Assets.Scripts

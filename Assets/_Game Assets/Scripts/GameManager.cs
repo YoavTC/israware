@@ -1,60 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using _Game_Assets.Scripts.ScreenHandlers;
+using AYellowpaper.SerializedCollections;
 using External_Packages.MonoBehaviour_Extensions;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Debug = UnityEngine.Debug;
 
 namespace _Game_Assets.Scripts
 {
     public class GameManager : Singleton<GameManager>
     {
+        [Header("Screens")] 
+        [SerializeField] private float defaultShowScreenDuration;
+        [SerializeField] private SerializedDictionary<ScreenType, ScreenHandlerBase> screenHandlersDictionary;
+
+        [Header("Game Variables")]
         [SerializeField] private bool gameActive;
-        [SerializeField] private List<MicrogameScriptableObject> microgames;
-        public MicrogameScriptableObject CurrentMicrogame { get; private set; }
+        [SerializeField] private int health;
+        [SerializeField] private int score;
+        [SerializeField] private bool lastMicrogameResult;
 
-        [Header("Components")] 
-        [SerializeField] private TransitionDoor transitionDoor;
-        [SerializeField] private ResultScreenHandler resultScreenHandler;
-
+        // Microgames
+        private List<MicrogameScriptableObject> microgames;
+        [ShowNativeProperty] public MicrogameScriptableObject CurrentMicrogame { get; private set; }
+        
         private void InitializeGameManager()
         {
             DontDestroyOnLoad(this);
-            microgames = Resources.LoadAll<MicrogameScriptableObject>("Microgames/").ToList();
+            microgames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/").ToList();
         }
         
         private void Start()
         {
             InitializeGameManager();
+            StartCoroutine(LoadMicrogame());
 
-            StartCoroutine(TransitionMicrogame());
+            lastMicrogameResult = false;
+            health = 5;
+            score = 0;
         }
         
-        public IEnumerator FinishedMicrogame(bool win)
-        {
-            bool stopGame = resultScreenHandler.SetLastMicrogameResult(win);
-            Timer.Instance.DisableTimer();
-            
-            // Close and open the transition door
-            yield return StartCoroutine(transitionDoor.Toggle(() =>
-            {
-                // Enable the between-screen
-                resultScreenHandler.ToggleVisibility(true);
-            }));
-
-            // Animate the between-screen
-            yield return StartCoroutine(resultScreenHandler.Animate());
-
-            if (!stopGame)
-            {
-                StartCoroutine(TransitionMicrogame());
-            }
-        }
-
-        private IEnumerator TransitionMicrogame()
+        private IEnumerator LoadMicrogame()
         {
             // Get random microgame
             MicrogameScriptableObject microgame = GetRandomMicrogame();
@@ -64,22 +52,68 @@ namespace _Game_Assets.Scripts
             var loadSceneAsync = SceneManager.LoadSceneAsync(microgame.id);
             if (loadSceneAsync == null) yield break;
             loadSceneAsync.allowSceneActivation = false;
-            
-            // When the screen is finished animating, wait until the scene is fully loaded if it already isn't
+
+            StartCoroutine(ShowScreen(ScreenType.STATUS, -1f));
+                
+            // When the screen is finished animating, wait until the scene is fully loaded
             yield return new WaitUntil(() => loadSceneAsync.progress >= 0.9f);
+            yield return new WaitForSeconds(defaultShowScreenDuration);
             
-            // Close and open the transition door
-            yield return StartCoroutine(transitionDoor.Toggle(() =>
+            // Activate the scene
+            gameActive = true;
+            loadSceneAsync.allowSceneActivation = true;
+            
+            // Small delay to make sure the scene is visually loaded
+            yield return new WaitForSeconds(0.1f);
+            
+            // Hide the status overlay
+            HideScreen(ScreenType.STATUS);
+        }
+
+        public void OnTimerFinished() => StartCoroutine(OnMicrogameFinished(false));
+        public IEnumerator OnMicrogameFinished(bool win)
+        {
+            if (!gameActive) yield break;
+
+            gameActive = false;
+            lastMicrogameResult = win;
+            Timer.Instance.DisableTimer();
+            
+            if (win) score++;
+            bool dead = UpdateHealth(win);
+
+            // Show the feedback overlay
+            yield return StartCoroutine(ShowScreen(win ? ScreenType.POSITIVE : ScreenType.NEGATIVE, defaultShowScreenDuration));
+
+            if (dead)
             {
-                // Disable the between-screen & allow the scene to be loaded
-                resultScreenHandler.ToggleVisibility(false);
-                loadSceneAsync.allowSceneActivation = true;
-            }));
+                StartCoroutine(ShowScreen(ScreenType.GAME_OVER, defaultShowScreenDuration));
+            }
+            else
+            {
+                StartCoroutine(LoadMicrogame());
+            }
+        }
+
+        private bool UpdateHealth(bool win)
+        {
+            health += win ? 0 : -1;
+            return health <= 0;
         }
         
         private MicrogameScriptableObject GetRandomMicrogame()
         {
             return microgames[Random.Range(0, microgames.Count)];
+        }
+
+        private IEnumerator ShowScreen(ScreenType screenType, float duration)
+        {
+            yield return StartCoroutine(screenHandlersDictionary[screenType].Show(duration, lastMicrogameResult, health, score));
+        }
+
+        private void HideScreen(ScreenType screenType)
+        {
+            screenHandlersDictionary[screenType].Hide();
         }
     }
 }

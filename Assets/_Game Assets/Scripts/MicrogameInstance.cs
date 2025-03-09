@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _Game_Assets.Scripts
 {
@@ -40,7 +39,7 @@ namespace _Game_Assets.Scripts
 
         private void Finish(bool win = false)
         {
-            StartCoroutine(gameManager.FinishedMicrogame(win));
+            StartCoroutine(gameManager.OnMicrogameFinished(win));
         }
     }
 }
