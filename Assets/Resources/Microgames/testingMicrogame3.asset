@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testingMicrogame3
   m_EditorClassIdentifier: 
   id: testingMicrogame3
+  prompt: Do it!
   finishType: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 3

@@ -6,6 +6,7 @@ using AYellowpaper.SerializedCollections;
 using External_Packages.MonoBehaviour_Extensions;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace _Game_Assets.Scripts
@@ -21,6 +22,9 @@ namespace _Game_Assets.Scripts
         [SerializeField] private int health;
         [SerializeField] private int score;
         [SerializeField] private bool lastMicrogameResult;
+
+        [Header("Events")] 
+        [SerializeField] private UnityEvent<bool> finishedMicrogameUnityEvent;
 
         // Microgames
         private List<MicrogameScriptableObject> microgames;
@@ -61,10 +65,13 @@ namespace _Game_Assets.Scripts
             }; 
 
             StartCoroutine(ShowScreen(ScreenType.STATUS, -1f));
+            
                 
             // When the screen is finished animating, wait until the scene is fully loaded
             yield return new WaitUntil(() => loadSceneAsync.progress >= 0.9f);
             yield return new WaitForSeconds(defaultShowScreenDuration);
+            
+            PromptHandler.Instance.ShowPrompt(microgame.prompt);
             
             // Activate the scene
             gameActive = true;
@@ -75,6 +82,8 @@ namespace _Game_Assets.Scripts
         public IEnumerator OnMicrogameFinished(bool win)
         {
             if (!gameActive) yield break;
+            
+            finishedMicrogameUnityEvent?.Invoke(win);
 
             gameActive = false;
             lastMicrogameResult = win;

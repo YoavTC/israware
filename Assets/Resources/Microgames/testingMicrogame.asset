@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testingMicrogame
   m_EditorClassIdentifier: 
   id: testingMicrogame
+  prompt: Lorem Ipsum!
   finishType: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1

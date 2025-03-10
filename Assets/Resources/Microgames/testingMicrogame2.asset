@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testingMicrogame2
   m_EditorClassIdentifier: 
   id: testingMicrogame2
+  prompt: Sit Amor!
   finishType: 0
   positiveFeedbacksToWin: 3
   negativeFeedbacksToLose: 1

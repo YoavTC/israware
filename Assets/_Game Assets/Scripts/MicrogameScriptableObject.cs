@@ -8,6 +8,7 @@ namespace _Game_Assets.Scripts
     {
         [Header("Meta")]
         public string id;
+        public string prompt;
         public MicrogameFinishType finishType;
 
         public int positiveFeedbacksToWin;
