@@ -8,5 +8,6 @@
         GAME_OVER,
         BOSS,
         FASTER,
+        HEALTH,
     }
 }

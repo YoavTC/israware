@@ -10,8 +10,11 @@ namespace _Game_Assets.Scripts.ScreenHandlers
 
         public void Hide()
         {
-            StopAllCoroutines();
-            screenParent.SetActive(false);
+            if (this != null)
+            {
+                StopAllCoroutines();
+                screenParent.SetActive(false);
+            }
         }
     }
 }

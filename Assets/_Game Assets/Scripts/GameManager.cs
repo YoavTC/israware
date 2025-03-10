@@ -54,7 +54,11 @@ namespace _Game_Assets.Scripts
             loadSceneAsync.allowSceneActivation = false;
             
             // Hide the status overlay when the scene finishes loading
-            loadSceneAsync.completed += operation => HideScreen(ScreenType.STATUS); 
+            loadSceneAsync.completed += operation =>
+            {
+                HideScreen(ScreenType.HEALTH);
+                HideScreen(ScreenType.STATUS);
+            }; 
 
             StartCoroutine(ShowScreen(ScreenType.STATUS, -1f));
                 
@@ -80,11 +84,12 @@ namespace _Game_Assets.Scripts
             bool dead = UpdateHealth(win);
 
             // Show the feedback overlay
+            StartCoroutine(ShowScreen(ScreenType.HEALTH, -1f));
             yield return StartCoroutine(ShowScreen(win ? ScreenType.POSITIVE : ScreenType.NEGATIVE, defaultShowScreenDuration));
 
             if (dead)
             {
-                StartCoroutine(ShowScreen(ScreenType.GAME_OVER, defaultShowScreenDuration));
+                StartCoroutine(ShowScreen(ScreenType.GAME_OVER, -1f));
             }
             else
             {
@@ -110,7 +115,7 @@ namespace _Game_Assets.Scripts
 
         private void HideScreen(ScreenType screenType)
         {
-            screenHandlersDictionary[screenType].Hide();
+            screenHandlersDictionary[screenType]?.Hide();
         }
     }
 }
