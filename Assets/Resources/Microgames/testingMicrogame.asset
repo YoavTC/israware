@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: testingMicrogame
   prompt: Lorem Ipsum!
-  finishType: 0
+  hideCursor: 0
+  finishType: 2
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 7.5

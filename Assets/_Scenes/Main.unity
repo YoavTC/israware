@@ -2626,6 +2626,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2669498063818114572, guid: 772dddd57bc0e91468958de9b1b0aff8, type: 3}
+      propertyPath: TimerFinishedUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669498063818114572, guid: 772dddd57bc0e91468958de9b1b0aff8, type: 3}
       propertyPath: TimerFinishedUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1529827642}

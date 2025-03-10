@@ -17,12 +17,16 @@ namespace _Game_Assets.Scripts
         [SerializeField] private bool timerActive;
         [SerializeField] private float time;
         [SerializeField, ReadOnly] private float originalTime;
-        [SerializeField] private UnityEvent TimerFinishedUnityEvent;
+        [SerializeField] private UnityEvent<bool> TimerFinishedUnityEvent;
+        private bool valueAtEnd;
         
-        public void StartTimer(float newTime)
+        public void StartTimer(float newTime, bool newValueAtEnd)
         {
+            Debug.Log($"Starting new timer: {newTime}s - {newValueAtEnd}");
             time = newTime;
             originalTime = time;
+
+            valueAtEnd = newValueAtEnd;
             timerActive = true;
         }
 
@@ -35,7 +39,7 @@ namespace _Game_Assets.Scripts
             
             if (time <= 0f)
             {
-                TimerFinishedUnityEvent?.Invoke();
+                TimerFinishedUnityEvent?.Invoke(valueAtEnd);
                 timerActive = false;
             }
         }
@@ -51,7 +55,7 @@ namespace _Game_Assets.Scripts
 
         #if UNITY_EDITOR
         [Button]
-        public void TestTimer10s() => StartTimer(10f);
+        public void TestTimer10s() => StartTimer(10f, false);
         #endif
     }
 }

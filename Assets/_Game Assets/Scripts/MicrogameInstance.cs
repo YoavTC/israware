@@ -1,37 +1,46 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Game_Assets.Scripts
 {
     public class MicrogameInstance : MonoBehaviour
     {
         private GameManager gameManager;
-        private MicrogameScriptableObject microgame;
+        [SerializeField, ReadOnly] private MicrogameScriptableObject microgame;
 
-        private MicrogameSettingsStruct microgameSettings;
+        [SerializeField, ReadOnly] private MicrogameSettingsStruct microgameSettings;
         private int negativeFeedbacksCount;
         private int positiveFeedbacksCount;
         
         private void Start()
         {
             gameManager = GameManager.Instance;
-            microgame = gameManager.CurrentMicrogame;
-
+            
+            if (gameManager != null)
+            {
+                Debug.Log("Manager is not null using it..");
+                microgame = gameManager.CurrentMicrogame;
+            } else LoadMicrogameScriptableObject();
+            
+            Cursor.visible = !microgameSettings.hideCursor;
             microgameSettings = microgame.GetSettings();
-
-            Timer.Instance.StartTimer(microgameSettings.maxMicrogameTime);
+            
+            if (Timer.Instance != null) Timer.Instance?.StartTimer(microgameSettings.maxMicrogameTime, microgameSettings.winAtTimerFinish);
         }
         
         public void Feedback(bool positive)
         {
+            Debug.Log("Received feedback");
             if (positive) positiveFeedbacksCount++;
             else negativeFeedbacksCount++;
 
-            if (microgameSettings.positiveFeedbacksToWin <= positiveFeedbacksCount)
+            if (microgameSettings.positiveFeedbacksToWin > 0 && positiveFeedbacksCount >= microgameSettings.positiveFeedbacksToWin)
             {
                 Finish(true);
             }
 
-            if (microgameSettings.negativeFeedbacksToLose <= negativeFeedbacksCount)
+            if (microgameSettings.negativeFeedbacksToLose > 0 && negativeFeedbacksCount >= microgameSettings.negativeFeedbacksToLose)
             {
                 Finish(false);
             }
@@ -39,7 +48,24 @@ namespace _Game_Assets.Scripts
 
         private void Finish(bool win = false)
         {
-            StartCoroutine(gameManager.OnMicrogameFinished(win));
+            if (gameManager != null)
+            {
+                StartCoroutine(gameManager.OnMicrogameFinished(win));
+            }
         }
+
+        private void LoadMicrogameScriptableObject()
+        {
+            microgame = Resources.Load<MicrogameScriptableObject>($"Microgames/{SceneManager.GetActiveScene().name}");
+            microgameSettings = microgame.GetSettings();
+        }
+        
+        #if UNITY_EDITOR
+        [Button]
+        private void ValidateSettings()
+        {
+            LoadMicrogameScriptableObject();
+        }
+        #endif
     }
 }

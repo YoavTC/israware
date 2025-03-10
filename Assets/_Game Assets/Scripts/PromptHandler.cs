@@ -43,7 +43,9 @@ namespace _Game_Assets.Scripts
 
         public void KillPrompt()
         {
+            Debug.Log("Hiding prompt");
             tweenScaleEffect.DOKill(true);
+            promptDisplay.DOKill(true);
             HidePrompt();
         }
     }

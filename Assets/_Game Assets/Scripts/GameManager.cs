@@ -33,7 +33,11 @@ namespace _Game_Assets.Scripts
         private void InitializeGameManager()
         {
             DontDestroyOnLoad(this);
-            microgames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/").ToList();
+            var loadedMicrogames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/")
+                .Where(mg => !mg.name.Contains("~")) // Filter out filenames containing '~'
+                .ToList();
+
+            microgames = loadedMicrogames;
         }
         
         private void Start()
@@ -78,7 +82,7 @@ namespace _Game_Assets.Scripts
             loadSceneAsync.allowSceneActivation = true;
         }
 
-        public void OnTimerFinished() => StartCoroutine(OnMicrogameFinished(false));
+        public void OnTimerFinished(bool win) => StartCoroutine(OnMicrogameFinished(win));
         public IEnumerator OnMicrogameFinished(bool win)
         {
             if (!gameActive) yield break;

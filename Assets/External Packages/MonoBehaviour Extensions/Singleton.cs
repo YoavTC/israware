@@ -14,11 +14,11 @@ namespace External_Packages.MonoBehaviour_Extensions
                 {
                     _instance = FindFirstObjectByType<T>();
 
-                    if (_instance == null)
-                    {
-                        GameObject singletonObject = new GameObject(typeof(T).Name);
-                        _instance = singletonObject.AddComponent<T>();
-                    }
+                    // if (_instance == null)
+                    // {
+                    //     GameObject singletonObject = new GameObject(typeof(T).Name);
+                    //     _instance = singletonObject.AddComponent<T>();
+                    // }
                 }
 
                 return _instance;

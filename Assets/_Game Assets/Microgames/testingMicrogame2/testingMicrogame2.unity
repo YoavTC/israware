@@ -737,6 +737,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79bccaeed2e3417fbfde0525135aab1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  microgame: {fileID: 11400000, guid: 299b38f189c0d464da536df87414e7d1, type: 2}
+  microgameSettings:
+    positiveFeedbacksToWin: 3
+    negativeFeedbacksToLose: 1
+    maxMicrogameTime: 7.5
+    hideCursor: 0
 --- !u!1 &1951608838
 GameObject:
   m_ObjectHideFlags: 0

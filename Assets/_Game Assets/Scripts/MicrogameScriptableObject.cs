@@ -9,15 +9,16 @@ namespace _Game_Assets.Scripts
         [Header("Meta")]
         public string id;
         public string prompt;
-        public MicrogameFinishType finishType;
+        public bool hideCursor;
 
         public int positiveFeedbacksToWin;
         public int negativeFeedbacksToLose;
         public float maxMicrogameTime;
+        public bool winAtTimerFinish;
 
         public MicrogameSettingsStruct GetSettings()
         {
-            return new MicrogameSettingsStruct(positiveFeedbacksToWin, negativeFeedbacksToLose, maxMicrogameTime);
+            return new MicrogameSettingsStruct(positiveFeedbacksToWin, negativeFeedbacksToLose, maxMicrogameTime, winAtTimerFinish, hideCursor);
         }
     }
 
@@ -27,12 +28,16 @@ namespace _Game_Assets.Scripts
         public int positiveFeedbacksToWin;
         public int negativeFeedbacksToLose;
         public float maxMicrogameTime;
+        public bool winAtTimerFinish;
+        public bool hideCursor;
 
-        public MicrogameSettingsStruct(int positiveFeedbacksToWin, int negativeFeedbacksToLose, float maxMicrogameTime)
+        public MicrogameSettingsStruct(int positiveFeedbacksToWin, int negativeFeedbacksToLose, float maxMicrogameTime, bool winAtTimerFinish, bool hideCursor)
         {
             this.positiveFeedbacksToWin = positiveFeedbacksToWin;
             this.negativeFeedbacksToLose = negativeFeedbacksToLose;
             this.maxMicrogameTime = maxMicrogameTime;
+            this.winAtTimerFinish = winAtTimerFinish;
+            this.hideCursor = hideCursor;
         }
     }
 
