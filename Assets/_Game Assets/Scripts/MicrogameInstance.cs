@@ -1,5 +1,8 @@
-﻿using NaughtyAttributes;
+﻿using System;
+using NaughtyAttributes;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace _Game_Assets.Scripts
@@ -65,6 +68,14 @@ namespace _Game_Assets.Scripts
         private void ValidateSettings()
         {
             LoadMicrogameScriptableObject();
+        }
+        
+        private void Update()
+        {
+            if (gameManager == null && Input.GetKeyDown(KeyCode.R))
+            {
+                EditorSceneManager.LoadSceneInPlayMode(SceneManager.GetActiveScene().path, new LoadSceneParameters(LoadSceneMode.Single));
+            }
         }
         #endif
     }
