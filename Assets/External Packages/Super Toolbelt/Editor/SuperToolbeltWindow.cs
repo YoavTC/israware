@@ -93,7 +93,7 @@ namespace External_Packages.Super_Toolbelt.Editor
       
         // Buttons logic and functionality
         #region Button 2: Toggle UI
-        private void ToggleUI()
+        private static void ToggleUI()
         {
             Canvas[] canvases = FindObjectsByType<Canvas>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (Canvas canvas in canvases)
@@ -104,15 +104,14 @@ namespace External_Packages.Super_Toolbelt.Editor
         #endregion
         
         #region Button 3: Toggle Inspector Debug Mode
-        private void ToggleInspectorMode()
+        private static void ToggleInspectorMode()
         {
             EditorWindow targetInspector = GetActiveInspectorWindow();
- 
             if (targetInspector != null  && targetInspector.GetType().Name == "InspectorWindow")
             {
                 Type type = Assembly.GetAssembly(typeof(UnityEditor.Editor)).GetType("UnityEditor.InspectorWindow");
                 FieldInfo field = type.GetField("m_InspectorMode", BindingFlags.NonPublic | BindingFlags.Instance);
-
+                
                 if (field != null)
                 {
                     InspectorMode mode = (InspectorMode)field.GetValue(targetInspector);
@@ -121,7 +120,10 @@ namespace External_Packages.Super_Toolbelt.Editor
                     MethodInfo method = type.GetMethod("SetMode", BindingFlags.NonPublic | BindingFlags.Instance);
                     if (method != null)
                     {
-                        method.Invoke(targetInspector, new object[] { mode });
+                        EditorApplication.delayCall += () =>
+                        {
+                            method.Invoke(targetInspector, new object[] { mode });
+                        };
                     }
                 }
             
