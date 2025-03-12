@@ -2,6 +2,7 @@ using System;
 using _Game_Assets.Scripts;
 using DG.Tweening;
 using External_Packages.MonoBehaviour_Extensions;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -10,7 +11,8 @@ namespace _Game_Assets.Microgames.matkot
 {
     public class BallSpawner : CooldownAction
     {
-        [Header("Spawner")]
+        [Header("Spawner")] 
+        [SerializeField] private Transform spawnerParent;
         [SerializeField] private int spawnAmount;
         [SerializeField] private float spawnCooldown;
         [SerializeField] private float spawnCooldownReducePerStep;
@@ -26,12 +28,16 @@ namespace _Game_Assets.Microgames.matkot
         [SerializeField] private Vector2 minMaxBallTravelDuration;
 
         [SerializeField] private UnityEvent missedBallUnityEvent;
+
+        private MMF_SpriteRenderer flickerFeedback;
         
         private void Start()
         {
             ActionEnabled = true;
             ActionCooldown = spawnCooldown;
             ballsSpawned = 0;
+
+            flickerFeedback = spawnerParent.GetComponent<MMF_Player>().GetFeedbackOfType<MMF_SpriteRenderer>();
         }
 
         protected override void ExecuteAction()
@@ -48,9 +54,12 @@ namespace _Game_Assets.Microgames.matkot
 
         private void ShootBall()
         {
-            var ball = Instantiate(ballPrefab, spawnOriginPoint[Random.Range(0, spawnOriginPoint.Length)], Quaternion.identity).transform;
+            var ball = Instantiate(ballPrefab, spawnOriginPoint[Random.Range(0, spawnOriginPoint.Length)], Quaternion.identity, spawnerParent).transform;
 
-            ball.GetComponent<SpriteRenderer>().color = External_Packages.Random.RandomBool() ? Color.black : Color.red;
+            flickerFeedback.BoundSpriteRenderer =ball.GetComponent<SpriteRenderer>();
+            // flickerFeedback.BoundRenderer = 
+            
+            ball.GetComponent<SpriteRenderer>().color = External_Packages.Random.RandomBool() ? Color.black : Color.red;//Color.white; //External_Packages.Random.RandomBool() ? Color.black : Color.red;
 
             float lifetime = GetRandomFromVector2(minMaxBallTravelDuration);
             ball.DOMove(targetPoints[Random.Range(0, targetPoints.Length)], lifetime)

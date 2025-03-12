@@ -3,25 +3,31 @@ using System.Collections;
 using DG.Tweening;
 using External_Packages.MonoBehaviour_Extensions;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace _Game_Assets.Microgames.matkot
 {
     public class MatkotController : CooldownAction
     {
+        [Header("Components")]
         [SerializeField] private Transform paddle;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private Collider2D paddleCollider;
         [SerializeField] private Camera mainCamera;
 
+        [Header("Cooldown")]
         [SerializeField] private float useCooldown;
         [SerializeField] private float useDuration;
         [SerializeField] private bool canUse;
         [SerializeField] private Sprite defaultSprite, useSprite;
         
+        [Header("Deflection")]
         [SerializeField] private Vector2[] deflectedBallsTargetPoints;
         [SerializeField] private float deflectedBallsSpeed;
+        [SerializeField] private UnityEvent paddleHitBallUnityEvent;
         
+        [Header("Rotation")]
         [SerializeField] private Vector2 rotationAnchorPoint;
         [SerializeField] private Vector2 rotationOffset;
 
@@ -99,6 +105,19 @@ namespace _Game_Assets.Microgames.matkot
 
                 ball.DOMove(deflectedBallsTargetPoints[Random.Range(0, deflectedBallsTargetPoints.Length)],
                     deflectedBallsSpeed).OnComplete(() => Destroy(ball.gameObject));
+
+                ball.DOScale(0f, deflectedBallsSpeed * 0.65f).SetEase(Ease.Linear);
+
+                TrailRenderer ballTrailRenderer = ball.GetComponent<TrailRenderer>();
+                ballTrailRenderer.time *= 1.5f;
+                
+                ballTrailRenderer.DOResize(0f, 0f, deflectedBallsSpeed);
+                
+                // ballTrailRenderer.GetComponent<Renderer>().material.DOFade(0f, deflectedBallsSpeed);
+                ballTrailRenderer.endColor = new Color(1f, 1f, 1f, 0.5f);
+                ballTrailRenderer.startColor = new Color(1f, 1f, 1f, 0.5f);
+                
+                paddleHitBallUnityEvent?.Invoke();
             }
         }
     }
