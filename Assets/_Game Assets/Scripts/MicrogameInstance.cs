@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -15,6 +17,8 @@ namespace _Game_Assets.Scripts
         [SerializeField, ReadOnly] private MicrogameSettingsStruct microgameSettings;
         private int negativeFeedbacksCount;
         private int positiveFeedbacksCount;
+
+        [SerializeField] private float finishDelay;
         
         private void Start()
         {
@@ -28,8 +32,6 @@ namespace _Game_Assets.Scripts
             
             Cursor.visible = !microgameSettings.hideCursor;
             microgameSettings = microgame.GetSettings();
-            
-            if (Timer.Instance != null) Timer.Instance?.StartTimer(microgameSettings.maxMicrogameTime, microgameSettings.winAtTimerFinish);
         }
         
         public void Feedback(bool positive)
@@ -40,17 +42,18 @@ namespace _Game_Assets.Scripts
 
             if (microgameSettings.positiveFeedbacksToWin > 0 && positiveFeedbacksCount >= microgameSettings.positiveFeedbacksToWin)
             {
-                Finish(true);
+                StartCoroutine(Finish(true));
             }
 
             if (microgameSettings.negativeFeedbacksToLose > 0 && negativeFeedbacksCount >= microgameSettings.negativeFeedbacksToLose)
             {
-                Finish(false);
+                StartCoroutine(Finish(false));
             }
         }
-
-        private void Finish(bool win = false)
+        
+        private IEnumerator Finish(bool win = false)
         {
+            if (win) yield return new WaitForSeconds(finishDelay);
             if (gameManager != null)
             {
                 StartCoroutine(gameManager.OnMicrogameFinished(win));

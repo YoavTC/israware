@@ -15,7 +15,7 @@ MonoBehaviour:
   id: matkot
   prompt: Play matkot!
   hideCursor: 1
-  positiveFeedbacksToWin: 0
+  positiveFeedbacksToWin: 10
   negativeFeedbacksToLose: 1
-  maxMicrogameTime: 10
+  maxMicrogameTime: -1
   winAtTimerFinish: 1

@@ -25,6 +25,7 @@ namespace _Game_Assets.Scripts
 
         [Header("Events")] 
         [SerializeField] private UnityEvent<bool> finishedMicrogameUnityEvent;
+        [SerializeField] private UnityEvent<MicrogameScriptableObject> loadedMicrogameUnityEvent;
 
         // Microgames
         private List<MicrogameScriptableObject> microgames;
@@ -80,6 +81,8 @@ namespace _Game_Assets.Scripts
             // Activate the scene
             gameActive = true;
             loadSceneAsync.allowSceneActivation = true;
+            
+            loadedMicrogameUnityEvent?.Invoke(microgame);
         }
 
         public void OnTimerFinished(bool win) => StartCoroutine(OnMicrogameFinished(win));
@@ -91,7 +94,6 @@ namespace _Game_Assets.Scripts
 
             gameActive = false;
             lastMicrogameResult = win;
-            Timer.Instance.DisableTimer();
             
             if (win) score++;
             bool dead = UpdateHealth(win);

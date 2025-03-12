@@ -1,8 +1,8 @@
-using System;
 using _Game_Assets.Scripts;
 using DG.Tweening;
 using External_Packages.MonoBehaviour_Extensions;
 using MoreMountains.Feedbacks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -26,18 +26,27 @@ namespace _Game_Assets.Microgames.matkot
         [SerializeField] private GameObject ballPrefab;
         [SerializeField] private Vector2 minMaxBallPathHeight;
         [SerializeField] private Vector2 minMaxBallTravelDuration;
-
-        [SerializeField] private UnityEvent missedBallUnityEvent;
-
         private MMF_SpriteRenderer flickerFeedback;
+
+        [Header("UI")]
+        [SerializeField] private TMP_Text remainingBallsCounterDisplay;
+
+        [Header("Events")]
+        [SerializeField] private UnityEvent missedBallUnityEvent;
         
         private void Start()
         {
             ActionEnabled = true;
             ActionCooldown = spawnCooldown;
             ballsSpawned = 0;
+            
+            if (GameManager.Instance != null)
+            {
+                spawnAmount = GameManager.Instance.CurrentMicrogame.positiveFeedbacksToWin;
+            }
 
             flickerFeedback = spawnerParent.GetComponent<MMF_Player>().GetFeedbackOfType<MMF_SpriteRenderer>();
+            UpdateUICounter();
         }
 
         protected override void ExecuteAction()
@@ -56,10 +65,9 @@ namespace _Game_Assets.Microgames.matkot
         {
             var ball = Instantiate(ballPrefab, spawnOriginPoint[Random.Range(0, spawnOriginPoint.Length)], Quaternion.identity, spawnerParent).transform;
 
-            flickerFeedback.BoundSpriteRenderer =ball.GetComponent<SpriteRenderer>();
-            // flickerFeedback.BoundRenderer = 
+            flickerFeedback.BoundSpriteRenderer = ball.GetComponent<SpriteRenderer>();
             
-            ball.GetComponent<SpriteRenderer>().color = External_Packages.Random.RandomBool() ? Color.black : Color.red;//Color.white; //External_Packages.Random.RandomBool() ? Color.black : Color.red;
+            ball.GetComponent<SpriteRenderer>().color = External_Packages.Random.RandomBool() ? Color.black : Color.red;
 
             float lifetime = GetRandomFromVector2(minMaxBallTravelDuration);
             ball.DOMove(targetPoints[Random.Range(0, targetPoints.Length)], lifetime)
@@ -78,6 +86,11 @@ namespace _Game_Assets.Microgames.matkot
             
             Debug.Log("Ball reached end");
             missedBallUnityEvent?.Invoke();
+        }
+
+        public void UpdateUICounter()
+        {
+            remainingBallsCounterDisplay.text = (spawnAmount - ballsSpawned).ToString("D2");
         }
 
         private float GetRandomFromVector2(Vector2 vector)

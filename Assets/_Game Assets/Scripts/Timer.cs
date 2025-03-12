@@ -1,3 +1,4 @@
+using DG.Tweening;
 using External_Packages.MonoBehaviour_Extensions;
 using NaughtyAttributes;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 
 namespace _Game_Assets.Scripts
 {
-    public class Timer : Singleton<Timer>
+    public class Timer : MonoBehaviour
     {
         [Header("Sliders")]
         [SerializeField] private Slider leftSlider;
@@ -19,15 +20,26 @@ namespace _Game_Assets.Scripts
         [SerializeField, ReadOnly] private float originalTime;
         [SerializeField] private UnityEvent<bool> TimerFinishedUnityEvent;
         private bool valueAtEnd;
-        
-        public void StartTimer(float newTime, bool newValueAtEnd)
-        {
-            Debug.Log($"Starting new timer: {newTime}s - {newValueAtEnd}");
-            time = newTime;
-            originalTime = time;
 
-            valueAtEnd = newValueAtEnd;
-            timerActive = true;
+        public void OnMicrogameLoaded(MicrogameScriptableObject microgame)
+        {
+            if (microgame.maxMicrogameTime < 0) DisableTimer();
+            else
+            {
+                time = microgame.maxMicrogameTime;
+                originalTime = time;
+
+                valueAtEnd = microgame.winAtTimerFinish;
+                timerActive = true;
+                
+                ToggleTimerVisibility(true);
+            }
+        }
+        
+        public void DisableTimer()
+        {
+            timerActive = false;
+            ToggleTimerVisibility(false);
         }
 
         private void Update()
@@ -51,11 +63,9 @@ namespace _Game_Assets.Scripts
             rightSlider.value = easedProgress;
         }
 
-        public void DisableTimer() => timerActive = false;
-
-        #if UNITY_EDITOR
-        [Button]
-        public void TestTimer10s() => StartTimer(10f, false);
-        #endif
+        private void ToggleTimerVisibility(bool state)
+        {
+            transform.GetComponent<RectTransform>().DOAnchorPosY(state ? 0f : -50f, 0);
+        }
     }
 }

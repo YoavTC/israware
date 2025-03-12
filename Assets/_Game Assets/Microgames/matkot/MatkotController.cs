@@ -97,23 +97,22 @@ namespace _Game_Assets.Microgames.matkot
         {
             if (other.CompareTag("NotPlayer"))
             {
+                // Get ball & remove collider component
                 Transform ball = other.transform;
                 Destroy(other);
 
+                // Stop it's Tweens
                 ball.DOKill(false);
                 ball.DOComplete(false);
-
-                ball.DOMove(deflectedBallsTargetPoints[Random.Range(0, deflectedBallsTargetPoints.Length)],
-                    deflectedBallsSpeed).OnComplete(() => Destroy(ball.gameObject));
-
+                
+                // Start new going out Tweens
+                ball.DOMove(deflectedBallsTargetPoints[Random.Range(0, deflectedBallsTargetPoints.Length)], deflectedBallsSpeed).OnComplete(() => Destroy(ball.gameObject));
                 ball.DOScale(0f, deflectedBallsSpeed * 0.65f).SetEase(Ease.Linear);
 
+                // Modify it's Trail Renderer
                 TrailRenderer ballTrailRenderer = ball.GetComponent<TrailRenderer>();
                 ballTrailRenderer.time *= 1.5f;
-                
                 ballTrailRenderer.DOResize(0f, 0f, deflectedBallsSpeed);
-                
-                // ballTrailRenderer.GetComponent<Renderer>().material.DOFade(0f, deflectedBallsSpeed);
                 ballTrailRenderer.endColor = new Color(1f, 1f, 1f, 0.5f);
                 ballTrailRenderer.startColor = new Color(1f, 1f, 1f, 0.5f);
                 
