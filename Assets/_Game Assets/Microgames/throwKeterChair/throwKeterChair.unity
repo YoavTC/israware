@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressIndicator: {fileID: 295463760}
-  indicatorSpeed: 2
+  indicatorSpeed: 1.5
   validityIndicator: {fileID: 1957646654}
   validityThreshold: 100
   validColor: {r: 0.1254895, g: 0.5660378, b: 0.1555297, a: 1}
