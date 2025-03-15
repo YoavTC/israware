@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/matkot/matkot.unity
     guid: 42a17a6908151ca47af6d9656be90d6e
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/throwKeterChair/throwKeterChair.unity
+    guid: 0165b427669f60144937ac849d032e46
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
