@@ -13,12 +13,17 @@ namespace _Game_Assets.Microgames.throwKeterChair
         [SerializeField, AnimatorParam(nameof(animator))] private string hitParam, missParam;
         [SerializeField, AnimatorParam(nameof(animator))] private string randomParam;
 
+        [SerializeField] private Animator ars2Animator;
+        [SerializeField, AnimatorParam(nameof(ars2Animator))] private string ars2HitParam;
+
         [SerializeField] private MMF_Player feedbackPlayer, chairFeedbackPlayer;
 
         public void OnThrowChair(bool hit)
         {
             animator?.SetBool(randomParam, Random.RandomBool());
             animator?.SetTrigger(hit ? hitParam : missParam);
+            
+            if (hit) ars2Animator?.SetTrigger(ars2HitParam);
         }
 
         [UsedImplicitly] // Triggered by animation
