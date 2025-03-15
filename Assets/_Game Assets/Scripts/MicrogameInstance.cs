@@ -18,7 +18,9 @@ namespace _Game_Assets.Scripts
         private int negativeFeedbacksCount;
         private int positiveFeedbacksCount;
 
-        [SerializeField] private float finishDelay;
+        [SerializeField] private float winFinishDelay;
+        [SerializeField] private float LoseFinishDelay;
+        
         
         private void Start()
         {
@@ -53,7 +55,7 @@ namespace _Game_Assets.Scripts
         
         private IEnumerator Finish(bool win = false)
         {
-            if (win) yield return new WaitForSeconds(finishDelay);
+            yield return new WaitForSeconds(win ? winFinishDelay : LoseFinishDelay);
             if (gameManager != null)
             {
                 StartCoroutine(gameManager.OnMicrogameFinished(win));

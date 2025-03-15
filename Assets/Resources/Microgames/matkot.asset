@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: matkot
   m_EditorClassIdentifier: 
   id: matkot
-  prompt: Play matkot!
+  ENGLISH_PROMPT: Play Matkot!
+  HEBREW_PROMPT: "!\u05EA\u05D5\u05E7\u05D8\u05DE \u05D5\u05E7\u05D7\u05E9\u05EA"
   hideCursor: 1
   positiveFeedbacksToWin: 10
   negativeFeedbacksToLose: 1

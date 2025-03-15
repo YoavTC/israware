@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace _Game_Assets.Scripts
@@ -8,7 +10,17 @@ namespace _Game_Assets.Scripts
     {
         [Header("Meta")]
         public string id;
-        public string prompt;
+        public string ENGLISH_PROMPT;
+        public string HEBREW_PROMPT;
+
+#if UNITY_EDITOR
+        [Button]
+        public void FixHebrew()
+        {
+            HEBREW_PROMPT = new string(HEBREW_PROMPT.Reverse().ToArray());
+        }
+#endif
+        
         public bool hideCursor;
 
         public int positiveFeedbacksToWin;

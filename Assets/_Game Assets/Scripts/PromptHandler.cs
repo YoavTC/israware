@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using DG.Tweening;
 using External_Packages.Extra_Components;
 using External_Packages.MonoBehaviour_Extensions;
@@ -8,8 +10,16 @@ using UnityEngine;
 
 namespace _Game_Assets.Scripts
 {
+    public enum Language
+    {
+        ENGLISH, HEBREW
+    }
+    
     public class PromptHandler : Singleton<PromptHandler>
     {
+        [SerializeField] private Language language;
+        
+        [Header("Settings")]
         [SerializeField] private float defaultPromptDuration;
         [SerializeField] private Vector2 inOutFadeDuration;
         [SerializeField] private TMP_Text promptDisplay;
@@ -17,9 +27,14 @@ namespace _Game_Assets.Scripts
 
         [Button] public void T() => ShowPrompt("Lorem Ipsum");
         [Button] public void TT() => ShowPrompt("Lorem Ipsum", Color.red);
+
+        public void ShowPrompt(MicrogameScriptableObject microgame)
+        {
+            ShowPrompt((language == Language.ENGLISH) ? microgame.ENGLISH_PROMPT : microgame.HEBREW_PROMPT);
+        }
         
-        public void ShowPrompt(string text) => ShowPrompt(text, Color.white);
-        public void ShowPrompt(string text, Color color)
+        private void ShowPrompt(string text) => ShowPrompt(text, Color.white);
+        private void ShowPrompt(string text, Color color)
         {
             promptDisplay.color = color;
             promptDisplay.text = text;

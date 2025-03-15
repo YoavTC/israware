@@ -76,7 +76,7 @@ namespace _Game_Assets.Scripts
             yield return new WaitUntil(() => loadSceneAsync.progress >= 0.9f);
             yield return new WaitForSeconds(defaultShowScreenDuration);
             
-            PromptHandler.Instance.ShowPrompt(microgame.prompt);
+            PromptHandler.Instance.ShowPrompt(microgame);
             
             // Activate the scene
             gameActive = true;

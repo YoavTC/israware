@@ -16,6 +16,7 @@ namespace _Game_Assets.Microgames.throwKeterChair
         [Header("Validity")]
         [SerializeField] private RectTransform validityIndicator;
         [SerializeField] private float validityThreshold;
+        [SerializeField] private Color validColor, invalidColor;
 
         [Header("Events")] 
         [SerializeField] private UnityEvent<bool> stopUnityEvent;
@@ -47,6 +48,8 @@ namespace _Game_Assets.Microgames.throwKeterChair
             bool isValid = Mathf.Abs(stopProgressPoint) <= validityThreshold / 2;
             
             stopUnityEvent?.Invoke(isValid);
+
+            GetComponent<Image>().color = isValid ? validColor : invalidColor;
         }
     }
 }

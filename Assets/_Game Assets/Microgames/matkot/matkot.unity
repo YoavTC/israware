@@ -895,7 +895,8 @@ MonoBehaviour:
     maxMicrogameTime: -1
     winAtTimerFinish: 1
     hideCursor: 1
-  finishDelay: 2
+  winFinishDelay: 2
+  LoseFinishDelay: 0.5
 --- !u!4 &755142732
 Transform:
   m_ObjectHideFlags: 0
