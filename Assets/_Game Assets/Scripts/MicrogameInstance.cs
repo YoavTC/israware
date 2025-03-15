@@ -36,7 +36,7 @@ namespace _Game_Assets.Scripts
         
         public void Feedback(bool positive)
         {
-            Debug.Log("Received feedback");
+            Debug.Log($"Received {(positive ? "positive" : "negative")} feedback");
             if (positive) positiveFeedbacksCount++;
             else negativeFeedbacksCount++;
 
