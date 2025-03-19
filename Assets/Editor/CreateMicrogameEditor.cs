@@ -4,12 +4,13 @@ using _Game_Assets.Scripts;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Editor
 {
     public class CreateMicrogameEditor : UnityEditor.Editor
     {
+        private const string MICROGAME_SCENE_TEMPLATE_PATH = "Assets/_Scenes/DefaultMicrogameSceneTemplate.unity";
+        
         [MenuItem("Tools/Create New Microgame")]
         public static void CreateMicrogame()
         {
@@ -38,15 +39,15 @@ namespace Editor
             
             // Create new scene
             string scenePath = microgameDir + "/" + microgameName + ".unity";
-            Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+            AssetDatabase.CopyAsset(MICROGAME_SCENE_TEMPLATE_PATH, scenePath);
+            var newScene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
             EditorSceneManager.SaveScene(newScene, scenePath);
             
             // Add the scene to scene build list
             var buildScenes = EditorBuildSettings.scenes.ToList();
             buildScenes.Add(new EditorBuildSettingsScene(scenePath, true));
             EditorBuildSettings.scenes = buildScenes.ToArray();
-
-
+            
             // Refresh assets
             AssetDatabase.Refresh();
         }

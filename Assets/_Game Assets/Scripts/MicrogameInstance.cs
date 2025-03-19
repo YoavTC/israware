@@ -69,7 +69,7 @@ namespace _Game_Assets.Scripts
         
         #if UNITY_EDITOR
         [Button]
-        private void ValidateSettings()
+        public void ValidateSettings()
         {
             LoadMicrogameScriptableObject();
         }

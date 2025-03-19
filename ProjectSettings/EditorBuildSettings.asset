@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/throwKeterChair/throwKeterChair.unity
     guid: 0165b427669f60144937ac849d032e46
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/b/b.unity
+    guid: 17b6ad7fbdee66247b2c9bf784e6b70b
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/sortKosherFood/sortKosherFood.unity
+    guid: 769d7acc47325ca4daff44bb0c546368
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
