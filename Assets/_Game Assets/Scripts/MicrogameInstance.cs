@@ -52,14 +52,13 @@ namespace _Game_Assets.Scripts
                 StartCoroutine(Finish(false));
             }
         }
-        
+
         private IEnumerator Finish(bool win = false)
         {
+            gameManager.Timer?.DisableTimer();
+
             yield return new WaitForSeconds(win ? winFinishDelay : LoseFinishDelay);
-            if (gameManager != null)
-            {
-                StartCoroutine(gameManager.OnMicrogameFinished(win));
-            }
+            gameManager?.StartCoroutine(gameManager.OnMicrogameFinished(win));
         }
 
         private void LoadMicrogameScriptableObject()

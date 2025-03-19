@@ -1798,6 +1798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671569014dded874c97f5cdde01bb38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 2105746273}
   defaultShowScreenDuration: 2
   screenHandlersDictionary:
     _serializedList:

@@ -18,5 +18,5 @@ MonoBehaviour:
   hideCursor: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
-  maxMicrogameTime: -1
+  maxMicrogameTime: 6
   winAtTimerFinish: 0

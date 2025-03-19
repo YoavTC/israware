@@ -13,6 +13,10 @@ namespace _Game_Assets.Scripts
 {
     public class GameManager : Singleton<GameManager>
     {
+        [Header("Managers")]
+        [SerializeField] private Timer timer;
+        public Timer Timer => timer;
+        
         [Header("Screens")] 
         [SerializeField] private float defaultShowScreenDuration;
         [SerializeField] private SerializedDictionary<ScreenType, ScreenHandlerBase> screenHandlersDictionary;
