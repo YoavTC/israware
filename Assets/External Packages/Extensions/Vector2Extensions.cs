@@ -17,6 +17,14 @@ namespace UnityUtils {
         }
 
         /// <summary>
+        /// Sets the z value of a Vector2
+        /// </summary>
+        public static Vector3 WithZ(this Vector2 vector2, float z)
+        {
+            return new Vector3(vector2.x, vector2.y, z);
+        }
+
+        /// <summary>
         /// Returns a Boolean indicating whether the current Vector2 is in a given range from another Vector2
         /// </summary>
         /// <param name="current">The current Vector2 position</param>
