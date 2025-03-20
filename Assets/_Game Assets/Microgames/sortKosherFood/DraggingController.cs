@@ -1,8 +1,4 @@
-using System;
-using System.Linq;
 using DG.Tweening;
-using External_Packages.Extra_Components;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityUtils;
@@ -21,8 +17,9 @@ namespace _Game_Assets.Microgames.sortKosherFood
 
         [SerializeField] private float outTransitionDuration;
         [SerializeField] private Vector2[] outPositions;
+        public bool kosherOnRight;
 
-        [SerializeField] private UnityEvent onThrowUnityEvent;
+        [SerializeField] private UnityEvent<Transform, bool> foodThrowUnityEvent;
 
         [SerializeField] private float grabEffectScale;
         [SerializeField] private float grabEffectDuration;
@@ -100,7 +97,7 @@ namespace _Game_Assets.Microgames.sortKosherFood
                 
                 targetObject.GetComponent<Collider2D>().enabled = false;
                 targetObject.DOMove(outPosition.With(y:targetObject.position.y * 2f), outTransitionDuration)
-                    .OnComplete(() => onThrowUnityEvent?.Invoke());
+                    .OnComplete(() => foodThrowUnityEvent?.Invoke(targetObject, kosherOnRight ? outPosition.x < 0 : outPosition.x > 0));
             } else {
                 Debug.Log($"Returning {targetObject.name}");
                 targetObject.DOMove(Vector3.zero, outTransitionDuration);
