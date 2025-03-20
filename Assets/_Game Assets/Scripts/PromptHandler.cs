@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using AYellowpaper.SerializedCollections;
 using DG.Tweening;
 using External_Packages.Extra_Components;
 using External_Packages.MonoBehaviour_Extensions;
@@ -27,6 +25,17 @@ namespace _Game_Assets.Scripts
 
         [Button] public void T() => ShowPrompt("Lorem Ipsum");
         [Button] public void TT() => ShowPrompt("Lorem Ipsum", Color.red);
+
+        private void Start()
+        {
+            UpdateLanguagePreference(language);
+        }
+        
+        public void UpdateLanguagePreference(Language newLanguage)
+        {
+            promptDisplay.isRightToLeftText = (newLanguage == Language.HEBREW);
+            language = newLanguage;
+        }
 
         public void ShowPrompt(MicrogameScriptableObject microgame)
         {

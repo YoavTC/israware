@@ -418,7 +418,6 @@ GameObject:
   m_Component:
   - component: {fileID: 625115596}
   - component: {fileID: 625115597}
-  - component: {fileID: 625115598}
   m_Layer: 0
   m_Name: Feedbacks
   m_TagString: Untagged
@@ -635,25 +634,6 @@ MonoBehaviour:
           AmplitudeX: 50
           AmplitudeY: 50
           AmplitudeZ: 50
---- !u!320 &625115598
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625115594}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 185480e91b7c1b744822d0c568487468, type: 2}
-  m_InitialState: 1
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 4203525992892485516, guid: 185480e91b7c1b744822d0c568487468, type: 2}
-    value: {fileID: 679513399}
-  m_ExposedReferences:
-    m_References: []
 --- !u!1 &679513397
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +643,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 679513398}
-  - component: {fileID: 679513399}
   - component: {fileID: 679513400}
   m_Layer: 0
   m_Name: Notes
@@ -689,28 +668,6 @@ Transform:
   - {fileID: 1689982049}
   m_Father: {fileID: 1499344285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &679513399
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 679513397}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &679513400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,13 +718,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   microgame: {fileID: 11400000, guid: fe1b06b3b04f48f4db68461337615295, type: 2}
   microgameSettings:
-    positiveFeedbacksToWin: 0
-    negativeFeedbacksToLose: 0
-    maxMicrogameTime: 0
+    positiveFeedbacksToWin: 1
+    negativeFeedbacksToLose: 1
+    maxMicrogameTime: 10
     winAtTimerFinish: 0
     hideCursor: 0
-  winFinishDelay: 0
-  LoseFinishDelay: 0
+  winFinishDelay: 1
+  LoseFinishDelay: 0.5
 --- !u!4 &755142732
 Transform:
   m_ObjectHideFlags: 0

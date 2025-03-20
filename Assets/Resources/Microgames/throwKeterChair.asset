@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: throwKeterChair
   ENGLISH_PROMPT: Hit the Ars!
-  HEBREW_PROMPT: "!\u05E1\u05E8\u05E2\u05D1 \u05D5\u05E2\u05D2\u05E4\u05EA"
+  HEBREW_PROMPT: "\u05EA\u05E4\u05D2\u05E2\u05D5 \u05D1\u05E2\u05E8\u05E1!"
   hideCursor: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
