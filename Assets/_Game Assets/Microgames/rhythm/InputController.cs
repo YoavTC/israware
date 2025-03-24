@@ -13,6 +13,9 @@ namespace _Game_Assets.Microgames.rhythm
         [SerializeField] private KeyCode[] keySet;
         [SerializeField] private UnityEvent<int> keyPressedUnityEvent;
 
+        [SerializeField] private Color[] keySetColors;
+        [SerializeField] private GameObject keyPressEffectPrefab;
+
         private void Update()
         {
             foreach (KeyCode key in keySet)
@@ -27,8 +30,12 @@ namespace _Game_Assets.Microgames.rhythm
 
         private void PressKey(int keyIndex)
         {
-            keyPressedUnityEvent.Invoke(keyIndex);
+            keyPressedUnityEvent?.Invoke(keyIndex);
             keyTransforms[keyIndex].GetOrAddComponent<TweenScaleEffect>().DoEffect();
+            
+            var a = Instantiate(keyPressEffectPrefab, keyTransforms[keyIndex].position, Quaternion.identity).GetComponent<ParticleSystem>();
+            var b = a.main;
+            b.startColor = keySetColors[keyIndex];
         }
     }
 }

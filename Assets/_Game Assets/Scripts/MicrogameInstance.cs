@@ -42,6 +42,7 @@ namespace _Game_Assets.Scripts
             if (positive) positiveFeedbacksCount++;
             else negativeFeedbacksCount++;
 
+            if (gameManager == null) return;
             if (microgameSettings.positiveFeedbacksToWin > 0 && positiveFeedbacksCount >= microgameSettings.positiveFeedbacksToWin)
             {
                 StartCoroutine(Finish(true));
