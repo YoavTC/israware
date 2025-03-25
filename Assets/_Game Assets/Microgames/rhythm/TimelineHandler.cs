@@ -17,6 +17,7 @@ namespace _Game_Assets.Microgames.rhythm
         private readonly int[] LINES_X_POSITIONS = {-6, -3, 0, 3, 6};
 
         [SerializeField] private UnityEvent failUnityEvent;
+        [SerializeField] private UnityEvent successUnityEvent;
         private bool isActive = true;
 
         void Update()
@@ -45,6 +46,7 @@ namespace _Game_Assets.Microgames.rhythm
                     tempCollider.enabled = false;
                     audioSource.clip = clips[clipsIndex++];
                     audioSource.Play();
+                    successUnityEvent?.Invoke();
                 }
             }
         }
