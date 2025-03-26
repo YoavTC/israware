@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/gatherProtestors/gatherProtestors.unity
     guid: 41880a03811ce274785dab9b0bd2cd6d
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/pourBeer/pourBeer.unity
+    guid: d54559b1a7d55194f91929e3a9a903b1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
