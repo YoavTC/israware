@@ -114,7 +114,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1000
         width: 540
         height: 975
       alignment: 0
@@ -136,7 +136,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 540
-        y: 0
+        y: 1000
         width: 540
         height: 975
       alignment: 0
@@ -158,7 +158,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1080
-        y: 0
+        y: 1000
         width: 540
         height: 975
       alignment: 0
@@ -180,7 +180,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1620
-        y: 0
+        y: 1000
         width: 540
         height: 975
       alignment: 0
@@ -201,12 +201,12 @@ TextureImporter:
       name: beers_4
       rect:
         serializedVersion: 2
-        x: 2160
+        x: 0
         y: 0
-        width: 836
-        height: 975
+        width: 1000
+        height: 1000
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -215,6 +215,94 @@ TextureImporter:
       bones: []
       spriteID: d31cdaa3091d4a24e91341b842ad7ecd
       internalID: 704414155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beers_5
+      rect:
+        serializedVersion: 2
+        x: 3558
+        y: 70
+        width: 442
+        height: 841
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 068eaebf1bc7dee4dbb9244da5a7100d
+      internalID: 217286138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beers_6
+      rect:
+        serializedVersion: 2
+        x: 3015
+        y: 161
+        width: 447
+        height: 701
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc0440bc203e35f479d855783d2ec65a
+      internalID: -863181643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beers_7
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 1000
+        height: 1000
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ac84d02b935dc8488886c0cb7410661
+      internalID: -1871897425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: beers_8
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 1000
+        width: 540
+        height: 975
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6213379b69e39f54386758f143b8d734
+      internalID: 533724779
       vertices: []
       indices: 
       edges: []
@@ -238,6 +326,10 @@ TextureImporter:
       beers_2: -244752152
       beers_3: -1420319927
       beers_4: 704414155
+      beers_5: 217286138
+      beers_6: -863181643
+      beers_7: -1871897425
+      beers_8: 533724779
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
