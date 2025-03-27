@@ -17,11 +17,13 @@ namespace _Game_Assets.Microgames.pourBeer
 
         [Header("Pouring")]
         [SerializeField] private Transform beer;
+        [SerializeField, ReadOnly] private bool isPouring;
         [SerializeField] private float beerFillSpeed;
         [SerializeField] private Vector2 minMaxBeerHeight;
         [SerializeField] private Vector2Int pourAngleRange = new Vector2Int(120, 150); // Min and max angles for pouring (in degrees)
+        [Space]
         [SerializeField] private MMF_Player pouringFeedback;
-        private bool isPouring;
+        [SerializeField] private LineRenderer pouringLineRenderer;
         
         [Header("Events")]
         [SerializeField] private UnityEvent beerFinishedPouringUnityEvent;
@@ -86,6 +88,8 @@ namespace _Game_Assets.Microgames.pourBeer
         {
             if (active) pouringFeedback.PlayFeedbacks();
             else pouringFeedback.StopFeedbacks();
+            
+            pouringLineRenderer.enabled = active;
         }
 
         #if UNITY_EDITOR
