@@ -797,13 +797,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   microgame: {fileID: 11400000, guid: aeec432affb48de41ba1615c4280d440, type: 2}
   microgameSettings:
-    positiveFeedbacksToWin: 0
-    negativeFeedbacksToLose: 0
-    maxMicrogameTime: 0
+    positiveFeedbacksToWin: 1
+    negativeFeedbacksToLose: 1
+    maxMicrogameTime: 4
     winAtTimerFinish: 0
     hideCursor: 0
-  winFinishDelay: 0
-  LoseFinishDelay: 0
+  winFinishDelay: 1
+  LoseFinishDelay: 1
 --- !u!4 &755142732
 Transform:
   m_ObjectHideFlags: 0
