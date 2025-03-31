@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace _Game_Assets.Microgames.splitRedSea
 {
@@ -16,6 +17,11 @@ namespace _Game_Assets.Microgames.splitRedSea
         [SerializeField] private float splitterXPosition;
         [SerializeField] private Vector2 minMaxSplitterYPosition;
         private float splitterProgressPosition;
+        
+        [Header("Events")]
+        [SerializeField] private UnityEvent startedSplittingUnityEvent;
+        [SerializeField] private UnityEvent stoppedSplittingUnityEvent;
+        [SerializeField] private UnityEvent finishedSplittingUnityEvent;
         
         private bool isGrabbing;
         private bool allowInput;
@@ -41,6 +47,7 @@ namespace _Game_Assets.Microgames.splitRedSea
                 {
                     isGrabbing = true;
                     splitter.GetChild(0).gameObject.SetActive(true);
+                    startedSplittingUnityEvent?.Invoke();
                 }
             }
 
@@ -57,19 +64,23 @@ namespace _Game_Assets.Microgames.splitRedSea
                     allowInput = false;
 
                     splitter.DOMoveY(minMaxSplitterYPosition.y + 15f, 0.65f);
+                    finishedSplittingUnityEvent?.Invoke();
                 }
             }
             
             if (isGrabbing && Input.GetMouseButtonUp(0))
             {
                 isGrabbing = false;
+                stoppedSplittingUnityEvent?.Invoke();
             }
         }
-        
+
+        #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             UnityEditor.Handles.color = Color.black;
             UnityEditor.Handles.Label(splitter.position, $"{splitter.position.y}");
         }
+        #endif
     }
 }
