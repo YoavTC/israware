@@ -3,6 +3,8 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using UnityUtils;
 
 namespace _Game_Assets.Microgames.airstrikeTyping
 {
@@ -16,9 +18,9 @@ namespace _Game_Assets.Microgames.airstrikeTyping
         private bool allowInput;
 
         [Header("Transition Settings")] 
-        [SerializeField] private float transitionDelay;
         [SerializeField] private float inInputFieldYPosition;
         [SerializeField] private float inInputFieldTransitionDuration;
+        [SerializeField] private float outTransitionDelay;
         
         [Header("Events")]
         [SerializeField] private UnityEvent characterDeletedUnityEvent;
@@ -44,8 +46,7 @@ namespace _Game_Assets.Microgames.airstrikeTyping
             
             allowInput = true;
 
-            inputField.DOAnchorPosY(inInputFieldYPosition, inInputFieldTransitionDuration)
-                .SetDelay(transitionDelay);
+            inputField.DOAnchorPosY(inInputFieldYPosition, inInputFieldTransitionDuration);
         }
 
         void Update()
@@ -96,8 +97,19 @@ namespace _Game_Assets.Microgames.airstrikeTyping
             
             bool isCorrect = typedCode.Trim() == code.Trim();
             inputCompleteUnityEvent?.Invoke(isCorrect);
-            
-            inputField.DOAnchorPosY(-300f, inInputFieldTransitionDuration);
+
+            for (int i = 0; i < textFields.Length; i++)
+            {
+                bool isCharacterCorrect = textFields[i].text[0] == code[i];
+                if (!isCharacterCorrect)
+                {
+                    textFields[i].GetComponentInParent<Image>().color = "#C30000".FromHex();
+                    textFields[i].color = Color.black;
+                }
+            }
+
+            inputField.DOAnchorPosY(-300f, inInputFieldTransitionDuration)
+                .SetDelay(outTransitionDelay);
         }  
     }
 }
