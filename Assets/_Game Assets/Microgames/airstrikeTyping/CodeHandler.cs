@@ -37,6 +37,10 @@ namespace _Game_Assets.Microgames.airstrikeTyping
                 char randomChar = Random.Range(0, 2) == 0 
                     ? (char)Random.Range('0', '9' + 1) 
                     : (char)Random.Range('A', 'Z' + 1);
+                
+                if (randomChar == 'O')
+                    randomChar = '0';
+                
                 code += randomChar;
             }
 
