@@ -39,9 +39,13 @@ namespace _Game_Assets.Scripts
         {
             DontDestroyOnLoad(this);
             var loadedMicrogames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/")
-                .Where(mg => !mg.name.Contains("~")) // Filter out filenames containing '~'
                 .ToList();
-
+            
+            if (loadedMicrogames.Any(microgame => microgame.name.Contains("~")))
+            {
+                loadedMicrogames = loadedMicrogames.Where(microgame => microgame.name.Contains("~")).ToList();
+            }
+            
             microgames = loadedMicrogames;
         }
         

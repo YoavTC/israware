@@ -3,7 +3,6 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 namespace _Game_Assets.Microgames.airstrikeTyping
 {
@@ -42,10 +41,11 @@ namespace _Game_Assets.Microgames.airstrikeTyping
         {
             code = newCode;
             currentFieldIndex = 0;
+            
+            allowInput = true;
 
             inputField.DOAnchorPosY(inInputFieldYPosition, inInputFieldTransitionDuration)
-                .SetDelay(transitionDelay)
-                .OnComplete(() => allowInput = true);
+                .SetDelay(transitionDelay);
         }
 
         void Update()
