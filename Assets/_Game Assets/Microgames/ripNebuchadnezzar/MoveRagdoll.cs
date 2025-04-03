@@ -1,5 +1,7 @@
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityUtils;
 
 namespace _Game_Assets.Microgames.ripNebuchadnezzar
 {
@@ -7,6 +9,8 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
     {
         [Header("Components")]
         [SerializeField] private Camera mainCamera;
+        [SerializeField] private Rigidbody2D torsoRb;
+        [SerializeField] private Rigidbody2D headRb;
         
         [Header("Settings")]
         [SerializeField] private float grabRadius;
@@ -17,6 +21,9 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
         [SerializeField] private bool removeVelocityOnRelease;
         private bool RemovingVelocity => removeVelocityOnGrab || removeVelocityOnRelease; 
         [SerializeField, EnableIf(nameof(RemovingVelocity))] private bool removeChildrenVelocity;
+        
+        [Header("Events")]
+        [SerializeField] private UnityEvent rippedUnityEvent;
         
         private Vector2 mousePosition;
         private bool isGrabbing;
@@ -33,7 +40,7 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
             
             if (Input.GetMouseButtonDown(0))
             {
-                var grabbedCollider2D = Physics2D.OverlapCircle(mousePosition, grabRadius);
+                var grabbedCollider2D = Physics2D.OverlapCircle(mousePosition, grabRadius, 1 << LayerMask.NameToLayer("Ragdoll"));
                 if (grabbedCollider2D != null 
                     && grabbedCollider2D.CompareTag("NotPlayer") 
                     && grabbedCollider2D.TryGetComponent(out grabbedRb))
@@ -74,6 +81,14 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
                     childRb.linearVelocity = Vector2.zero;
                     childRb.angularVelocity = 0f;
                 }
+            }
+        }
+
+        public void JointBreak2D(Rigidbody2D rb)
+        {
+            if (rb == torsoRb || rb == headRb)
+            {
+                rippedUnityEvent?.Invoke();
             }
         }
 

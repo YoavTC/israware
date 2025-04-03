@@ -113,10 +113,10 @@ TextureImporter:
       name: nebuchanezzarRagdoll_0
       rect:
         serializedVersion: 2
-        x: 320
-        y: 873
-        width: 334
-        height: 334
+        x: 211
+        y: 691
+        width: 552
+        height: 731
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
