@@ -1144,9 +1144,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   microgame: {fileID: 11400000, guid: c988435b292812645812d99d5d5d14dd, type: 2}
   microgameSettings:
-    positiveFeedbacksToWin: 0
-    negativeFeedbacksToLose: 0
-    maxMicrogameTime: 0
+    positiveFeedbacksToWin: 1
+    negativeFeedbacksToLose: 1
+    maxMicrogameTime: 8
     winAtTimerFinish: 0
     hideCursor: 0
   winFinishDelay: 2
@@ -2823,7 +2823,7 @@ Transform:
   m_GameObject: {fileID: 1507507027}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7323494, y: 0.904171, z: 0}
+  m_LocalPosition: {x: 0.7323494, y: 0.904171, z: 53.5}
   m_LocalScale: {x: 8.0276, y: 8.0276, z: 8.0276}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2956,6 +2956,7 @@ MonoBehaviour:
   mainCamera: {fileID: 938456779}
   torsoRb: {fileID: 615524251}
   headRb: {fileID: 805155734}
+  ripBloodParticlePrefab: {fileID: 5071846699991850867, guid: 0b8a1182f5a4c9c488169c0664cdbbec, type: 3}
   grabRadius: 1.5
   speed: 500
   mouseBounds:

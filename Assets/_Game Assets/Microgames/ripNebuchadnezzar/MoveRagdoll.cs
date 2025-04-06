@@ -12,6 +12,9 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
         [SerializeField] private Rigidbody2D torsoRb;
         [SerializeField] private Rigidbody2D headRb;
         
+        [Header("Prefabs")]
+        [SerializeField] private GameObject ripBloodParticlePrefab;
+        
         [Header("Settings")]
         [SerializeField] private float grabRadius;
         [SerializeField] private float speed;
@@ -90,6 +93,8 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
             {
                 rippedUnityEvent?.Invoke();
             }
+            
+            Instantiate(ripBloodParticlePrefab, rb.position, Quaternion.identity);
         }
 
         private void OnDrawGizmos()
