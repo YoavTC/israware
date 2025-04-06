@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32918d70757248b8816b6119d043acc9, type: 3}
-  m_Name: ~throwKeterChair
+  m_Name: ripNebuchadnezzar
   m_EditorClassIdentifier: 
-  id: throwKeterChair
-  ENGLISH_PROMPT: Hit the Ars!
-  HEBREW_PROMPT: "\u05EA\u05E4\u05D2\u05E2\u05D5 \u05D1\u05E2\u05E8\u05E1!"
-  hideCursor: 1
+  id: ripNebuchadnezzar
+  ENGLISH_PROMPT: 
+  HEBREW_PROMPT: 
+  hideCursor: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
-  maxMicrogameTime: 6
+  maxMicrogameTime: 8
   winAtTimerFinish: 0
