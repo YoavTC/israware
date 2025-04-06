@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using DG.Tweening;
-using NaughtyAttributes;
+using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,14 +21,14 @@ namespace _Game_Assets.Scripts.Reusables
         
         [Header("Destruction")]
         [SerializeField] private bool destroyOnComplete;
-        [SerializeField, ShowIf(nameof(destroyOnComplete))] private float lifetime;
+        [SerializeField, ShowField(nameof(destroyOnComplete))] private float lifetime;
         [SerializeField] private float destroyDelay;
         
         [Header("Movement")]
         [SerializeField] private float moveSpeed;
         [SerializeField] private Vector3 moveDirection;
         [SerializeField] private MovementType movementType;
-        [SerializeField, EnableIf(nameof(UseDOTween))] private Ease movementEasing; 
+        [SerializeField, EnableField(nameof(UseDOTween))] private Ease movementEasing; 
         private bool UseDOTween => movementType == MovementType.DOTween_DOMove || movementType == MovementType.DOTween_DOAnchorPos;
         
         [Header("Update")]
@@ -39,8 +39,8 @@ namespace _Game_Assets.Scripts.Reusables
         [SerializeField] private bool invokeEventOnStart;
         [SerializeField] private bool invokeEventOnComplete;
         
-        [SerializeField, EnableIf(nameof(invokeEventOnStart))] private UnityEvent movingStartedUnityEvent;
-        [SerializeField, EnableIf(nameof(invokeEventOnComplete))] private UnityEvent movingCompletedUnityEvent;
+        [SerializeField, EnableField(nameof(invokeEventOnStart))] private UnityEvent movingStartedUnityEvent;
+        [SerializeField, EnableField(nameof(invokeEventOnComplete))] private UnityEvent movingCompletedUnityEvent;
 
         private enum MovementType
         {

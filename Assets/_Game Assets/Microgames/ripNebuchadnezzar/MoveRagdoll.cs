@@ -1,7 +1,6 @@
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityUtils;
+using EditorAttributes;
 
 namespace _Game_Assets.Microgames.ripNebuchadnezzar
 {
@@ -23,7 +22,7 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
         [SerializeField] private bool removeVelocityOnGrab;
         [SerializeField] private bool removeVelocityOnRelease;
         private bool RemovingVelocity => removeVelocityOnGrab || removeVelocityOnRelease; 
-        [SerializeField, EnableIf(nameof(RemovingVelocity))] private bool removeChildrenVelocity;
+        [SerializeField, EnableField(nameof(RemovingVelocity))] private bool removeChildrenVelocity;
         
         [Header("Events")]
         [SerializeField] private UnityEvent rippedUnityEvent;

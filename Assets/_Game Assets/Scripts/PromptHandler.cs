@@ -1,8 +1,8 @@
 ﻿using System;
 using DG.Tweening;
+using EditorAttributes;
 using External_Packages.Extra_Components;
 using External_Packages.MonoBehaviour_Extensions;
-using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 

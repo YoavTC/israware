@@ -1,6 +1,6 @@
 using DG.Tweening;
+using EditorAttributes;
 using MoreMountains.Feedbacks;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 

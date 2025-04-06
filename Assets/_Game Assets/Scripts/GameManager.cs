@@ -4,7 +4,6 @@ using System.Linq;
 using _Game_Assets.Scripts.ScreenHandlers;
 using AYellowpaper.SerializedCollections;
 using External_Packages.MonoBehaviour_Extensions;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -33,7 +32,7 @@ namespace _Game_Assets.Scripts
 
         // Microgames
         private List<MicrogameScriptableObject> microgames;
-        [ShowNativeProperty] public MicrogameScriptableObject CurrentMicrogame { get; private set; }
+        public MicrogameScriptableObject CurrentMicrogame { get; private set; }
         
         private void InitializeGameManager()
         {

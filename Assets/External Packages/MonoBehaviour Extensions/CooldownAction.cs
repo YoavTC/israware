@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,8 +9,8 @@ namespace External_Packages.MonoBehaviour_Extensions
     /// </summary>
     public abstract class CooldownAction : MonoBehaviour 
     {
-        [ShowNativeProperty] protected bool ActionEnabled { get; set; }
-        [ShowNativeProperty] protected float ActionCooldown { get; set; } = -1f;
+        protected bool ActionEnabled { get; set; }
+        protected float ActionCooldown { get; set; } = -1f;
         private float ElapsedTime { get; set; }
         
         protected virtual void Update()

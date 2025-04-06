@@ -1,5 +1,5 @@
 using DG.Tweening;
-using NaughtyAttributes;
+using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
