@@ -26,6 +26,7 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
         
         [Header("Events")]
         [SerializeField] private UnityEvent rippedUnityEvent;
+        [SerializeField] private UnityEvent jointBrokeUnityEvent;
         
         private Vector2 mousePosition;
         private bool isGrabbing;
@@ -93,6 +94,7 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
                 rippedUnityEvent?.Invoke();
             }
             
+            jointBrokeUnityEvent?.Invoke();
             Instantiate(ripBloodParticlePrefab, rb.position, Quaternion.identity);
         }
 
