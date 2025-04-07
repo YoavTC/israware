@@ -7,6 +7,7 @@ namespace _Game_Assets.Microgames.spotTheDifferences
     public class ImageHandler : MonoBehaviour
     {
         [SerializeField] private Transform pointsParent;
+        public Transform PointsParent => pointsParent;
         private const float X_OFFSET = 960f;
 
         private void Awake()

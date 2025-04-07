@@ -14,7 +14,10 @@ namespace _Game_Assets.Microgames.spotTheDifferences
         [Header("Components")]
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Transform pointsParent;
-        [SerializeField] private Canvas canvas;
+        [SerializeField] private Transform imageHolder;
+        
+        [Header("Images")]
+        [SerializeField] private ImageHandler[] images;
         
         [Header("Raycasting Components")]
         [SerializeField] private GraphicRaycaster graphicRaycaster;
@@ -38,6 +41,8 @@ namespace _Game_Assets.Microgames.spotTheDifferences
         {
             pointerEventData = new PointerEventData(eventSystem);
             targetLayer = LayerMask.NameToLayer("Target");
+            
+            pointsParent = Instantiate(images[Random.Range(0, images.Length)], imageHolder).PointsParent;
         }
 
         private void Update()
@@ -75,7 +80,7 @@ namespace _Game_Assets.Microgames.spotTheDifferences
                 
             foreach (Transform pointChild in pointsHolder.Children())
             {
-                Transform circle = Instantiate(pointCirclePrefab, pointChild.position, Quaternion.identity, canvas.transform).transform;
+                Transform circle = Instantiate(pointCirclePrefab, pointChild.position, Quaternion.identity, imageHolder).transform;
                     
                 circle.localScale = circleTransitionStartEndScale.x * pointChild.localScale;
                 circle.GetComponent<Image>().DOFade(1f, circleTransitionDuration).SetEase(circleTransitionEase);
