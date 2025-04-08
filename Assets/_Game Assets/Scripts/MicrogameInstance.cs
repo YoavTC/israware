@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using EditorAttributes;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -9,30 +8,30 @@ namespace _Game_Assets.Scripts
 {
     public class MicrogameInstance : MonoBehaviour
     {
-        private GameManager gameManager;
+        [Header("Microgame Settings")]
         [SerializeField, ReadOnly] private MicrogameScriptableObject microgame;
-
-        [SerializeField, ReadOnly] private MicrogameSettingsStruct microgameSettings;
-        private int negativeFeedbacksCount;
-        private int positiveFeedbacksCount;
-
+        [SerializeField, InlineButton(nameof(PositiveFeedback), "+", 50f)] private int positiveFeedbacksCount;
+        [SerializeField, InlineButton(nameof(NegativeFeedback), "+", 50f)] private int negativeFeedbacksCount;
+        
+        [Header("Delay Settings")]
         [SerializeField] private float winFinishDelay;
         [SerializeField] private float LoseFinishDelay;
         
+        private GameManager gameManager;
         
         private void Start()
         {
             gameManager = GameManager.Instance;
             
-            if (gameManager != null)
-            {
-                Debug.Log("Manager is not null using it..");
-                microgame = gameManager.CurrentMicrogame;
-            } else LoadMicrogameScriptableObject();
+            microgame = gameManager != null ? 
+                gameManager.CurrentMicrogame : 
+                Resources.Load<MicrogameScriptableObject>($"Microgames/{SceneManager.GetActiveScene().name}");
             
-            Cursor.visible = !microgameSettings.hideCursor;
-            microgameSettings = microgame.GetSettings();
+            Cursor.visible = !microgame.hideCursor;
         }
+
+        private void PositiveFeedback() => Feedback(true);
+        private void NegativeFeedback() => Feedback(false);
         
         public void Feedback(bool positive)
         {
@@ -41,38 +40,26 @@ namespace _Game_Assets.Scripts
             else negativeFeedbacksCount++;
 
             if (gameManager == null) return;
-            if (microgameSettings.positiveFeedbacksToWin > 0 && positiveFeedbacksCount >= microgameSettings.positiveFeedbacksToWin)
+            if (microgame.positiveFeedbacksToWin > 0 && positiveFeedbacksCount >= microgame.positiveFeedbacksToWin)
             {
                 StartCoroutine(Finish(true));
             }
 
-            if (microgameSettings.negativeFeedbacksToLose > 0 && negativeFeedbacksCount >= microgameSettings.negativeFeedbacksToLose)
+            if (microgame.negativeFeedbacksToLose > 0 && negativeFeedbacksCount >= microgame.negativeFeedbacksToLose)
             {
                 StartCoroutine(Finish(false));
             }
         }
 
-        private IEnumerator Finish(bool win = false)
+        private IEnumerator Finish(bool win)
         {
             gameManager.Timer?.DisableTimer();
 
             yield return new WaitForSeconds(win ? winFinishDelay : LoseFinishDelay);
-            gameManager?.StartCoroutine(gameManager.OnMicrogameFinished(win));
-        }
-
-        private void LoadMicrogameScriptableObject()
-        {
-            microgame = Resources.Load<MicrogameScriptableObject>($"Microgames/{SceneManager.GetActiveScene().name}");
-            microgameSettings = microgame.GetSettings();
+            gameManager?.StartCoroutine(gameManager.UnloadMicrogame(win));
         }
         
         #if UNITY_EDITOR
-        [Button]
-        public void ValidateSettings()
-        {
-            LoadMicrogameScriptableObject();
-        }
-        
         private void Update()
         {
             if (gameManager == null && Input.GetKeyDown(KeyCode.R))

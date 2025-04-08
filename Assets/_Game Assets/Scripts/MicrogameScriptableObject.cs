@@ -1,4 +1,4 @@
-﻿using System;
+﻿using EditorAttributes;
 using UnityEngine;
 
 namespace _Game_Assets.Scripts
@@ -6,47 +6,19 @@ namespace _Game_Assets.Scripts
     [CreateAssetMenu(menuName = "New Microgame Asset", fileName = "Microgame Asset")]
     public class MicrogameScriptableObject : ScriptableObject
     {
-        [Header("Meta")]
-        public string id;
+        [Title(nameof(Title), stringInputMode: StringInputMode.Dynamic)]
+        [ReadOnly] public string id;
+        private string Title => "ID: " + id;
+        
+        [Header("Prompt")]
         public string ENGLISH_PROMPT;
         public string HEBREW_PROMPT;
         
+        [Header("Settings")]
         public bool hideCursor;
-
         public int positiveFeedbacksToWin;
         public int negativeFeedbacksToLose;
         public float maxMicrogameTime;
         public bool winAtTimerFinish;
-
-        public MicrogameSettingsStruct GetSettings()
-        {
-            return new MicrogameSettingsStruct(positiveFeedbacksToWin, negativeFeedbacksToLose, maxMicrogameTime, winAtTimerFinish, hideCursor);
-        }
-    }
-
-    [Serializable]
-    public struct MicrogameSettingsStruct
-    {
-        public int positiveFeedbacksToWin;
-        public int negativeFeedbacksToLose;
-        public float maxMicrogameTime;
-        public bool winAtTimerFinish;
-        public bool hideCursor;
-
-        public MicrogameSettingsStruct(int positiveFeedbacksToWin, int negativeFeedbacksToLose, float maxMicrogameTime, bool winAtTimerFinish, bool hideCursor)
-        {
-            this.positiveFeedbacksToWin = positiveFeedbacksToWin;
-            this.negativeFeedbacksToLose = negativeFeedbacksToLose;
-            this.maxMicrogameTime = maxMicrogameTime;
-            this.winAtTimerFinish = winAtTimerFinish;
-            this.hideCursor = hideCursor;
-        }
-    }
-
-    public enum MicrogameFinishType
-    {
-        MANUAL,
-        FAIL, 
-        TIME,
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +22,9 @@ namespace _Game_Assets.Scripts
         [SerializeField] private SerializedDictionary<ScreenType, ScreenHandlerBase> screenHandlersDictionary;
 
         [Header("Game Variables")]
-        [SerializeField] private bool gameActive;
         [SerializeField] private int health;
         [SerializeField] private int score;
+        [SerializeField] private bool gameActive;
         [SerializeField] private bool lastMicrogameResult;
 
         [Header("Events")] 
@@ -35,20 +34,6 @@ namespace _Game_Assets.Scripts
         // Microgames
         private List<MicrogameScriptableObject> microgames;
         public MicrogameScriptableObject CurrentMicrogame { get; private set; }
-        
-        private void InitializeGameManager()
-        {
-            DontDestroyOnLoad(this);
-            var loadedMicrogames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/")
-                .ToList();
-            
-            if (loadedMicrogames.Any(microgame => microgame.name.Contains("~")))
-            {
-                loadedMicrogames = loadedMicrogames.Where(microgame => microgame.name.Contains("~")).ToList();
-            }
-            
-            microgames = loadedMicrogames;
-        }
         
         private void Start()
         {
@@ -60,10 +45,25 @@ namespace _Game_Assets.Scripts
             score = 0;
         }
         
+        private void InitializeGameManager()
+        {
+            DontDestroyOnLoad(this);
+            var loadedMicrogames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/")
+                .ToList();
+            
+            // Filter out microgames that are not marked as playable if at least one is marked with "~"
+            if (loadedMicrogames.Any(microgame => microgame.name.Contains("~")))
+            {
+                loadedMicrogames = loadedMicrogames.Where(microgame => microgame.name.Contains("~")).ToList();
+            }
+            
+            microgames = loadedMicrogames;
+        }
+        
         private IEnumerator LoadMicrogame()
         {
             // Get random microgame
-            MicrogameScriptableObject microgame = GetRandomMicrogame();
+            MicrogameScriptableObject microgame = microgames[Random.Range(0, microgames.Count)];;
             CurrentMicrogame = microgame;
             
             // Start loading the microgame scene
@@ -80,12 +80,9 @@ namespace _Game_Assets.Scripts
 
             StartCoroutine(ShowScreen(ScreenType.STATUS, -1f));
             
-                
             // When the screen is finished animating, wait until the scene is fully loaded
             yield return new WaitUntil(() => loadSceneAsync.progress >= 0.9f);
             yield return new WaitForSeconds(defaultShowScreenDuration);
-            
-            PromptHandler.Instance.ShowPrompt(microgame);
             
             // Activate the scene
             gameActive = true;
@@ -94,8 +91,12 @@ namespace _Game_Assets.Scripts
             loadedMicrogameUnityEvent?.Invoke(microgame);
         }
 
-        public void OnTimerFinished(bool win) => StartCoroutine(OnMicrogameFinished(win));
-        public IEnumerator OnMicrogameFinished(bool win)
+        public void OnTimerFinished(bool win)
+        {
+            StartCoroutine(UnloadMicrogame(win));
+        }
+
+        public IEnumerator UnloadMicrogame(bool win)
         {
             if (!gameActive) yield break;
             
@@ -110,26 +111,15 @@ namespace _Game_Assets.Scripts
             // Show the feedback overlay
             StartCoroutine(ShowScreen(ScreenType.HEALTH, -1f));
             yield return StartCoroutine(ShowScreen(win ? ScreenType.POSITIVE : ScreenType.NEGATIVE, defaultShowScreenDuration));
-
-            if (dead)
-            {
-                StartCoroutine(ShowScreen(ScreenType.GAME_OVER, -1f));
-            }
-            else
-            {
-                StartCoroutine(LoadMicrogame());
-            }
+            
+            StartCoroutine(dead ? ShowScreen(ScreenType.GAME_OVER, -1f) : 
+                LoadMicrogame());
         }
 
         private bool UpdateHealth(bool win)
         {
             health += win ? 0 : -1;
             return health <= 0;
-        }
-        
-        private MicrogameScriptableObject GetRandomMicrogame()
-        {
-            return microgames[Random.Range(0, microgames.Count)];
         }
 
         private IEnumerator ShowScreen(ScreenType screenType, float duration)
@@ -147,11 +137,11 @@ namespace _Game_Assets.Scripts
         {
             if (Input.GetKeyDown(KeyCode.F1))
             {
-                StartCoroutine(OnMicrogameFinished(true));
+                StartCoroutine(UnloadMicrogame(true));
             }
             if (Input.GetKeyDown(KeyCode.F2))
             {
-                StartCoroutine(OnMicrogameFinished(false));
+                StartCoroutine(UnloadMicrogame(false));
             }
         }
         #endif
