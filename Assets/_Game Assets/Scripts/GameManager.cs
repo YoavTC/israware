@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using External_Packages.MonoBehaviour_Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace _Game_Assets.Scripts
 {
@@ -139,5 +141,19 @@ namespace _Game_Assets.Scripts
         {
             screenHandlersDictionary[screenType]?.Hide();
         }
+
+        #if UNITY_EDITOR
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                StartCoroutine(OnMicrogameFinished(true));
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                StartCoroutine(OnMicrogameFinished(false));
+            }
+        }
+        #endif
     }
 }
