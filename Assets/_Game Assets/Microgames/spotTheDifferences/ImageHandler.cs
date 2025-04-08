@@ -8,7 +8,8 @@ namespace _Game_Assets.Microgames.spotTheDifferences
     {
         [SerializeField] private Transform pointsParent;
         public Transform PointsParent => pointsParent;
-        private const float X_OFFSET = 960f;
+        
+        private const float X_OFFSET = 955f;
 
         private void Awake()
         {
@@ -16,14 +17,11 @@ namespace _Game_Assets.Microgames.spotTheDifferences
             for (int i = 0; i < children.Length; i++)
             {
                 var childCopy = Instantiate(children[i], pointsParent);
-                Vector3 newPosition = childCopy.localPosition;
-                newPosition.x -= X_OFFSET;
-                childCopy.localPosition = newPosition;
+                
+                childCopy.localPosition = childCopy.localPosition.Add(x: -X_OFFSET);
                 
                 Transform childrenParent = new GameObject($"[{i}] points parent").transform;
-                
                 childrenParent.SetParent(pointsParent);
-                
                 childCopy.SetParent(childrenParent);
                 children[i].SetParent(childrenParent);
             }

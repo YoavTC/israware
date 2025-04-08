@@ -364,8 +364,8 @@ MonoBehaviour:
   DebugActive: 0
   InScriptDrivenPause: 0
   FeedbacksList:
-  - rid: 1440116306397364377
-  - rid: 1440116306397364378
+  - rid: 1440116306397364379
+  - rid: 1440116306397364380
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -374,11 +374,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1440116306397364377
+    - rid: 1440116306397364379
       type: {class: MMF_PositionShake, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
         Active: 0
-        UniqueID: 1020511712
+        UniqueID: -892433922
         Label: Position Shake
         OriginalLabel: Position Shake
         ChannelMode: 0
@@ -500,11 +500,11 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    - rid: 1440116306397364378
+    - rid: 1440116306397364380
       type: {class: MMF_ScaleShake, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
         Active: 1
-        UniqueID: 1315458793
+        UniqueID: -821213681
         Label: Scale Shake
         OriginalLabel: Scale Shake
         ChannelMode: 0
@@ -1500,6 +1500,7 @@ MonoBehaviour:
   - {fileID: 8398562923948325065, guid: b20dff9ac9cae914099bee8c6a9b51c7, type: 3}
   - {fileID: 8398562923948325065, guid: e8b4d0a381a04ef40a9c334afaf58077, type: 3}
   - {fileID: 8398562923948325065, guid: 02858559de2a6644db4f5ed349c04360, type: 3}
+  - {fileID: 8398562923948325065, guid: 540384c901dcf1a41b40f76056496bc8, type: 3}
   graphicRaycaster: {fileID: 1251608387}
   eventSystem: {fileID: 1614939806}
   pointCirclePrefab: {fileID: 4271365897421129678, guid: cc78e9a9ec463064ab5babc70bb0e50f, type: 3}
