@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: airstrikeTyping
   m_EditorClassIdentifier: 
   id: airstrikeTyping
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Enter the Code!
+  HEBREW_PROMPT: "\u05DE\u05D4 \u05D4\u05E7\u05D5\u05D3?"
   hideCursor: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: forbiddenFruit
   m_EditorClassIdentifier: 
   id: forbiddenFruit
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Don't Sin!
+  HEBREW_PROMPT: "\u05D0\u05DC \u05EA\u05D7\u05D8\u05D0\u05D5!"
   hideCursor: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1

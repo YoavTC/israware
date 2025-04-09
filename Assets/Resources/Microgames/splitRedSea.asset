@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: splitRedSea
   m_EditorClassIdentifier: 
   id: splitRedSea
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Part the Red Sea!
+  HEBREW_PROMPT: "\u05E7\u05E8\u05E2\u05D5 \u05D0\u05EA \u05D9\u05DD \u05E1\u05D5\u05E3!"
   hideCursor: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
