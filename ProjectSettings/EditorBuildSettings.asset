@@ -44,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/spotTheDifferences/spotTheDifferences.unity
     guid: 3dc88095699080a49b65525a7d0f9ec6
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/forbiddenFruit/forbiddenFruit.unity
+    guid: 5039644fc9a9b4b4da33b09053aed6ab
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
