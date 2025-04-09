@@ -1,7 +1,7 @@
 ﻿using EditorAttributes;
 using UnityEngine;
 
-namespace _Game_Assets.Scripts
+namespace _Game_Assets.Scripts.Definitions
 {
     [CreateAssetMenu(menuName = "New Microgame Asset", fileName = "Microgame Asset")]
     public class MicrogameScriptableObject : ScriptableObject

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _Game_Assets.Scripts.Definitions;
 using EditorAttributes;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -74,7 +75,7 @@ namespace _Game_Assets.Scripts
 
         private void Update()
         {
-            if (gameManager == null && Input.GetKeyDown(KeyCode.R))
+            if (!gameManager && Input.GetKeyDown(KeyCode.R))
             {
                 EditorSceneManager.LoadSceneInPlayMode(SceneManager.GetActiveScene().path, new LoadSceneParameters(LoadSceneMode.Single));
             }

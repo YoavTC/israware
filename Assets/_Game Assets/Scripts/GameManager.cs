@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using _Game_Assets.Scripts.ScreenHandlers;
+using _Game_Assets.Scripts.Definitions;
 using AYellowpaper.SerializedCollections;
+using EditorAttributes;
 using External_Packages.MonoBehaviour_Extensions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Object = System.Object;
 using Random = UnityEngine.Random;
 
 namespace _Game_Assets.Scripts
@@ -27,9 +29,8 @@ namespace _Game_Assets.Scripts
         [SerializeField] private bool gameActive;
         [SerializeField] private bool lastMicrogameResult;
 
-        [Header("Events")] 
-        [SerializeField] private UnityEvent<bool> finishedMicrogameUnityEvent;
-        [SerializeField] private UnityEvent<MicrogameScriptableObject> loadedMicrogameUnityEvent;
+        [Header("Microgame callbacks Listeners")] 
+        [SerializeField] private MonoBehaviour[] microgameCallbacksListeners;
 
         // Microgames
         private List<MicrogameScriptableObject> microgames;
@@ -88,7 +89,8 @@ namespace _Game_Assets.Scripts
             gameActive = true;
             loadSceneAsync.allowSceneActivation = true;
             
-            loadedMicrogameUnityEvent?.Invoke(microgame);
+            // microgameLoadedUnityEvent?.Invoke(microgame);
+            NotifyMicrogameCallbackListeners(microgame);
         }
 
         public void OnTimerFinished(bool win)
@@ -100,7 +102,8 @@ namespace _Game_Assets.Scripts
         {
             if (!gameActive) yield break;
             
-            finishedMicrogameUnityEvent?.Invoke(win);
+            // microgameFinishedUnityEvent?.Invoke(win);
+            NotifyMicrogameCallbackListeners(win);
 
             gameActive = false;
             lastMicrogameResult = win;
@@ -130,6 +133,14 @@ namespace _Game_Assets.Scripts
         private void HideScreen(ScreenType screenType)
         {
             screenHandlersDictionary[screenType]?.Hide();
+        }
+        
+        private void NotifyMicrogameCallbackListeners(Object parameter)
+        {
+            foreach (var listener in microgameCallbacksListeners.OfType<IMicrogameCallbacksListener>())
+            {
+                listener.ReceiveMicrogameCallback(parameter);
+            }
         }
 
         #if UNITY_EDITOR

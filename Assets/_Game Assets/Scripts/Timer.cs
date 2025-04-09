@@ -1,3 +1,4 @@
+using _Game_Assets.Scripts.Definitions;
 using DG.Tweening;
 using EditorAttributes;
 using UnityEngine;
@@ -6,8 +7,10 @@ using UnityEngine.UI;
 
 namespace _Game_Assets.Scripts
 {
-    public class Timer : MonoBehaviour
+    public class Timer : MonoBehaviour, IMicrogameCallbacksListener
     {
+        [SerializeField] private RectTransform rectTransform;
+        
         [Header("Sliders")]
         [SerializeField] private Slider leftSlider;
         [SerializeField] private Slider rightSlider;
@@ -17,9 +20,9 @@ namespace _Game_Assets.Scripts
         [SerializeField] private bool timerActive;
         [SerializeField] private float time;
         [SerializeField, ReadOnly] private float originalTime;
-        [SerializeField] private UnityEvent<bool> TimerFinishedUnityEvent;
-        private bool valueAtEnd;
-
+        [SerializeField] private UnityEvent<bool> timerFinishedUnityEvent;
+        private bool winAtFinish;
+        
         public void OnMicrogameLoaded(MicrogameScriptableObject microgame)
         {
             if (microgame.maxMicrogameTime < 0) DisableTimer();
@@ -28,19 +31,18 @@ namespace _Game_Assets.Scripts
                 time = microgame.maxMicrogameTime;
                 originalTime = time;
 
-                valueAtEnd = microgame.winAtTimerFinish;
+                winAtFinish = microgame.winAtTimerFinish;
                 timerActive = true;
                 
                 ToggleTimerVisibility(true);
             }
         }
-        
-        public void DisableTimer()
-        {
-            timerActive = false;
-            ToggleTimerVisibility(false);
-        }
 
+        public void OnMicrogameFinished(bool result)
+        {
+            DisableTimer();
+        }
+        
         private void Update()
         {
             if (!timerActive) return;
@@ -50,7 +52,7 @@ namespace _Game_Assets.Scripts
             
             if (time <= 0f)
             {
-                TimerFinishedUnityEvent?.Invoke(valueAtEnd);
+                timerFinishedUnityEvent?.Invoke(winAtFinish);
                 timerActive = false;
             }
         }
@@ -62,9 +64,15 @@ namespace _Game_Assets.Scripts
             rightSlider.value = easedProgress;
         }
 
+        public void DisableTimer()
+        {
+            timerActive = false;
+            ToggleTimerVisibility(false);
+        }
+        
         private void ToggleTimerVisibility(bool state)
         {
-            transform.GetComponent<RectTransform>().DOAnchorPosY(state ? 0f : -50f, 0);
+            rectTransform.DOAnchorPosY(state ? 0f : -50f, 0);
         }
     }
 }

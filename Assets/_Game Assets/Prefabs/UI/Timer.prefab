@@ -353,13 +353,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd03901c8efeb94381e91099d2d5539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rectTransform: {fileID: 8578812321884833148}
   leftSlider: {fileID: 172304008159369225}
   rightSlider: {fileID: 7154011945474748796}
   easingFactor: 0.57
   timerActive: 1
   time: 10
   originalTime: 10
-  TimerFinishedUnityEvent:
+  timerFinishedUnityEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}

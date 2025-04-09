@@ -1,4 +1,4 @@
-﻿namespace _Game_Assets.Scripts.ScreenHandlers
+﻿namespace _Game_Assets.Scripts.Definitions
 {
     public enum ScreenType
     {

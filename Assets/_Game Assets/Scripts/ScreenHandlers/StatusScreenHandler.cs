@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _Game_Assets.Scripts.Definitions;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;

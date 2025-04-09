@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using _Game_Assets.Scripts;
+using _Game_Assets.Scripts.Definitions;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;

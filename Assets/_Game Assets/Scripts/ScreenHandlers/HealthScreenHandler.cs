@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using _Game_Assets.Scripts.Definitions;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;

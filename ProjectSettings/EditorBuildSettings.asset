@@ -18,9 +18,6 @@ EditorBuildSettings:
     path: Assets/_Game Assets/Microgames/sortKosherFood/sortKosherFood.unity
     guid: f4691a20ac1da9f498306a30b052857a
   - enabled: 1
-    path: Assets/_Game Assets/Microgames/sortKosherFood/sortKosherFood.unity
-    guid: f4691a20ac1da9f498306a30b052857a
-  - enabled: 1
     path: Assets/_Game Assets/Microgames/rhythm/rhythm.unity
     guid: a4d5fa7f8cdd22345abb872b1aa79d6f
   - enabled: 1
@@ -38,9 +35,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/ripNebuchadnezzar/ripNebuchadnezzar.unity
     guid: 9f8ee1080d4a44746a6f62e146f648ca
-  - enabled: 1
-    path: Assets/_Game Assets/Microgames/spotTheDifferences/spotTheDifferences.unity
-    guid: 43374ddadb8004c4387ce834413ab288
   - enabled: 1
     path: Assets/_Game Assets/Microgames/spotTheDifferences/spotTheDifferences.unity
     guid: 3dc88095699080a49b65525a7d0f9ec6

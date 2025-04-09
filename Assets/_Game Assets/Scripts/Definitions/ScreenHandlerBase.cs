@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace _Game_Assets.Scripts.ScreenHandlers
+namespace _Game_Assets.Scripts.Definitions
 {
     public abstract class ScreenHandlerBase : MonoBehaviour
     {

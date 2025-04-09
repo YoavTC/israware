@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Lorem Ipsum
   m_isRightToLeft: 1
   m_fontAsset: {fileID: 11400000, guid: 7df46e8a2193c5144bba9a0d80ec0867, type: 2}
   m_sharedMaterial: {fileID: -5050225365450578321, guid: 7df46e8a2193c5144bba9a0d80ec0867, type: 2}
@@ -1476,8 +1476,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 255
+  m_fontColor: {r: 1, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1494,7 +1494,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 125.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1765,10 +1765,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   language: 1
-  defaultPromptDuration: 1.5
-  inOutFadeDuration: {x: 0.2, y: 0.5}
   promptDisplay: {fileID: 954007697}
   tweenScaleEffect: {fileID: 1472823989}
+  defaultPromptDuration: 1.5
+  inOutFadeDuration: {x: 0.2, y: 0.5}
 --- !u!1 &1529827641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,60 +1820,15 @@ MonoBehaviour:
   score: 0
   gameActive: 1
   lastMicrogameResult: 0
-  finishedMicrogameUnityEvent:
+  microgameFinishedUnityEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1472823990}
-        m_TargetAssemblyTypeName: _Game_Assets.Scripts.PromptHandler, Assembly-CSharp
-        m_MethodName: KillPrompt
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2105746273}
-        m_TargetAssemblyTypeName: _Game_Assets.Scripts.Timer, Assembly-CSharp
-        m_MethodName: DisableTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  loadedMicrogameUnityEvent:
+      m_Calls: []
+  microgameLoadedUnityEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2105746273}
-        m_TargetAssemblyTypeName: _Game_Assets.Scripts.Timer, Assembly-CSharp
-        m_MethodName: OnMicrogameLoaded
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1472823990}
-        m_TargetAssemblyTypeName: _Game_Assets.Scripts.PromptHandler, Assembly-CSharp
-        m_MethodName: ShowPrompt
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  microgameCallbacksListeners:
+  - {fileID: 1472823990}
+  - {fileID: 2105746273}
 --- !u!4 &1529827643
 Transform:
   m_ObjectHideFlags: 0
@@ -2678,7 +2633,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2669498063818114572, guid: 772dddd57bc0e91468958de9b1b0aff8, type: 3}
-      propertyPath: TimerFinishedUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: timerFinishedUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1529827642}
     - target: {fileID: 3601910776299209639, guid: 772dddd57bc0e91468958de9b1b0aff8, type: 3}
