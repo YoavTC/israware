@@ -44,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/makeCoffee/makeCoffee.unity
     guid: 567f52e9819e2064799de80012c598bc
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/braidChallah/braidChallah.unity
+    guid: 8fbd7c443bb3d0d46959695c5275c6a1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
