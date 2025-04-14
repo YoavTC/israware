@@ -15,8 +15,8 @@ MonoBehaviour:
   id: makeCoffee
   ENGLISH_PROMPT: 
   HEBREW_PROMPT: 
-  hideCursor: 0
-  positiveFeedbacksToWin: 0
-  negativeFeedbacksToLose: 0
-  maxMicrogameTime: 0
+  hideCursor: 1
+  positiveFeedbacksToWin: 1
+  negativeFeedbacksToLose: 1
+  maxMicrogameTime: 6.5
   winAtTimerFinish: 0
