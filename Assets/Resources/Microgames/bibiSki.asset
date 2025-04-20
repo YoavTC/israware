@@ -15,8 +15,8 @@ MonoBehaviour:
   id: bibiSki
   ENGLISH_PROMPT: 
   HEBREW_PROMPT: 
-  hideCursor: 0
-  positiveFeedbacksToWin: 0
-  negativeFeedbacksToLose: 0
-  maxMicrogameTime: 0
+  hideCursor: 1
+  positiveFeedbacksToWin: 1
+  negativeFeedbacksToLose: 1
+  maxMicrogameTime: -1
   winAtTimerFinish: 0

@@ -921,8 +921,8 @@ MonoBehaviour:
   microgame: {fileID: 11400000, guid: b7f39f2ac03a1534c816937d21c0d18a, type: 2}
   positiveFeedbacksCount: 0
   negativeFeedbacksCount: 0
-  winFinishDelay: 0
-  LoseFinishDelay: 0
+  winFinishDelay: 1
+  LoseFinishDelay: 1
 --- !u!4 &755142732
 Transform:
   m_ObjectHideFlags: 0
@@ -2358,6 +2358,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Stop
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 625115597}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMFeedbacks, MoreMountains.Tools
+        m_MethodName: SetCanPlay
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
