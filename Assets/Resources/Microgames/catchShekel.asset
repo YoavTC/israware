@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: catchShekel
   m_EditorClassIdentifier: 
   id: catchShekel
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Catch the Shekel!
+  HEBREW_PROMPT: "\u05EA\u05E4\u05E1\u05D5 \u05D0\u05EA \u05D4\u05E9\u05E7\u05DC!"
   hideCursor: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
