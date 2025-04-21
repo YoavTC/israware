@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 41854515e1ce7b341967f4186f739ed4
+guid: 634e99aa3c9e0394e92a95a05a75416d
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Cleanow
+  - The Lumion
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

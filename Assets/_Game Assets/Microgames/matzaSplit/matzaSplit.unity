@@ -153,9 +153,10 @@ MonoBehaviour:
   matzaLeft: {fileID: 803347164}
   matzaRight: {fileID: 473753986}
   percentageText: {fileID: 1041283014}
-  CUT_DETAIL_AMOUNT_MIN: 6
-  CUT_DETAIL_AMOUNT_MAX: 17
-  CUT_DEPTH_PERCENTAGE: 0.07
+  CUT_DETAIL_AMOUNT_MIN: 3
+  CUT_DETAIL_AMOUNT_MAX: 12
+  CUT_DEPTH_PERCENTAGE_MIN: 0.3
+  CUT_DEPTH_PERCENTAGE_MAX: 0.5
   matzaChosenUnityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1110,8 +1111,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 54%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d824ba449433f2f479eb47fd21ea0e32, type: 2}
-  m_sharedMaterial: {fileID: -3247542744325786371, guid: d824ba449433f2f479eb47fd21ea0e32, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e49abd9b8016d2a49be22e6c65b25088, type: 2}
+  m_sharedMaterial: {fileID: -5630208194072877176, guid: e49abd9b8016d2a49be22e6c65b25088, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

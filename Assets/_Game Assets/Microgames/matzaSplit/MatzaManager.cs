@@ -16,9 +16,11 @@ namespace _Game_Assets.Microgames.matzaSplit
         [SerializeField] private PercentageText percentageText;
 
         [Header("Split properties")]
-        [SerializeField] private int CUT_DETAIL_AMOUNT_MIN = 5;
-        [SerializeField] private int CUT_DETAIL_AMOUNT_MAX = 7;
-        [SerializeField] private float CUT_DEPTH_PERCENTAGE = 0.3f;
+        [SerializeField] private int CUT_DETAIL_AMOUNT_MIN;
+        [SerializeField] private int CUT_DETAIL_AMOUNT_MAX;
+        [Space]
+        [SerializeField] private float CUT_DEPTH_PERCENTAGE_MIN;
+        [SerializeField] private float CUT_DEPTH_PERCENTAGE_MAX;
 
         [Header("Events")]
         [SerializeField] private UnityEvent<bool> matzaChosenUnityEvent;
@@ -111,7 +113,7 @@ namespace _Game_Assets.Microgames.matzaSplit
             float last_x = -1;
             for (int cut_i = 0; cut_i < cuts; cut_i++)
             {
-                x = 0.5f + UnityEngine.Random.Range(-0.5f, 0.5f) * CUT_DEPTH_PERCENTAGE;
+                x = 0.5f + UnityEngine.Random.Range(-0.5f, 0.5f) * Random.Range(CUT_DEPTH_PERCENTAGE_MIN, CUT_DEPTH_PERCENTAGE_MAX);
 
                 if (last_x != -1)
                     area += (last_x + x) / 2f / (cuts - 1);
