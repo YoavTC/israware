@@ -1,65 +1,59 @@
-using System;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class MatzaSlice : MonoBehaviour
+namespace _Game_Assets.Microgames.matzaSplit
 {
-
-    [Header("Components")]
-    [SerializeField] private SpriteRenderer sr;
-    [SerializeField] private SpriteShapeController ssc;
-
-    private MatzaManager mm;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class MatzaSlice : MonoBehaviour
     {
-        if (sr == null) sr = GetComponent<SpriteRenderer>();
-        if (ssc == null) ssc = GetComponentInChildren<SpriteShapeController>();
-    }
+        [Header("Components")]
+        [SerializeField] private SpriteRenderer sr;
+        [SerializeField] private SpriteShapeController ssc;
 
-    public void setMatzaManager(MatzaManager mm)
-    {
-        this.mm = mm;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        private MatzaManager mm;
         
-    }
-
-    public void SetPolygon(Vector2[] vertices, bool other)
-    {
-        // Build spline for mask
-        Spline spline = ssc.spline;
-        spline.Clear();
-
-        foreach (Vector2 point in vertices)
+        void Start()
         {
-            spline.InsertPointAt(0, new Vector3(point.x * 2 - 1, point.y * 2 - 1));
+            if (sr == null) sr = GetComponent<SpriteRenderer>();
+            if (ssc == null) ssc = GetComponentInChildren<SpriteShapeController>();
         }
 
-        sr.maskInteraction = other ? SpriteMaskInteraction.VisibleOutsideMask : SpriteMaskInteraction.VisibleInsideMask;
-    }
+        public void SetMatzaManager(MatzaManager mm)
+        {
+            this.mm = mm;
+        }
 
-    private void OnMouseDown()
-    {
-        mm.OnMatzaSelected(this);
-    }
+        public void SetPolygon(Vector2[] vertices, bool other)
+        {
+            // Build spline for mask
+            Spline spline = ssc.spline;
+            spline.Clear();
 
-    public void Hide()
-    {
-        sr.enabled = false;
-    }
+            foreach (Vector2 point in vertices)
+            {
+                spline.InsertPointAt(0, new Vector3(point.x * 2 - 1, point.y * 2 - 1));
+            }
 
-    public void Show()
-    {
-        sr.enabled = true;
-    }
+            sr.maskInteraction = other ? SpriteMaskInteraction.VisibleOutsideMask : SpriteMaskInteraction.VisibleInsideMask;
+        }
 
-    internal void Reset()
-    {
-        transform.rotation.Set(0, 0, 0, 0);
+        private void OnMouseDown()
+        {
+            mm.OnMatzaSelected(this);
+        }
+
+        public void Hide()
+        {
+            sr.enabled = false;
+        }
+
+        public void Show()
+        {
+            sr.enabled = true;
+        }
+
+        internal void Reset()
+        {
+            transform.rotation.Set(0, 0, 0, 0);
+        }
     }
 }
