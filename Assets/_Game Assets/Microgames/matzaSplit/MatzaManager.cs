@@ -1,4 +1,3 @@
-using System;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
@@ -81,7 +80,7 @@ namespace _Game_Assets.Microgames.matzaSplit
         void BringMatza()
         {
             RemoveSpriteMasks();
-            animator.Play("FlyIn");
+            // animator.Play("FlyIn");
             biggerMatza = null;
 
             matzaLeft.Reset();
