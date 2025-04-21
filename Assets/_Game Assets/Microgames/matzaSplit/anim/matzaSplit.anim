@@ -1808,8 +1808,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0
-    functionName: CreatePolygonAndSetSpriteMasks()
+  - time: 0.95
+    functionName: ToggleInteractable
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

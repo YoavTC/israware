@@ -43,12 +43,12 @@ namespace _Game_Assets.Microgames.matzaSplit
 
         public void Hide()
         {
-            sr.enabled = false;
+            if (sr != null) sr.enabled = false;
         }
 
         public void Show()
         {
-            sr.enabled = true;
+            if (sr != null) sr.enabled = true;
         }
 
         internal void Reset()

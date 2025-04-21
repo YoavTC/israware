@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,16 +17,16 @@ namespace _Game_Assets.Microgames.matzaSplit
         [SerializeField] private PercentageText percentageText;
 
         [Header("Split properties")]
-        [SerializeField] int CUT_DETAIL_AMOUNT_MIN = 5;
-        [SerializeField] int CUT_DETAIL_AMOUNT_MAX = 7;
-        [SerializeField] float CUT_DEPTH_PERCENTAGE = 0.3f;
+        [SerializeField] private int CUT_DETAIL_AMOUNT_MIN = 5;
+        [SerializeField] private int CUT_DETAIL_AMOUNT_MAX = 7;
+        [SerializeField] private float CUT_DEPTH_PERCENTAGE = 0.3f;
 
         [Header("Events")]
         [SerializeField] private UnityEvent<bool> matzaChosenUnityEvent;
 
         private Vector2[] slicePolygon;
         private MatzaSlice biggerMatza;
-        private Boolean interactable;
+        private bool interactable;
         private float area;
         
         void Start()
@@ -41,6 +42,12 @@ namespace _Game_Assets.Microgames.matzaSplit
             interactable = false;
             
             BringMatza();
+        }
+        
+        [UsedImplicitly]
+        public void ToggleInteractable()
+        {
+            interactable = !interactable;
         }
 
         internal void OnMatzaSelected(MatzaSlice matzaSlice)
@@ -89,6 +96,7 @@ namespace _Game_Assets.Microgames.matzaSplit
             matzaRight.Hide();
         }
 
+        [UsedImplicitly]
         void CreatePolygonAndSetSpriteMasks()
         {
             int cuts = UnityEngine.Random.Range(CUT_DETAIL_AMOUNT_MIN, CUT_DETAIL_AMOUNT_MAX) + 2;
