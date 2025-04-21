@@ -4,28 +4,25 @@ namespace _Game_Assets.Microgames.catchShekel
 {
     public class ShekelController : MonoBehaviour
     {
+        [Header("Components")]
         [SerializeField] private Transform shekelTransform;
-        [Space]
+        public Transform ShekelTransform => shekelTransform;
+        
+        [Header("Settings")]
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotateSpeed;
         [Space]
         [SerializeField] private Vector2 minMaxXPosition;
         
-        public Transform ShekelTransform => shekelTransform;
-
         private bool moveRight;
-        private bool rotateRight;
-        
-        private bool allowMove = true;
         
         void Update()
         {
-            if (!allowMove) return;
-            
+            // Move and rotate the shekel
             shekelTransform.position += (moveRight ? Vector3.right : Vector3.left) * (moveSpeed * Time.deltaTime);
             shekelTransform.Rotate(moveRight ? Vector3.back : Vector3.forward, rotateSpeed * Time.deltaTime);
             
-            
+            // Bounds check
             if (shekelTransform.position.x > minMaxXPosition.y)
             {
                 moveRight = false;
