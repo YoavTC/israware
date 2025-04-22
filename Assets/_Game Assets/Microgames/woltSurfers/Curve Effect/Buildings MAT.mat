@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Curvy MAT
+  m_Name: Buildings MAT
   m_Shader: {fileID: -6465566751694194690, guid: b8d9e05905c14b84494e8e6e38c151ed, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
