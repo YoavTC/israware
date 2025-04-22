@@ -6,19 +6,28 @@ namespace _Game_Assets.Microgames.woltSurfers
 {
     public class EnvironmentManager : MonoBehaviour
     {
+        [Header("Spawning Settings")]
         [SerializeField] private float speed;
         [SerializeField] private float spawnDelayFactor;
         [SerializeField] private float zKillPoint;
 
-        [SerializeField] private GameObject[] cityBlockPrefabs;
+        [Header("City Block Settings")]
+        [SerializeField] private Transform cityBlocksParent;
+        [SerializeField] private GameObject cityBlockPrefab;
         [SerializeField] private List<Transform> cityBlocks;
 
+        [Header("City Block Spawn Animation Settings")]
         [SerializeField] private float cityBlockSpawnAnimationDistance;
         [SerializeField] private float cityBlockSpawnAnimationDuration;
         [SerializeField] private Ease cityBlockSpawnAnimationEase;
 
         private float elapseTime;
-        
+
+        private void Start()
+        {
+            elapseTime = spawnDelayFactor * speed;
+        }
+
         void Update()
         {
             HandleSpawning();
@@ -31,15 +40,12 @@ namespace _Game_Assets.Microgames.woltSurfers
 
             if (elapseTime >= spawnDelayFactor * speed)
             {
-                GameObject cityBlock = Instantiate(cityBlockPrefabs[Random.Range(0, cityBlockPrefabs.Length)],
+                GameObject cityBlock = Instantiate(cityBlockPrefab,
                     transform.position,
-                    Quaternion.identity);
+                    Quaternion.Euler(new Vector3(0, External_Packages.Random.RandomBool() ? 0f : 180f, 0)),
+                    cityBlocksParent);
                 
                 cityBlock.transform.localPosition += Vector3.down * cityBlockSpawnAnimationDistance;
-                // cityBlock.transform.localScale = Vector3.zero;
-                //
-                // cityBlock.transform.DOScale(1f, cityBlockSpawnAnimationDuration)
-                //     .SetEase(cityBlockSpawnAnimationEase);
 
                 cityBlock.transform.DOMoveY(transform.position.y, cityBlockSpawnAnimationDuration)
                     .SetEase(cityBlockSpawnAnimationEase);
