@@ -885,6 +885,7 @@ MonoBehaviour:
   speed: 15
   spawnDelayFactor: 0.37
   zKillPoint: -80
+  cityBlocksParent: {fileID: 0}
   cityBlockPrefab: {fileID: 5500011866212220600, guid: ca9ed027bd3685045bd8a2f75ee58dab, type: 3}
   cityBlocks:
   - {fileID: 1744186743}
