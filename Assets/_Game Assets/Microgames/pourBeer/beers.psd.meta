@@ -220,50 +220,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: beers_5
-      rect:
-        serializedVersion: 2
-        x: 3558
-        y: 70
-        width: 442
-        height: 841
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 068eaebf1bc7dee4dbb9244da5a7100d
-      internalID: 217286138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: beers_6
-      rect:
-        serializedVersion: 2
-        x: 3015
-        y: 161
-        width: 447
-        height: 701
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc0440bc203e35f479d855783d2ec65a
-      internalID: -863181643
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: beers_7
       rect:
         serializedVersion: 2

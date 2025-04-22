@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace _Game_Assets.Microgames.pourBeer
 {
     public class PouringController : MonoBehaviour
-    {
+    { 
         [Header("Rotation")]
         [SerializeField] private float rotationSpeed = 50f; // Speed of rotation change per second
         [SerializeField] private float rotationMultiplier = -0.5f;
