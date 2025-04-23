@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using External_Packages.MonoBehaviour_Extensions;
 using UnityEngine;
 
 namespace _Game_Assets.Microgames.woltSurfers
 {
-    public class EnvironmentManager : MonoBehaviour
+    public class EnvironmentManager : Singleton<EnvironmentManager>
     {
         [Header("Spawning Settings")]
         [SerializeField] private float speed;
@@ -68,6 +69,11 @@ namespace _Game_Assets.Microgames.woltSurfers
                     Destroy(cityBlock.gameObject);
                 }
             }
+        }
+        
+        public (float, float) GetMoveEnvironmentSettings()
+        {
+            return (speed, zKillPoint);
         }
     }
 }

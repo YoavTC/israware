@@ -1,10 +1,8 @@
-using System;
-using DG.Tweening;
 using UnityEngine;
 
 namespace _Game_Assets.Microgames.woltSurfers
 {
-    public class Coin : MonoBehaviour
+    public class Coin : MoveWithEnvironmentBase
     {
         [SerializeField] private ParticleSystem particle;
 
@@ -12,7 +10,8 @@ namespace _Game_Assets.Microgames.woltSurfers
         {
             if (other.CompareTag("Player"))
             {
-                Instantiate(particle, transform.position, Quaternion.identity);
+                var particleObject = Instantiate(particle, transform.position, Quaternion.identity);
+                particleObject.gameObject.AddComponent<MoveWithEnvironment>();
                 Destroy(gameObject);
             }
         }
