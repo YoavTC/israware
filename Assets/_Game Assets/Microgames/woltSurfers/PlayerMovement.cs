@@ -2,10 +2,11 @@ using System.Collections;
 using DG.Tweening;
 using EditorAttributes;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace _Game_Assets.Microgames.woltSurfers
 {
-    public class WolterController : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         [Header("Components")]
         [SerializeField] private Transform playerTransform;

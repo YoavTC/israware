@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Game_Assets.Microgames.woltSurfers
 {
-    public class Coin : MoveWithEnvironmentBase
+    public class Coin : MonoBehaviour
     {
         [SerializeField] private ParticleSystem particle;
 
@@ -12,6 +12,9 @@ namespace _Game_Assets.Microgames.woltSurfers
             {
                 var particleObject = Instantiate(particle, transform.position, Quaternion.identity);
                 particleObject.gameObject.AddComponent<MoveWithEnvironment>();
+                
+                other.transform.root.GetComponent<Wolter>().OnCollectCoin();
+                
                 Destroy(gameObject);
             }
         }
