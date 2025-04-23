@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using EditorAttributes;
 using UnityEngine;
@@ -8,10 +9,10 @@ namespace _Game_Assets.Microgames.woltSurfers
     {
         [Header("Components")]
         [SerializeField] private Transform playerTransform;
+        [SerializeField] private Animator scooterAnimator;
         
         [Header("Lane Switch")]
         [SerializeField] private float laneCenterXPosition;
-        [Space]
         [SerializeField] private float laneSwitchCooldown;
         [SerializeField, ReadOnly] private float timeSinceLastLaneSwitch;
         [SerializeField] private bool onRightLane;
@@ -20,15 +21,13 @@ namespace _Game_Assets.Microgames.woltSurfers
         [SerializeField] private Ease laneAnimationEase;
 
         [Header("Action Move")] 
-        [SerializeField] private float jumpHeightYPosition;
-        [SerializeField] private float rollHeightYPosition;
         [SerializeField] private float actionMoveStayDuration;
-        [Space]
         [SerializeField] private float actionMoveCooldown;
         [SerializeField, ReadOnly] private float timeSinceLastActionMove;
-        [Space]
-        [SerializeField] private float actionMoveAnimationDuration;
-        [SerializeField] private Ease actionMoveAnimationEase;
+
+        [Header("Action Move Animations")] 
+        [SerializeField, AnimatorParamDropdown(nameof(scooterAnimator))] private string slideAnimationParameter;
+        [SerializeField, AnimatorParamDropdown(nameof(scooterAnimator))] private string jumpAnimationParameter;
         
         private const string HORIZONTAL = "Horizontal";
         private const string VERTICAL = "Vertical";
@@ -49,25 +48,24 @@ namespace _Game_Assets.Microgames.woltSurfers
             bool canPerformActionMove = moveDirection != 0 && timeSinceLastActionMove >= actionMoveCooldown;
             if (canPerformActionMove)
             {
-                PerformActionMove(moveDirection);
+                StartCoroutine(PerformActionMoveCoroutine(moveDirection == 1));
                 timeSinceLastActionMove = 0f;
             }
         }
 
-        private void PerformActionMove(int direction)
+        private IEnumerator PerformActionMoveCoroutine(bool isJumping)
         {
-            float targetYPosition = direction == 1 ? jumpHeightYPosition : rollHeightYPosition;
-            float originalYPosition = playerTransform.position.y;
-            
-            playerTransform.DOMoveY(targetYPosition, actionMoveAnimationDuration)
-                .SetEase(actionMoveAnimationEase)
-                .OnComplete(() =>
-                {
-                    playerTransform.DOMoveY(originalYPosition,
-                        actionMoveAnimationDuration)
-                        .SetDelay(actionMoveStayDuration)
-                        .SetEase(actionMoveAnimationEase);
-                });
+            NotifyAnimator(isJumping, true);
+            yield return new WaitForSeconds(actionMoveStayDuration);
+            NotifyAnimator(isJumping, false);
+        }
+
+        private void NotifyAnimator(bool isJumping, bool state)
+        {
+            scooterAnimator.SetBool(
+                isJumping ? jumpAnimationParameter : slideAnimationParameter,
+                state
+                );
         }
 
         private void HandleLaneSwitching()
