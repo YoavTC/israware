@@ -1556,6 +1556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cityblock
       objectReference: {fileID: 0}
+    - target: {fileID: 5500011866212220600, guid: ca9ed027bd3685045bd8a2f75ee58dab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
