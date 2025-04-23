@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityUtils;
 using Random = UnityEngine.Random;
 
-namespace _Game_Assets.Microgames.woltSurfers
+namespace _Game_Assets.Scripts.Reusables
 {
-    public class RandomPropsGroup : MonoBehaviour
+    public class RandomChildSelector : MonoBehaviour
     {
         [SerializeField] private bool noneIsAnOption;
         [Space]
