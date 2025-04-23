@@ -13,7 +13,6 @@ namespace _Game_Assets.Microgames.woltSurfers
         [SerializeField] private float zKillPoint;
 
         [Header("City Block Settings")]
-        [SerializeField] private Transform cityBlocksParent;
         [SerializeField] private GameObject cityBlockPrefab;
         [SerializeField] private List<Transform> cityBlocks;
 
@@ -44,7 +43,7 @@ namespace _Game_Assets.Microgames.woltSurfers
                 GameObject cityBlock = Instantiate(cityBlockPrefab,
                     transform.position,
                     Quaternion.Euler(new Vector3(0, External_Packages.Random.RandomBool() ? 0f : 180f, 0)),
-                    cityBlocksParent);
+                    transform);
                 
                 cityBlock.transform.localPosition += Vector3.down * cityBlockSpawnAnimationDistance;
 
