@@ -1836,6 +1836,11 @@ MonoBehaviour:
   zKillPoint: -80
   cityBlockPrefabs:
   - {fileID: 5500011866212220600, guid: de43c2c4fbe20be479ac0bb39b43d73d, type: 3}
+  - {fileID: 5500011866212220600, guid: 8cb33ae8220186a46a12471bbfce24c2, type: 3}
+  - {fileID: 5500011866212220600, guid: a592f0b69bd9e8344a8c979b1d3af2fc, type: 3}
+  - {fileID: 5500011866212220600, guid: 02c6748cf3ac3414daab4f863e7c6cbf, type: 3}
+  - {fileID: 5500011866212220600, guid: 45ac8215c86de694789c76f7247a2a0d, type: 3}
+  - {fileID: 5500011866212220600, guid: 54f785f6035008145bbb4358ac49e4fe, type: 3}
   cityBlocks:
   - {fileID: 1744186743}
   cityBlockSpawnAnimationDistance: 15
@@ -2948,7 +2953,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 52.017334, y: -44.405273}
+  m_AnchoredPosition: {x: 52.01758, y: -44.405273}
   m_SizeDelta: {x: 534.943, y: 138.81}
   m_Pivot: {x: 0, y: 1}
 --- !u!95 &2124691059 stripped

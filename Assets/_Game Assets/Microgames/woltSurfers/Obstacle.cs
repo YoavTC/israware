@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace _Game_Assets.Microgames.woltSurfers
 {
-    [RequireComponent(typeof(BoxCollider))]
+    [SelectionBase,
+    RequireComponent(typeof(BoxCollider))]
     public class Obstacle : MonoBehaviour
     {
         private void OnTriggerEnter(Collider other)

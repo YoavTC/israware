@@ -42,7 +42,8 @@ namespace _Game_Assets.Microgames.woltSurfers
             {
                 GameObject cityBlock = Instantiate(cityBlockPrefabs[Random.Range(0, cityBlockPrefabs.Length)],
                     transform.position,
-                    Quaternion.Euler(new Vector3(0, External_Packages.Random.RandomBool() ? 0f : 180f, 0)),
+                    // Quaternion.Euler(new Vector3(0, External_Packages.Random.RandomBool() ? 0f : 180f, 0)),
+                    Quaternion.identity,
                     transform);
                 
                 cityBlock.transform.localPosition += Vector3.down * cityBlockSpawnAnimationDistance;
