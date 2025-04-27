@@ -15,5 +15,10 @@ namespace _Game_Assets.Microgames.woltSurfers
             coinsCollected++;
             collectCoinUnityEvent?.Invoke(coinsCollected.ToString());
         }
+
+        public void OnObstacleHit(Transform obstacleTransform)
+        {
+            Debug.Log("Obstacle hit: " + obstacleTransform.name);
+        }
     }
 }

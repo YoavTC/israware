@@ -13,7 +13,7 @@ namespace _Game_Assets.Microgames.woltSurfers
         [SerializeField] private float zKillPoint;
 
         [Header("City Block Settings")]
-        [SerializeField] private GameObject cityBlockPrefab;
+        [SerializeField] private GameObject[] cityBlockPrefabs;
         [SerializeField] private List<Transform> cityBlocks;
 
         [Header("City Block Spawn Animation Settings")]
@@ -40,7 +40,7 @@ namespace _Game_Assets.Microgames.woltSurfers
 
             if (elapseTime >= spawnDelayFactor * speed)
             {
-                GameObject cityBlock = Instantiate(cityBlockPrefab,
+                GameObject cityBlock = Instantiate(cityBlockPrefabs[Random.Range(0, cityBlockPrefabs.Length)],
                     transform.position,
                     Quaternion.Euler(new Vector3(0, External_Packages.Random.RandomBool() ? 0f : 180f, 0)),
                     transform);
