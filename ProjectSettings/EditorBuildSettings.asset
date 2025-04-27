@@ -56,6 +56,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/woltSurfers/woltSurfers.unity
     guid: 47cb73c4a5189cb4ea708f91e3710d18
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/strawTropit/strawTropit.unity
+    guid: 6ce6c20370cb7984fbef184d8607d06a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
