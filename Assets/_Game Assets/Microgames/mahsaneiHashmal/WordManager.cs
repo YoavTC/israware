@@ -21,7 +21,6 @@ namespace _Game_Assets.Microgames.mahsaneiHashmal
         
         [Header("Settings")]
         [SerializeField] private TMP_Text wordAliasPrefab;
-        [SerializeField] private float wordSnapDistance;
         [Space]
         [SerializeField] private SerializedDictionary<TMP_Text, string[]> wordAliasesDictionary;
         
@@ -38,10 +37,6 @@ namespace _Game_Assets.Microgames.mahsaneiHashmal
         // Grabbed word alias
         private Transform grabbedWordAliasTransform;
         private Vector2 grabOffset;
-        
-        // Word alias display width offset adjustment
-        private const float WORD_ALIAS_DISPLAY_WIDTH = 17f;
-        private Vector3 wordAliasLabelWidth => new Vector3(0f, WORD_ALIAS_DISPLAY_WIDTH, 0f);
 
         private void Start()
         {
@@ -89,14 +84,13 @@ namespace _Game_Assets.Microgames.mahsaneiHashmal
             {
                 grabbedWordAliasTransform.position = Input.mousePosition + (Vector3) grabOffset;
             }
-                
-            Debug.DrawLine(grabbedWordAliasTransform.position - wordAliasLabelWidth, randomWordDisplay.transform.position - wordAliasLabelWidth, Color.red);
             
             // If mouse is released, check if the grabbed word alias is close enough to the random word display
             if (Input.GetMouseButtonUp(0))
             {
-                float distance = Vector2.Distance(grabbedWordAliasTransform.position - wordAliasLabelWidth, randomWordDisplay.transform.position - wordAliasLabelWidth);
-                if (distance < wordSnapDistance)
+                // Raycast and check if hovering over the random word display
+                List<RaycastResult> raycastResults = RaycastUI();
+                if (raycastResults.Any(result => result.gameObject == randomWordDisplay.gameObject))
                 {
                     Submit();
                 }
@@ -107,15 +101,7 @@ namespace _Game_Assets.Microgames.mahsaneiHashmal
 
         private void Grab()
         {
-            // Initialize UI raycast
-            PointerEventData eventData = new PointerEventData(EventSystem.current)
-            {
-                position = Input.mousePosition
-            };
-
-            // Raycast
-            List<RaycastResult> raycastResults = new List<RaycastResult>();
-            graphicRaycaster.Raycast(eventData, raycastResults);
+            List<RaycastResult> raycastResults = RaycastUI();
             
             // Check if the raycast hit a word alias
             if (raycastResults.Count > 0 && raycastResults.FirstOrDefault().gameObject.TryGetComponent(out WordAlias wordAlias))
@@ -142,6 +128,21 @@ namespace _Game_Assets.Microgames.mahsaneiHashmal
             randomWordDisplay.transform.GetChild(0).gameObject.SetActive(false); // Deactivate the word display's background
             
             wordSubmittedUnityEvent?.Invoke(submittedAlias.Trim() == originalRandomWordValue);
+        }
+
+        private List<RaycastResult> RaycastUI()
+        {
+            // Initialize UI raycast
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+
+            // Raycast
+            List<RaycastResult> raycastResults = new List<RaycastResult>();
+            graphicRaycaster.Raycast(eventData, raycastResults);
+
+            return raycastResults;
         }
     }
 }

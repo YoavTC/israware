@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 111169045}
   m_Layer: 5
   m_Name: Text (TMP) (1)
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,12 +204,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 121.1
+  m_fontSize: 121
   m_fontSizeBase: 121.1
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 500
+  m_fontSizeMax: 121
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 662092777}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 734510114}
   m_Layer: 5
   m_Name: Text (TMP) (4)
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -626,12 +626,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 121.1
+  m_fontSize: 121
   m_fontSizeBase: 121.1
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 500
+  m_fontSizeMax: 121
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -710,8 +710,8 @@ MonoBehaviour:
   microgame: {fileID: 11400000, guid: eb6606b5b9f7a6f48b0498150e633d2f, type: 2}
   positiveFeedbacksCount: 0
   negativeFeedbacksCount: 0
-  winFinishDelay: 0
-  LoseFinishDelay: 0
+  winFinishDelay: 0.5
+  LoseFinishDelay: 0.5
 --- !u!4 &755142732
 Transform:
   m_ObjectHideFlags: 0
@@ -760,34 +760,53 @@ MonoBehaviour:
   mainCamera: {fileID: 938456779}
   graphicRaycaster: {fileID: 1251608387}
   wordAliasPrefab: {fileID: 3514748103475153013, guid: 5764f6c4ac13d7648a3e13d06a849361, type: 3}
-  wordSnapDistance: 17.5
   wordAliasesDictionary:
     _serializedList:
     - Key: {fileID: 1040489130}
       Value:
-      - 01
-      - 02
-      - 03
+      - "\u05D4\u05D3\u05D7\u05DC\u05D9\u05DC"
+      - "\u05D4\u05D6\u05DE\u05D9\u05E8"
+      - "\u05D4\u05D9\u05E8\u05D9\u05D3"
+      - "\u05D4\u05E9\u05DE\u05D9\u05E8"
+      - "\u05D4\u05DE\u05D7\u05D6\u05D9\u05E8"
+      - "\u05D4\u05DE\u05D7\u05D9\u05E7"
+      - "\u05D4\u05E0\u05D7\u05D9\u05E8"
     - Key: {fileID: 111169045}
       Value:
-      - 11
-      - 12
-      - 13
+      - "\u05E0\u05DE\u05E8"
+      - "\u05E0\u05DE\u05D5\u05E9\u05D4"
+      - "\u05E1\u05DE\u05D5\u05DA"
+      - "\u05D3\u05E8\u05D5\u05DA"
+      - "\u05E0\u05DE\u05D5\u05D2"
+      - "\u05E0\u05D1\u05D5\u05DA"
+      - "\u05E4\u05E8\u05D5\u05DA"
     - Key: {fileID: 1538550826}
       Value:
-      - 21
-      - 22
-      - 23
+      - "\u05E4\u05E8\u05D9"
+      - "\u05DE\u05E8\u05D9"
+      - "\u05D5\u05D5\u05D3\u05D0\u05D9"
+      - "\u05D2\u05DC\u05D0\u05D9"
+      - "\u05E4\u05E0\u05D9"
+      - "\u05DE\u05D3\u05D9\u05D9"
+      - "\u05DE\u05D3\u05D5"
     - Key: {fileID: 1214439883}
       Value:
-      - 31
-      - 32
-      - 33
+      - "\u05D1\u05DE\u05D7\u05E1\u05E0\u05D9\u05EA"
+      - "\u05D1\u05DE\u05D7\u05D3\u05DC\u05D9"
+      - "\u05D1\u05D7\u05E1\u05D4"
+      - "\u05E4\u05E8\u05D7\u05D9\u05DD"
+      - "\u05DE\u05E0\u05D8\u05D4-\u05E8\u05D9\u05D9"
+      - "\u05D1\u05DE\u05D7\u05E1\u05D3\u05D9"
+      - "\u05D1\u05DE\u05D7\u05E4\u05E8\u05D9"
     - Key: {fileID: 734510114}
       Value:
-      - 41
-      - 42
-      - 43
+      - "\u05D1\u05DB\u05DC\u05DC"
+      - "\u05D7\u05E8\u05D3\u05DC"
+      - "\u05D7\u05E8\u05D2\u05D5\u05DC"
+      - "\u05D7\u05E9\u05DC\u05DC"
+      - "\u05E9\u05D7\u05DE\u05D8"
+      - "\u05DB\u05E0\"\u05DC"
+      - "\u05D0\u05D1\u05D5\u05DC\u05E2\u05E4\u05D9\u05D4"
   wordSubmittedUnityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -795,6 +814,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: _Game_Assets.Scripts.MicrogameInstance, Assembly-CSharp
         m_MethodName: Feedback
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 625115597}
+        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
+        m_MethodName: PlayFeedbacks
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1317,7 +1348,7 @@ GameObject:
   - component: {fileID: 1040489130}
   m_Layer: 5
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1389,12 +1420,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 121.1
+  m_fontSize: 121
   m_fontSizeBase: 121.1
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 500
+  m_fontSizeMax: 121
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1454,7 +1485,7 @@ GameObject:
   - component: {fileID: 1122990773}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1529,7 +1560,7 @@ GameObject:
   - component: {fileID: 1214439883}
   m_Layer: 5
   m_Name: Text (TMP) (3)
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1601,12 +1632,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 121.1
+  m_fontSize: 121
   m_fontSizeBase: 121.1
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 500
+  m_fontSizeMax: 121
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1666,7 +1697,7 @@ GameObject:
   - component: {fileID: 1220360430}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1964,7 +1995,7 @@ GameObject:
   - component: {fileID: 1538550826}
   m_Layer: 5
   m_Name: Text (TMP) (2)
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2036,12 +2067,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 121.1
+  m_fontSize: 121
   m_fontSizeBase: 121.1
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 500
+  m_fontSizeMax: 121
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -2180,7 +2211,7 @@ GameObject:
   - component: {fileID: 1932601322}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2255,7 +2286,7 @@ GameObject:
   - component: {fileID: 2054277952}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: NotPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2324,5 +2355,5 @@ SceneRoots:
   - {fileID: 755142732}
   - {fileID: 938456780}
   - {fileID: 625115596}
-  - {fileID: 1251608390}
   - {fileID: 825162461}
+  - {fileID: 1251608390}
