@@ -16,7 +16,7 @@ MonoBehaviour:
   ENGLISH_PROMPT: 
   HEBREW_PROMPT: 
   hideCursor: 1
-  positiveFeedbacksToWin: 0
-  negativeFeedbacksToLose: 0
-  maxMicrogameTime: 0
+  positiveFeedbacksToWin: 1
+  negativeFeedbacksToLose: 1
+  maxMicrogameTime: 5
   winAtTimerFinish: 0
