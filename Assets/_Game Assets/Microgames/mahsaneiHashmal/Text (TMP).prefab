@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 551236079953108382}
-  velocityMultiplier: 0.5
+  velocityMultiplierRange: {x: 0.2, y: 0.7}
   velocityCurve:
     serializedVersion: 2
     m_Curve:

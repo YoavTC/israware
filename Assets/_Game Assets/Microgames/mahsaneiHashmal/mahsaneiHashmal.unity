@@ -759,6 +759,8 @@ MonoBehaviour:
   canvas: {fileID: 1251608390}
   mainCamera: {fileID: 938456779}
   graphicRaycaster: {fileID: 1251608387}
+  wordAliasPrefab: {fileID: 3514748103475153013, guid: 5764f6c4ac13d7648a3e13d06a849361, type: 3}
+  wordSnapDistance: 17.5
   wordAliasesDictionary:
     _serializedList:
     - Key: {fileID: 1040489130}
@@ -786,11 +788,21 @@ MonoBehaviour:
       - 41
       - 42
       - 43
-  wordAliasPrefab: {fileID: 3514748103475153013, guid: 5764f6c4ac13d7648a3e13d06a849361, type: 3}
-  wordSnapDistance: 15
   wordSubmittedUnityEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 755142731}
+        m_TargetAssemblyTypeName: _Game_Assets.Scripts.MicrogameInstance, Assembly-CSharp
+        m_MethodName: Feedback
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &825162461
 Transform:
   m_ObjectHideFlags: 0

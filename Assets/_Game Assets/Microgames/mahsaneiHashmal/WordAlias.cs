@@ -6,16 +6,18 @@ namespace _Game_Assets.Microgames.mahsaneiHashmal
 {
     public class WordAlias : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private GameObject background;
-        
         private void Awake()
         {
             ToggleBackground(false);
-            
-            isSliding = true;
-            direction = Random.insideUnitCircle.normalized;
-        }
 
+            elapsedTime = 0f;
+            isSliding = true;
+            randomDirection = Random.insideUnitCircle.normalized;
+        }
+        
+        #region Hover Effect
+        [SerializeField] private GameObject background;
+        
         public void OnPointerEnter(PointerEventData eventData) => ToggleBackground(true);
         public void OnPointerExit(PointerEventData eventData) => ToggleBackground(false);
 
@@ -23,22 +25,35 @@ namespace _Game_Assets.Microgames.mahsaneiHashmal
         {
             background.SetActive(state);
         }
-
-        [SerializeField] private float velocityMultiplier;
+        #endregion
+        
+        #region Spawn Animation
+        [SerializeField] private Vector2 velocityMultiplierRange;
         [SerializeField] private AnimationCurve velocityCurve;
-        private Vector3 direction;
+
+        private float elapsedTime;
+        private Vector3 randomDirection;
         private bool isSliding;
 
+        // Called from the WordManager when the word alias is grabbed
         public void OnWordGrabbed() => isSliding = false;
         
+        // Animate spawning effect
         private void Update()
         {
             if (isSliding)
             {
-                float velocity = velocityCurve.Evaluate(Time.time) * Screen.width;
-                transform.position += direction * (velocityMultiplier * Time.deltaTime * velocity);
+                elapsedTime += Time.deltaTime;
+                
+                float velocity = velocityCurve.Evaluate(elapsedTime);
+                
+                velocity *= Screen.width; // Screen size-responsive
+                velocity *= Time.deltaTime; // Frame rate-independent
+                velocity *= Random.Range(velocityMultiplierRange.x, velocityMultiplierRange.y); // Variation
+                
+                transform.position += randomDirection * velocity;
             }
         }
-
+        #endregion
     }
 }
