@@ -1820,12 +1820,6 @@ MonoBehaviour:
   score: 0
   gameActive: 1
   lastMicrogameResult: 0
-  microgameFinishedUnityEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  microgameLoadedUnityEvent:
-    m_PersistentCalls:
-      m_Calls: []
   microgameCallbacksListeners:
   - {fileID: 1472823990}
   - {fileID: 2105746273}
