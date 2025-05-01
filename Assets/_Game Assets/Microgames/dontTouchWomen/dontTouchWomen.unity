@@ -5138,7 +5138,7 @@ MonoBehaviour:
   DebugActive: 0
   InScriptDrivenPause: 0
   FeedbacksList:
-  - rid: 1440116805430673746
+  - rid: 1440116805430673747
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -5147,11 +5147,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 1440116805430673746
+    - rid: 1440116805430673747
       type: {class: MMF_CameraShake, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
         Active: 1
-        UniqueID: 720724389
+        UniqueID: -2100197274
         Label: Camera Shake
         OriginalLabel: Camera Shake
         ChannelMode: 0
