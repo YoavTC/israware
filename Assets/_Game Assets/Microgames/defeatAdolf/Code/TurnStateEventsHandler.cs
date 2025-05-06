@@ -1,14 +1,33 @@
 ﻿using System.Collections.Generic;
+using _Game_Assets.Microgames.defeatAdolf.Code.Enums;
 using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace _Game_Assets.Microgames.defeatAdolf
+namespace _Game_Assets.Microgames.defeatAdolf.Code
 {
     public class TurnStateEventsHandler : MonoBehaviour
     {
         [Header("Events")]
         [SerializeField] private UnityEvent<TurnState> stateChangedUnityEvent;
+        [SerializeField] private UnityEvent playerDamagedUnityEvent;
+        [SerializeField] private UnityEvent enemyDamagedUnityEvent;
+        
+        private void InvokeEvent(string eventName)
+        {
+            switch (eventName)
+            {
+                case "PlayerDamaged":
+                    playerDamagedUnityEvent?.Invoke();
+                    break;
+                case "EnemyDamaged":
+                    enemyDamagedUnityEvent?.Invoke();
+                    break;
+                default:
+                    Debug.LogWarning($"Event '{eventName}' not recognized.");
+                    break;
+            }
+        }
         
         // Generic events
         [FoldoutGroup("Generic Events", nameof(choosingStateUnityEvent), nameof(performingStateUnityEvent))]

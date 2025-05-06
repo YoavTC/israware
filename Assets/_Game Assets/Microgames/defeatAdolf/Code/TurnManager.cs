@@ -1,16 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game_Assets.Microgames.defeatAdolf.Code.Enums;
+using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace _Game_Assets.Microgames.defeatAdolf
+namespace _Game_Assets.Microgames.defeatAdolf.Code
 {
     public class TurnManager : MonoBehaviour
     {
         [Header("Components")] 
         [SerializeField] private TurnStateEventsHandler turnStateEventsHandler;
         [SerializeField] private PlayableDirector introDirector;
+        [SerializeField] private Animator actionsAnimator;
+
+        private ActionType chosenAction;
 
         [Header("State Machine")]
         [SerializeField] private TurnState currentState;
@@ -49,6 +54,7 @@ namespace _Game_Assets.Microgames.defeatAdolf
         // machine know that the current state has finished
         public void FinishState()
         {
+            Debug.Log("Finished state: " + currentState);
             waitingForInput = false;
         }
 
@@ -58,6 +64,11 @@ namespace _Game_Assets.Microgames.defeatAdolf
             yield return new WaitUntil(() => !waitingForInput);
         }
         #endregion
+        
+        public void ActionChosen(ActionType actionType)
+        {
+            chosenAction = actionType;
+        }
 
         #region Turn state coroutines
         private IEnumerator IntroStateCoroutine()
@@ -79,6 +90,7 @@ namespace _Game_Assets.Microgames.defeatAdolf
         private IEnumerator PlayerPerformingAttackCoroutine()
         {
             // Animate the action & notify affected entities
+            actionsAnimator.SetTrigger(chosenAction.ToString("G"));
             yield return WaitForState(TurnState.PLAYER_PERFORMING_ATTACK);
 
             UpdateState(TurnState.ENEMY_CHOOSING_ATTACK);
