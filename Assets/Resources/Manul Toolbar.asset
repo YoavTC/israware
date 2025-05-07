@@ -183,7 +183,7 @@ MonoBehaviour:
     showNameField: 0
     intNamesList: []
   - isActive: 1
-    isExpanded: 0
+    isExpanded: 1
     type: 1
     labelType: 0
     labelText: Microgames Assets

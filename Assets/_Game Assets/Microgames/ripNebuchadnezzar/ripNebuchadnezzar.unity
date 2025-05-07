@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 149382320}
   - component: {fileID: 149382319}
   - component: {fileID: 149382322}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R Arm
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 305650066}
   - component: {fileID: 305650065}
   - component: {fileID: 305650068}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R Leg
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -1226,12 +1226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   microgame: {fileID: 11400000, guid: c988435b292812645812d99d5d5d14dd, type: 2}
-  microgameSettings:
-    positiveFeedbacksToWin: 1
-    negativeFeedbacksToLose: 1
-    maxMicrogameTime: 8
-    winAtTimerFinish: 0
-    hideCursor: 0
+  positiveFeedbacksCount: 0
+  negativeFeedbacksCount: 0
   winFinishDelay: 2
   LoseFinishDelay: 1
 --- !u!4 &755142732
@@ -1263,7 +1259,7 @@ GameObject:
   - component: {fileID: 763447373}
   - component: {fileID: 763447372}
   - component: {fileID: 763447375}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L Arm
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -1663,7 +1659,7 @@ GameObject:
   - component: {fileID: 894566963}
   - component: {fileID: 894566962}
   - component: {fileID: 894566965}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L Leg
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
