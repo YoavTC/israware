@@ -1,0 +1,19 @@
+{
+    "name": "Scripts.Reusables",
+    "rootNamespace": "",
+    "references": [
+        "GUID:febaf25a60dafbd44941357b21678606",
+        "GUID:49fe881a00758a148a131425697bcb5a",
+        "GUID:156c07b1866562045a9fd0d6c0c33604",
+        "GUID:9cd890951ee69a048bbdff36b933df44"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
