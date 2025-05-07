@@ -1,0 +1,13 @@
+{
+    "name": "strawTropit",
+    "references": [
+        "ExternalPackages",
+        "EditorAttributes",
+        "MoreMountains.Tools",
+        "Unity.TextMeshPro",
+        "DOTween.Modules",
+        "AYellowpaper.SerializedCollections",
+        "Scripts.Reusables",
+        "UnityUtils"
+    ]
+}

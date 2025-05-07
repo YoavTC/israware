@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace UnityUtils {
+namespace External_Packages.Extensions {
     public static class StringExtensions {
         /// <summary>Checks if a string is Null or white space</summary>
         public static bool IsNullOrWhiteSpace(this string val) => string.IsNullOrWhiteSpace(val);

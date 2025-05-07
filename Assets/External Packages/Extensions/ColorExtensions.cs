@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace UnityUtils {
+namespace External_Packages.Extensions {
     public static class ColorExtensions {
         /// <summary>
         /// Sets the alpha component of the color.

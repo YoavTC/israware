@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UIElements;
 
-namespace UnityUtils {
+namespace External_Packages.Extensions {
     public static class UQueryBuilderExtensions {
         /// <summary>
         /// Sorts the elements of a sequence in ascending order according 

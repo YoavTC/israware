@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using External_Packages.Extensions;
 using External_Packages.Extra_Components;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityUtils;
 using Random = UnityEngine.Random;
 
 namespace _Game_Assets.Microgames.gatherProtestors
@@ -52,7 +52,7 @@ namespace _Game_Assets.Microgames.gatherProtestors
         {
             foreach (var child in transform.Children())
             {
-                child.GetOrAddComponent<TweenScaleEffect>().DoEffect();
+                child.GetOrAdd<TweenScaleEffect>().DoEffect();
             }
         }
     }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using External_Packages.Extensions;
 using UnityEngine;
-using UnityUtils;
 using Random = UnityEngine.Random;
 
 namespace _Game_Assets.Microgames.dontTouchWomen

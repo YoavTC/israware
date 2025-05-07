@@ -39,11 +39,6 @@ namespace _Game_Assets.Microgames.matkot
             ActionEnabled = true;
             ActionCooldown = spawnCooldown;
             ballsSpawned = 0;
-            
-            if (GameManager.Instance != null)
-            {
-                spawnAmount = GameManager.Instance.CurrentMicrogame.positiveFeedbacksToWin;
-            }
 
             flickerFeedback = spawnerParent.GetComponent<MMF_Player>().GetFeedbackOfType<MMF_SpriteRenderer>();
             UpdateUICounter();

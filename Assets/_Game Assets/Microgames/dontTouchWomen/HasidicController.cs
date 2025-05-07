@@ -3,7 +3,6 @@ using DG.Tweening;
 using External_Packages.Extra_Components;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityUtils;
 
 namespace _Game_Assets.Microgames.dontTouchWomen
 {

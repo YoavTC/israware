@@ -1,4 +1,5 @@
 ﻿using System;
+using External_Packages.Extensions;
 using External_Packages.Extra_Components;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace _Game_Assets.Microgames.rhythm
         private void PressKey(int keyIndex)
         {
             keyPressedUnityEvent?.Invoke(keyIndex);
-            keyTransforms[keyIndex].GetOrAddComponent<TweenScaleEffect>().DoEffect();
+            keyTransforms[keyIndex].GetOrAdd<TweenScaleEffect>().DoEffect();
             
             var a = Instantiate(keyPressEffectPrefab, keyTransforms[keyIndex].position, Quaternion.identity).GetComponent<ParticleSystem>();
             var b = a.main;

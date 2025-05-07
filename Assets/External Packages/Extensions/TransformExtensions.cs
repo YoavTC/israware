@@ -3,8 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UnityUtils {
+namespace External_Packages.Extensions {
     public static class TransformExtensions {
+        /// <summary>
+        /// Gets a component of the given type attached to the Transform. If that type of component does not exist, it adds one.
+        /// </summary>
+        /// <remarks>
+        /// This method is useful when you don't know if a Transform has a specific type of component,
+        /// but you want to work with that component regardless. Instead of checking and adding the component manually,
+        /// you can use this method to do both operations in one line.
+        /// </remarks>
+        /// <typeparam name="T">The type of the component to get or add.</typeparam>
+        /// <param name="transform">The Transform to get the component from or add the component to.</param>
+        /// <returns>The existing component of the given type, or a new one if no such component exists.</returns>    
+        public static T GetOrAdd<T>(this Transform transform) where T : Component {
+            T component = transform.GetComponent<T>();
+            if (!component) component = transform.gameObject.AddComponent<T>();
+            
+            return component;
+        }
+        
         /// <summary>
         /// Check if the transform is within a certain distance and optionally within a certain angle (FOV) from the target transform.
         /// </summary>

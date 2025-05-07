@@ -1,7 +1,7 @@
 using DG.Tweening;
+using External_Packages.Extensions;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityUtils;
 
 namespace _Game_Assets.Microgames.sortKosherFood
 {

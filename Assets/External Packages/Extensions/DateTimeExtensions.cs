@@ -1,6 +1,6 @@
 using System;
 
-namespace UnityUtils {
+namespace External_Packages.Extensions {
     public static class DateTimeExtensions {
         /// <summary>
         /// Thanks, Adam, for refactoring this code
