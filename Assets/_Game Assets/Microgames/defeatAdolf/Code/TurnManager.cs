@@ -99,7 +99,10 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         private IEnumerator EnemyChoosingAttackCoroutine()
         {
             // Enemy AI logic to choose an action
-            yield return WaitForState(TurnState.ENEMY_CHOOSING_ATTACK);
+            // yield return WaitForState(TurnState.ENEMY_CHOOSING_ATTACK);
+            yield return new WaitForSeconds(1f);
+            ActionChosen(ActionType.ENEMY_RANGED_ATTACK);
+            actionsAnimator.SetTrigger(chosenAction.ToString("G"));
 
             UpdateState(TurnState.ENEMY_PERFORMING_ATTACK);
         }

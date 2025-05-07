@@ -11,6 +11,7 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         [Header("Events")]
         [SerializeField] private UnityEvent<TurnState> stateChangedUnityEvent;
         [SerializeField] private UnityEvent playerDamagedUnityEvent;
+        [SerializeField] private UnityEvent playerRangedDamagedUnityEvent;
         [SerializeField] private UnityEvent playerHealedUnityEvent;
         [SerializeField] private UnityEvent enemyDamagedUnityEvent;
         
@@ -20,6 +21,9 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
             {
                 case "PlayerDamaged":
                     playerDamagedUnityEvent?.Invoke();
+                    break;
+                case "PlayerRangedDamaged":
+                    playerRangedDamagedUnityEvent?.Invoke();
                     break;
                 case "EnemyDamaged":
                     enemyDamagedUnityEvent?.Invoke();
