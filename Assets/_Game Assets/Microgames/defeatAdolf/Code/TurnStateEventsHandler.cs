@@ -14,6 +14,7 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         [SerializeField] private UnityEvent playerRangedDamagedUnityEvent;
         [SerializeField] private UnityEvent playerHealedUnityEvent;
         [SerializeField] private UnityEvent enemyDamagedUnityEvent;
+        [SerializeField] private UnityEvent enemyHealedUnityEvent;
         
         private void InvokeEvent(string eventName)
         {
@@ -30,6 +31,9 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
                     break;
                 case "PlayerHealed":
                     playerHealedUnityEvent?.Invoke();
+                    break;
+                case "EnemyHealed":
+                    enemyHealedUnityEvent?.Invoke();
                     break;
                 default:
                     Debug.LogWarning($"Event '{eventName}' not recognized.");

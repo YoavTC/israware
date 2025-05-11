@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Game_Assets.Microgames.defeatAdolf.Code.Enums;
-using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -14,6 +13,7 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         [SerializeField] private TurnStateEventsHandler turnStateEventsHandler;
         [SerializeField] private PlayableDirector introDirector;
         [SerializeField] private Animator actionsAnimator;
+        [SerializeField] private EnemyAI enemyAI;
 
         private ActionType chosenAction;
 
@@ -70,6 +70,11 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
             chosenAction = actionType;
         }
 
+        private void NotifyAnimator()
+        {
+            actionsAnimator.SetTrigger(chosenAction.ToString("G"));
+        }
+
         #region Turn state coroutines
         private IEnumerator IntroStateCoroutine()
         {
@@ -90,7 +95,7 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         private IEnumerator PlayerPerformingAttackCoroutine()
         {
             // Animate the action & notify affected entities
-            actionsAnimator.SetTrigger(chosenAction.ToString("G"));
+            NotifyAnimator();
             yield return WaitForState(TurnState.PLAYER_PERFORMING_ATTACK);
 
             UpdateState(TurnState.ENEMY_CHOOSING_ATTACK);
@@ -99,10 +104,8 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         private IEnumerator EnemyChoosingAttackCoroutine()
         {
             // Enemy AI logic to choose an action
-            // yield return WaitForState(TurnState.ENEMY_CHOOSING_ATTACK);
-            yield return new WaitForSeconds(1f);
-            ActionChosen(ActionType.ENEMY_RANGED_ATTACK);
-            actionsAnimator.SetTrigger(chosenAction.ToString("G"));
+            yield return enemyAI.GetEnemyAction();
+            NotifyAnimator();
 
             UpdateState(TurnState.ENEMY_PERFORMING_ATTACK);
         }

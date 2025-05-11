@@ -1197,6 +1197,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.8833333
+    functionName: InvokeEvent
+    data: PlayerRangedDamaged
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.0666667
     functionName: FinishState
     data: 
