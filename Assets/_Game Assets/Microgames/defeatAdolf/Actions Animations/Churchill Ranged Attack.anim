@@ -1322,7 +1322,7 @@ AnimationClip:
   m_Events:
   - time: 0.31666666
     functionName: InvokeEvent
-    data: damageHitler
+    data: gunDamageHitler
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
@@ -1336,26 +1336,26 @@ AnimationClip:
     messageOptions: 0
   - time: 0.41666666
     functionName: InvokeEvent
-    data: damageHitler
+    data: gunDamageHitler
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.51666665
     functionName: InvokeEvent
-    data: damageHitler
+    data: gunDamageHitler
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6166667
     functionName: InvokeEvent
-    data: damageHitler
+    data: gunDamageHitler
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.3166667
+  - time: 1.2666667
     functionName: FinishState
     data: 
     objectReferenceParameter: {fileID: 0}

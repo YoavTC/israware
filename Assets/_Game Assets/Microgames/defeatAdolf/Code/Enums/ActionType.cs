@@ -9,5 +9,8 @@
         ENEMY_MELEE_ATTACK = 3,
         ENEMY_RANGED_ATTACK = 4,
         ENEMY_HEAL = 5,
+        
+        PLAYER_DEATH = 6,
+        ENEMY_DEATH = 7,
     }
 }

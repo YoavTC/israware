@@ -11,6 +11,7 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
     public class TurnStateEventsHandler : MonoBehaviour
     {
         [Header("Events")]
+        [SerializeField] private UnityEvent<ActionType> actionTypeChosenUnityEvent;
         [SerializeField] private UnityEvent<TurnState> stateChangedUnityEvent;
         [SerializeField] private SerializedDictionary<string, UnityEvent> animationEventsDictionary;
         
@@ -20,6 +21,11 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
             {
                 animationEvent?.Invoke();
             } else Debug.LogWarning($"Event '{eventName}' not found in the dictionary.");
+        }
+        
+        public void OnActionTypeChosen(ActionType actionType)
+        {
+            actionTypeChosenUnityEvent?.Invoke(actionType);
         }
         
         // Generic events

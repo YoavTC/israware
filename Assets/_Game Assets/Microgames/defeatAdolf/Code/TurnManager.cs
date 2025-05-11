@@ -21,6 +21,7 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         [SerializeField] private TurnState currentState;
         [SerializeField] private bool waitingForInput;
         public TurnState CurrentState => currentState;
+        private bool stateMachineActive = true;
         
         // Dictionary to hold the factory instances of state coroutines
         // to allow reuse of the same coroutines
@@ -35,8 +36,7 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
                 { TurnState.PLAYER_CHOOSING_ATTACK, PlayerChoosingAttackCoroutine },
                 { TurnState.PLAYER_PERFORMING_ATTACK, PlayerPerformingAttackCoroutine },
                 { TurnState.ENEMY_CHOOSING_ATTACK, EnemyChoosingAttackCoroutine },
-                { TurnState.ENEMY_PERFORMING_ATTACK, EnemyPerformingAttackCoroutine },
-                { TurnState.GAME_OVER, GameOverCoroutine }
+                { TurnState.ENEMY_PERFORMING_ATTACK, EnemyPerformingAttackCoroutine }
             };
 
             UpdateState(TurnState.INTRO);
@@ -63,11 +63,13 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
             waitingForInput = true;
             yield return new WaitUntil(() => !waitingForInput);
         }
+
         #endregion
         
         public void ActionChosen(ActionType actionType)
         {
             chosenAction = actionType;
+            turnStateEventsHandler.OnActionTypeChosen(actionType);
         }
 
         private void NotifyAnimator()
@@ -118,12 +120,15 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
             UpdateState(TurnState.PLAYER_CHOOSING_ATTACK);
         }
 
-        private IEnumerator GameOverCoroutine()
+        public void GameOver(bool win)
         {
-            // Game over screen
-            yield return WaitForState(TurnState.GAME_OVER);
-
-            UpdateState(TurnState.INTRO);
+            if (stateMachineActive)
+            {
+                stateMachineActive = false;
+                StopAllCoroutines();
+                ActionChosen(win ? ActionType.ENEMY_DEATH : ActionType.PLAYER_DEATH);
+                NotifyAnimator();
+            }
         }
         #endregion
     }
