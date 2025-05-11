@@ -13,9 +13,9 @@
     "DisableHierarchyDesignerDuringPlayMode": true,
     "ExcludeFolderProperties": true,
     "ExcludedComponents": [
-        "Transform",
         "RectTransform",
-        "CanvasRenderer"
+        "CanvasRenderer",
+        "GraphicRaycaster"
     ],
     "MaximumComponentIconsAmount": 10,
     "ExcludedTags": [],
