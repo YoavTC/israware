@@ -28,27 +28,18 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         {
             attackMenuOptions = attackMenuOptionsDictionary.Keys.ToArray();
         }
-
+        
         public void TransitionMenu(bool transitionIn)
         {
-            if (transitionIn) TransitionIn();
-            else TransitionOut();
-        }
-        
-        [Button]
-        private void TransitionIn()
-        {
-            menuRectTransform.DOAnchorPos(inPosition, tweenTransitionSettings.duration)
+            menuRectTransform.DOAnchorPos(transitionIn ? inPosition : outPosition, tweenTransitionSettings.duration)
                 .SetAs(tweenTransitionSettings.GetParams());
-        }
-        
-        [Button]
-        private void TransitionOut()
-        {
-            menuRectTransform.DOAnchorPos(outPosition, tweenTransitionSettings.duration)
-                .SetAs(tweenTransitionSettings.GetParams());
-        }
 
+            if (transitionIn)
+            {
+                EnableAllMenuOptions();
+            }
+        }
+        
         public void OnMenuOptionSelected(UIAttackMenuOption selectedMenuOption)
         {
             menuOptionSelectUnityEvent?.Invoke(attackMenuOptionsDictionary[selectedMenuOption]);
@@ -61,9 +52,6 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
             }
         }
 
-        #region Debugging
-#if UNITY_EDITOR
-        
         [Button]
         private void EnableAllMenuOptions()
         {
@@ -81,7 +69,10 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
                 menuOption.DisableInteraction(updateStyle);
             }
         }
-#endif
+        
+        #region Debugging
+        [Button] private void TransitionIn() => TransitionMenu(true);
+        [Button] private void TransitionOut() => TransitionMenu(false);
         #endregion
     }
 }

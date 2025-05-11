@@ -604,6 +604,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1490481462}
+        m_TargetAssemblyTypeName: _Game_Assets.Microgames.defeatAdolf.Code.UIAttackMenuHandler,
+          Assembly-CSharp
+        m_MethodName: TransitionMenu
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   playerPerformingAttackStateUnityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5099,7 +5112,7 @@ MonoBehaviour:
   DebugActive: 0
   InScriptDrivenPause: 0
   FeedbacksList:
-  - rid: 4791872041302884452
+  - rid: 4791872041302884455
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -5108,11 +5121,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4791872041302884452
+    - rid: 4791872041302884455
       type: {class: MMF_CameraShake, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
         Active: 1
-        UniqueID: 280557686
+        UniqueID: -1830419766
         Label: Camera Shake
         OriginalLabel: Camera Shake
         ChannelMode: 0
