@@ -2436,7 +2436,7 @@ AnimationClip:
   m_Events:
   - time: 1.2166667
     functionName: InvokeEvent
-    data: EnemyHealed
+    data: healHitler
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

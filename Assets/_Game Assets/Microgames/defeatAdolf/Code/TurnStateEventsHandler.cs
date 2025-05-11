@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using _Game_Assets.Microgames.defeatAdolf.Code.Enums;
+using AYellowpaper.SerializedCollections;
 using EditorAttributes;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,35 +12,14 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
     {
         [Header("Events")]
         [SerializeField] private UnityEvent<TurnState> stateChangedUnityEvent;
-        [SerializeField] private UnityEvent playerDamagedUnityEvent;
-        [SerializeField] private UnityEvent playerRangedDamagedUnityEvent;
-        [SerializeField] private UnityEvent playerHealedUnityEvent;
-        [SerializeField] private UnityEvent enemyDamagedUnityEvent;
-        [SerializeField] private UnityEvent enemyHealedUnityEvent;
+        [SerializeField] private SerializedDictionary<string, UnityEvent> animationEventsDictionary;
         
         private void InvokeEvent(string eventName)
         {
-            switch (eventName)
+            if (animationEventsDictionary.TryGetValue(eventName, out UnityEvent animationEvent))
             {
-                case "PlayerDamaged":
-                    playerDamagedUnityEvent?.Invoke();
-                    break;
-                case "PlayerRangedDamaged":
-                    playerRangedDamagedUnityEvent?.Invoke();
-                    break;
-                case "EnemyDamaged":
-                    enemyDamagedUnityEvent?.Invoke();
-                    break;
-                case "PlayerHealed":
-                    playerHealedUnityEvent?.Invoke();
-                    break;
-                case "EnemyHealed":
-                    enemyHealedUnityEvent?.Invoke();
-                    break;
-                default:
-                    Debug.LogWarning($"Event '{eventName}' not recognized.");
-                    break;
-            }
+                animationEvent?.Invoke();
+            } else Debug.LogWarning($"Event '{eventName}' not found in the dictionary.");
         }
         
         // Generic events

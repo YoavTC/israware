@@ -623,7 +623,14 @@ AnimationClip:
   m_Events:
   - time: 1.1166667
     functionName: InvokeEvent
-    data: PlayerRangedDamaged
+    data: damageChurchill
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.1166667
+    functionName: InvokeEvent
+    data: airstrike
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

@@ -1192,14 +1192,14 @@ AnimationClip:
   m_Events:
   - time: 0.68333334
     functionName: InvokeEvent
-    data: PlayerDamaged
+    data: damageChurchill
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.8833333
     functionName: InvokeEvent
-    data: PlayerRangedDamaged
+    data: rumbleCamera
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

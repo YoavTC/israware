@@ -135,10 +135,10 @@ TextureImporter:
       name: item sprites_1
       rect:
         serializedVersion: 2
-        x: 982
-        y: 375
-        width: 126
-        height: 242
+        x: 916
+        y: 248
+        width: 192
+        height: 369
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

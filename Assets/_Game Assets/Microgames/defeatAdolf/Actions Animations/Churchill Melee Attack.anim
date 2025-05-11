@@ -1750,7 +1750,7 @@ AnimationClip:
   m_Events:
   - time: 0.8
     functionName: InvokeEvent
-    data: EnemyDamaged
+    data: damageHitler
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
