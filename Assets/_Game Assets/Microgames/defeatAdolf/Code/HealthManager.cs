@@ -19,6 +19,8 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
         [SerializeField, HideInEditMode] private float globalDamageMultiplier;
         [SerializeField] private float globalDamageMultiplierStep;
         
+        [SerializeField] private float enemyDamageMultiplier;
+        
         private float maxPlayerHealth;
         private float maxEnemyHealth;
         
@@ -43,7 +45,7 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
 
         public void DamagePlayer(float multiplier)
         {
-            playerHealth -= (Random.Range(damageRange.x, damageRange.y) * multiplier) * globalDamageMultiplier;
+            playerHealth -= (Random.Range(damageRange.x, damageRange.y) * multiplier) * globalDamageMultiplier * enemyDamageMultiplier;
             playerHealthChangedUnityEvent?.Invoke(playerHealth);
             IncreaseGlobalDamageMultiplier();
             

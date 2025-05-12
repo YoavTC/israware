@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: defeatAdolf
   m_EditorClassIdentifier: 
   id: defeatAdolf
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Defeat Hitler!
+  HEBREW_PROMPT: "\u05EA\u05D1\u05D9\u05E1\u05D5 \u05D0\u05EA \u05D4\u05D9\u05D8\u05DC\u05E8!"
   hideCursor: 0
-  positiveFeedbacksToWin: 0
-  negativeFeedbacksToLose: 0
-  maxMicrogameTime: 0
+  positiveFeedbacksToWin: 1
+  negativeFeedbacksToLose: 1
+  maxMicrogameTime: -1
   winAtTimerFinish: 0

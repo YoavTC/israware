@@ -363,12 +363,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbac2f9f9a13ba4b8fc1fc8129a5b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 25
-  enemyHealth: 25
+  playerHealth: 200
+  enemyHealth: 200
   damageRange: {x: 5, y: 20}
   healRange: {x: 15, y: 25}
   globalDamageMultiplier: 0
   globalDamageMultiplierStep: 0.05
+  enemyDamageMultiplier: 1.1
   playerHealthInitializedUnityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -486,6 +487,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: _Game_Assets.Microgames.defeatAdolf.Code.TurnManager,
           defeatAdolf
         m_MethodName: GameOver
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 755142731}
+        m_TargetAssemblyTypeName: _Game_Assets.Scripts.MicrogameInstance, Assembly-CSharp
+        m_MethodName: Feedback
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2883,8 +2896,8 @@ MonoBehaviour:
   microgame: {fileID: 11400000, guid: 171cc140eb47906499acea832f90c266, type: 2}
   positiveFeedbacksCount: 0
   negativeFeedbacksCount: 0
-  winFinishDelay: 0
-  LoseFinishDelay: 0
+  winFinishDelay: 2
+  LoseFinishDelay: 2
 --- !u!4 &755142732
 Transform:
   m_ObjectHideFlags: 0
