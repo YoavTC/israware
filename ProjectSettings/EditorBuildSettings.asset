@@ -83,6 +83,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/noahsArk/noahsArk.unity
     guid: b2045d551cabe1945b139c10d4cea702
+  - enabled: 1
+    path: Assets/_Game Assets/Microgames/shoppingList/shoppingList.unity
+    guid: b42ba3daa353edb48bc161a5d30f3a4c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
