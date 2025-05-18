@@ -24,10 +24,9 @@ namespace WingmanInspector {
         
         public static GUIStyle RightToolBarGuiStyle;
         public static GUIContent PasteToolBarGuiContent;
-        
+
         private const string AllButtonName = "All";
         private const float DragThreshold = 12f;
-        private const int MaxViewRows = 3;
         private const float MiniMapMargin = 4f;
         private const float SearchCompListSpace = 4f;
         private const float RowHeight = 25f;
@@ -37,7 +36,7 @@ namespace WingmanInspector {
         private const string InspectorListClassName = "unity-inspector-editors-list";
         private const string InspectorScrolllassName = "unity-inspector-root-scrollview";
         private const string InspectorNoMultiEditClassName = "unity-inspector-no-multi-edit-warning";
-        private const string MiniMapName = "MiniMap";
+        private const string MainWingmanName = "Wingman Main";
         private const string SearchResultsName = "SearchResults";
         
         private static Vector2 iconSize = new Vector2(12, 12);
@@ -48,7 +47,9 @@ namespace WingmanInspector {
         private Object inspectingObject;
         private VisualElement editorListVisual;
         private IMGUIContainer miniMapGuiContainer;
+        private IMGUIContainer pinnedHeaderContainer;
         private IMGUIContainer searchResultsGuiContainer;
+        private IMGUIContainer pinnedDividerContainer;
         private ScrollView inspectorScrollView;
 
         private List<int> selectedCompIds;
@@ -58,12 +59,13 @@ namespace WingmanInspector {
         private HashSet<string> noMultiEditVisualElements = new HashSet<string>();
         
         private Vector2 miniMapScrollPos;
-        private int lastCompCount;
-        private int curContainerRowCount;
         
-        private bool isProjectPrefab;
-        private bool isProjectModel;
+        private int lastCompCount;
+        private int lastRowCount;
 
+        private enum AssetType { NotImportant, HierarchyGameObject,  HierarchyPrefab, HierarchyModel, ProjectPrefab }
+        private AssetType inspectingAssetType;
+        
         private List<ComponentSearchResults> searchResults = new List<ComponentSearchResults>();
         private const double TimeAfterLastKeyPressToSearch = 0.15;
         private double timeOfLastSearchUpdate;
@@ -82,7 +84,7 @@ namespace WingmanInspector {
         private bool canStartDrag;
         private int dragId;
         private Vector2 initialDragMousePos;
-
+        
         public WingmanContainer(EditorWindow window, Object obj) {
             InspectorWindow = window;
             lockedPropertyInfo = window.GetType().GetProperty("isLocked", BindingFlags.Public | BindingFlags.Instance);
@@ -98,31 +100,47 @@ namespace WingmanInspector {
         public void RemoveGui() {
             if (!InspectingObjectIsValid()) return;
 
-            if (ShowingMiniMapGui()) {
+            if (ShowingWingmanGui()) {
                 editorListVisual?.RemoveAt(MiniMapIndex());
             }
 
             if (ShowingSearchResults()) {
                 editorListVisual?.RemoveAt(SearchResultsIndex());
             }
-            
-            InspectorWindow.Repaint();
         }
 
         public void SetContainerSelectionToObject(Object obj) {
             inspectingObject = obj;
-            if (inspectingObject is not GameObject) return;
             
-            searchResults.Clear();
-
             if (!inspectingObject) {
-                isProjectPrefab = false;
-                isProjectModel = false;
+                inspectingAssetType = AssetType.NotImportant;
                 return;
             }
-
+            
+            // Figure out what type of asset we are inspecting
+            {
+                bool isAsset = AssetDatabase.Contains(inspectingObject);
+                PrefabAssetType prefabType = PrefabUtility.GetPrefabAssetType(inspectingObject);
+                
+                if (isAsset && prefabType is PrefabAssetType.Regular or PrefabAssetType.Variant) {
+                    inspectingAssetType = AssetType.ProjectPrefab;
+                }
+                else if (!isAsset && prefabType is PrefabAssetType.Model) {
+                    inspectingAssetType = AssetType.HierarchyModel;
+                }
+                else if (!isAsset && prefabType is PrefabAssetType.Regular or PrefabAssetType.Variant) {
+                    inspectingAssetType = AssetType.HierarchyPrefab;
+                }
+                else if (!isAsset && prefabType is PrefabAssetType.NotAPrefab) {
+                    inspectingAssetType = AssetType.HierarchyGameObject;
+                }
+                else {
+                    inspectingAssetType = AssetType.NotImportant;
+                }
+            }
+            
+            searchResults.Clear();
             RefreshNoMultiInspectVisualsSet();
-
             PersistentData.AddDataForContainer(inspectingObject);
             selectedCompIds = PersistentData.SelectedCompIds(inspectingObject);
             
@@ -132,15 +150,12 @@ namespace WingmanInspector {
                     PersistentData.SetSearchString(inspectingObject, string.Empty);
                 }
             }
-            
-            bool isAsset = AssetDatabase.Contains(inspectingObject);
-            PrefabAssetType prefabType = PrefabUtility.GetPrefabAssetType(inspectingObject);
-            isProjectPrefab = isAsset && prefabType is PrefabAssetType.Regular or PrefabAssetType.Variant;
-            isProjectModel = isAsset && prefabType is PrefabAssetType.Model;
         }
 
         public void Update() {
             if (!InspectingObjectIsValid()) return;
+
+            if (Settings.TransOnlyDisable && OnlyHasTransform()) return;
 
             editorListVisual ??= InspectorWindow.rootVisualElement.Q(null, InspectorListClassName);
             
@@ -157,18 +172,18 @@ namespace WingmanInspector {
                 UpdateComponentVisibility();
             }
 
-            if (!ShowingMiniMapGui() && editorListVisual.childCount > MiniMapIndex()) {
-                miniMapGuiContainer = new IMGUIContainer();
-                miniMapGuiContainer.name = MiniMapName;
-                miniMapGuiContainer.style.width = new StyleLength(StyleKeyword.Auto);
-                miniMapGuiContainer.style.height = CalculateMiniMapHeight();
-                miniMapGuiContainer.onGUIHandler = DrawMiniMapGui;
-
-                Margin(miniMapGuiContainer.style, MiniMapMargin);
-                float[] buttonWidths = GetButtonWidths(GetAllVisibleComponents());
-                curContainerRowCount = Mathf.Clamp(GetRowCount(miniMapGuiContainer.layout.width, buttonWidths), 1, MaxViewRows);
-                editorListVisual.Insert(MiniMapIndex(), miniMapGuiContainer);
+            if (!ShowingWingmanGui() && editorListVisual.childCount > MiniMapIndex()) {
+                float miniMapHeight = CalculateMiniMapHeight();
                 
+                miniMapGuiContainer = new IMGUIContainer();
+                miniMapGuiContainer.name = MainWingmanName;
+                miniMapGuiContainer.style.width = FullLength();
+                miniMapGuiContainer.style.height = miniMapHeight;
+                miniMapGuiContainer.style.minHeight = miniMapHeight; 
+                miniMapGuiContainer.onGUIHandler = DrawWingmanGui;
+                
+                Margin(miniMapGuiContainer.style, MiniMapMargin);
+                editorListVisual.Insert(MiniMapIndex(), miniMapGuiContainer);
                 UpdateComponentVisibility();
             }
 
@@ -177,8 +192,8 @@ namespace WingmanInspector {
             if (!showingSearchResults && HasSearchResults() && editorListVisual.childCount > SearchResultsIndex()) {
                 searchResultsGuiContainer = new IMGUIContainer();
                 searchResultsGuiContainer.name = SearchResultsName;
-                searchResultsGuiContainer.style.width = new StyleLength(StyleKeyword.Auto);
-                searchResultsGuiContainer.style.height = new StyleLength(StyleKeyword.Auto); 
+                searchResultsGuiContainer.style.width = FullLength();
+                searchResultsGuiContainer.style.height = FullLength(); 
                 searchResultsGuiContainer.onGUIHandler = DrawSearchResultsGui;
                 editorListVisual.Insert(SearchResultsIndex(), searchResultsGuiContainer);
             }
@@ -208,119 +223,174 @@ namespace WingmanInspector {
                 Event.current.Use();
             }
         }
-        
-        private void DrawMiniMapGui() {
+
+        private void DrawWingmanGui() {
             if (!InspectingObjectIsValid()) return;
+            
+            Rect reservedRect = GUILayoutUtility.GetRect(0f, 0f, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+
+            bool showCopyPasteOnly = Settings.TransOnlyKeepCopyPaste && OnlyHasTransform();
+            if (!Settings.HideToolbar || showCopyPasteOnly) {
+                DrawToolBar(reservedRect, showCopyPasteOnly);
+                reservedRect = ShiftRectStartVertically(reservedRect, SearchBarHeight + SearchCompListSpace);
+            }
 
             List<Component> comps = GetAllVisibleComponents();
+            float[] buttonWidths = GetButtonWidths(comps);
             
+            int newCompCount = comps.Count;
+            int newRowCount = GetRowCount(reservedRect.width, buttonWidths);
+            
+            // Create associated component data
             compFromIndex.Clear();
             validCompIds.Clear();
             for (int i = 0; i < comps.Count; i++) {
                 compFromIndex.Add(i, comps[i]);
                 validCompIds.Add(comps[i].GetInstanceID());
             }
+
+            // Check for resizing the container
+            bool resizeRequired = newCompCount != lastCompCount || newRowCount != lastRowCount;
+            if (resizeRequired) {
+                ResizeGuiContainer();
+            }
             
-            UpdateModifiers();
+            // Remove component from selection if it was removed from gameobject
+            if (newCompCount < lastCompCount) {
+                for (int i = selectedCompIds.Count - 1; i >= 0; i--) {
+                    if (!validCompIds.Contains(selectedCompIds[i])) {
+                        selectedCompIds.RemoveAt(i);
+                    }
+                }
+            }
+            
+            bool compsGotAdjusted = newCompCount < lastCompCount || !CompareComponentIds(validCompIds, prevValidCompIds);
+            
+            // Set variables for next method call
+            prevValidCompIds.Clear();
+            foreach (int validCompId in validCompIds) {
+                prevValidCompIds.Add(validCompId);
+            }
+            lastCompCount = newCompCount;
+            lastRowCount = newRowCount;
+            
+            GetScrollViewDimensions(reservedRect, newRowCount, out Rect innerScrollRect, out Rect outerScrollRect);
+            List<Rect> buttonPlacements = GetButtonPlacements(innerScrollRect, comps, buttonWidths);
+
+            if (Event.current.type is EventType.MouseDown && Event.current.button is 1) {
+                ShowContextMenu(comps, buttonPlacements);
+                Event.current.Use(); // Eat event so right clicking doesn't toggle component
+            }
+            
+            if (showCopyPasteOnly) return;
+
+            // Update Modifiers
+            EventModifiers modifiers = Event.current.modifiers;
+            multiSelectModifier = modifiers.HasFlag(EventModifiers.Control);
+            rangeSelectModifier = modifiers.HasFlag(EventModifiers.Shift);
+            
             UpdateDragAndDrop();
-            CheckForComponentListUpdate(comps, out bool orderOfComponentsChanged);
-            
-            Rect reservedRect = GUILayoutUtility.GetRect(0f, 0f, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
-            
-            DrawToolBar(reservedRect);
-            reservedRect.position += new Vector2(0f, SearchBarHeight + SearchCompListSpace);
-            
+
             EditorGUI.BeginChangeCheck();
-            
-            DrawMiniMapScrollView(reservedRect, comps);
-            
-            if (EditorGUI.EndChangeCheck() || orderOfComponentsChanged) {
+            DrawPreviewScrollView(buttonPlacements, comps, innerScrollRect, outerScrollRect);
+            if (EditorGUI.EndChangeCheck() || compsGotAdjusted) {
                 UpdateComponentVisibility();
             }
         }
 
-        private void DrawMiniMapScrollView(Rect reservedRect, List<Component> comps) {
-            float[] buttonWidths = GetButtonWidths(comps);
-            int rowCount = GetRowCount(reservedRect.width, buttonWidths);
-
-            if (rowCount != curContainerRowCount) {
-                ResizeGuiContainer();
-                curContainerRowCount = rowCount;
-            }
-            
-            Rect innerScrollRect = new Rect(reservedRect) { height = rowCount * RowHeight };
-            Rect outerScrollRect = new Rect(reservedRect) { height = RowHeight * MaxViewRows };
-            
+        private void DrawPreviewScrollView(List<Rect> placementRects, List<Component> comps, Rect innerScrollRect, Rect outerScrollRect) {
             miniMapScrollPos = GUI.BeginScrollView(outerScrollRect, miniMapScrollPos, innerScrollRect, GUIStyle.none, GUIStyle.none);
+            
+            // Handle the All button
+            { 
+                const int allButtonId = -1;
+                bool prevAllButtonToggle = AllIsSelected() && !HasTextInSearchField();
+                Rect allButtonRect = placementRects[0];
+                
+                if (allButtonRect.Contains(Event.current.mousePosition) && Event.current.type == EventType.MouseDown) {
+                    canStartDrag = true;
+                    dragId = allButtonId;
+                    ClearSearchOnComponentButtonPress();
+                }
+                
+                bool draggingAll = dragId == allButtonId && !prevAllButtonToggle;
 
-            float usableWidth = innerScrollRect.width;
-            if (!ShowingVerticalScrollBar()) {
-                usableWidth -= InspectorScrollBarWidth;
+                if (DrawToggleButton(allButtonRect, AllIcon, AllButtonName, prevAllButtonToggle, draggingAll)) {
+                    selectedCompIds.Clear();
+                    rangeModifierPivot = 0;
+                }
             }
             
-            Rect placementRect = innerScrollRect;
-            
-            float curWidth = usableWidth;
-            bool prevAllButtonToggle = AllIsSelected() && !HasTextInSearchField();
-            Rect allButtonRect = new Rect(placementRect.position, new Vector2(buttonWidths[0], RowHeight));
-            
-            if (allButtonRect.Contains(Event.current.mousePosition) && Event.current.type == EventType.MouseDown) {
-                canStartDrag = true;
-                dragId = -1;
-                ClearSearchOnComponentButtonPress();
-            }
-            
-            bool draggingAll = dragId == -1 && !prevAllButtonToggle;
-
-            if (DrawToggleButton(allButtonRect, AllIcon, AllButtonName, prevAllButtonToggle, draggingAll)) {
-                GUI.changed = true;
-                selectedCompIds.Clear();
-                rangeModifierPivot = 0;
-            }
-
-            curWidth -= buttonWidths[0];
-            placementRect.position += new Vector2(buttonWidths[0], 0f);
-
             for (int i = 0; i < comps.Count; i++) {
                 Component comp = comps[i];
+                Rect buttonRect = placementRects[i + 1];
                 int compId = comp.GetInstanceID();
                 
-                float buttonWidth = buttonWidths[i + 1];
-                
-                if (curWidth < buttonWidth) {
-                    placementRect.position = new Vector2(innerScrollRect.position.x, placementRect.position.y + RowHeight);
-                    curWidth = usableWidth;
+                if (buttonRect.Contains(Event.current.mousePosition)) {
+                    if (Event.current.type == EventType.MouseDown && Event.current.button == 0) {
+                        canStartDrag = true;
+                        dragId = compId;
+                    }
                 }
-                curWidth -= buttonWidth;
-
+                
                 string compName = comp.GetType().Name;
                 GUIContent content = EditorGUIUtility.ObjectContent(comp, comp.GetType());
                 bool prevToggle = selectedCompIds.Contains(compId);
-                Rect buttonRect = new Rect(placementRect.position, new Vector2(buttonWidth, RowHeight));
-                
-                if (buttonRect.Contains(Event.current.mousePosition) && Event.current.type == EventType.MouseDown) {
-                    canStartDrag = true;
-                    dragId = compId;
-                }
-
                 bool draggingButton = compId == dragId && !prevToggle;
+                
                 bool toggled = DrawToggleButton(buttonRect, content.image, compName, prevToggle, draggingButton);
                 
                 if (toggled && !prevToggle) {
-                    GUI.changed = true;
                     OnButtonToggleOn(i);
                     ClearSearchOnComponentButtonPress();
                 }
                 else if (!toggled && prevToggle) {
-                    GUI.changed = true;
                     OnButtonToggleOff(i);
                     ClearSearchOnComponentButtonPress();
                 }
-                
-                placementRect.position += new Vector2(buttonWidth, 0f);
             }
             
             GUI.EndScrollView();
+        }
+
+        private void GetScrollViewDimensions(Rect reservedRect, int rowCount, out Rect innerScrollRect, out Rect outerScrollRect) {
+            innerScrollRect = new Rect(reservedRect) { height = rowCount * RowHeight };
+            outerScrollRect = new Rect(reservedRect) { height = RowHeight * Settings.MaxNumberOfRows };
+        }
+
+        private List<Rect> GetButtonPlacements(Rect scrollViewRect, List<Component> comps, float[] buttonWidths) {
+            List<Rect> placements = new List<Rect>(); 
+            
+            Rect placementRect = scrollViewRect;
+            
+            float usableWidth = scrollViewRect.width;
+            if (!ShowingVerticalScrollBar()) {
+                usableWidth -= InspectorScrollBarWidth;
+            }
+            
+            Rect allButtonRect = new Rect(placementRect.position, new Vector2(buttonWidths[0], RowHeight));
+            placements.Add(allButtonRect);
+            
+            float curWidth = usableWidth;
+            curWidth -= buttonWidths[0];
+            placementRect.position += new Vector2(buttonWidths[0], 0f);
+
+            for (int i = 0; i < comps.Count; i++) {
+                float buttonWidth = buttonWidths[i + 1];
+                
+                if (curWidth < buttonWidth) {
+                    placementRect.position = new Vector2(scrollViewRect.position.x, placementRect.position.y + RowHeight);
+                    curWidth = usableWidth;
+                }
+                curWidth -= buttonWidth;
+
+                Rect buttonRect = new Rect(placementRect.position, new Vector2(buttonWidth, RowHeight));
+                placements.Add(buttonRect);
+
+                placementRect.position += new Vector2(buttonWidth, 0f);
+            }
+
+            return placements;
         }
         
         private void ClearSearchOnComponentButtonPress() {
@@ -329,14 +399,16 @@ namespace WingmanInspector {
                 searchResults.Clear();
                 GUI.changed = true;
                 RemoveSearchGui();
+                ToggleAllComonentVisibility(true);
             }
         }
 
         private bool DrawToggleButton(Rect placement, Texture icon, string label, bool toggled, bool beingDragged) {
-            if (isDragging && beingDragged) {
+            if (!toggled && isDragging && beingDragged) {
                 toggled = true;
+                GUI.changed = true;
             }
-            else if (Event.current.type == EventType.MouseUp && placement.Contains(Event.current.mousePosition)) {
+            else if (Event.current.type == EventType.MouseUp && placement.Contains(Event.current.mousePosition) && Event.current.button == 0) {
                 toggled = !toggled;
             }
 
@@ -439,41 +511,37 @@ namespace WingmanInspector {
             }
         }
         
-        private void DrawToolBar(Rect placementRect) {
+        private void DrawToolBar(Rect placementRect, bool showCopyPasteOnly) {
             placementRect.height = SearchBarHeight;
             
             float fullWidth = placementRect.width;
             float xStartPos = placementRect.position.x;
-
-            // Handle Copying 
-            if (DrawToolBarButton(placementRect, true)) {
-                PersistentData.Clipboard.CopyComponents(GetComponentsFromSelection());
-            }
-
-            placementRect.position += new Vector2(ToolBarButtonWidth, 0f);
-
-            // Handle Pasting
-            if (DrawToolBarButton(placementRect, false)) {
-                if (InspectorIsLocked()) {
-                    (inspectingObject as GameObject).PasteComponents(PersistentData.Clipboard.Copies);
+            
+            if (!Settings.HideCopyPaste || showCopyPasteOnly) {
+                if (DrawToolBarButton(placementRect, true)) {
+                    CopySelectedToClipboard();
                 }
-                else {
-                    foreach (GameObject gameObject in Selection.gameObjects) {
-                        gameObject.PasteComponents(PersistentData.Clipboard.Copies);
-                    }
+                placementRect.position += new Vector2(ToolBarButtonWidth, 0f);
+                if (DrawToolBarButton(placementRect, false)) {
+                    PasteFromClipboard();
                 }
+                placementRect.position += new Vector2(ToolBarButtonWidth + MiniMapMargin, 0f);
             }
-
-            placementRect.position += new Vector2(ToolBarButtonWidth + MiniMapMargin, 0f);
+            
+            if (showCopyPasteOnly) return;
+            
             placementRect.width = fullWidth - (placementRect.position.x - xStartPos);
 
-            string searchText = PersistentData.SearchString(inspectingObject);
-
+            const float crossSize = 11;
+            const float crossDistFromEndOfSearch = 16;
             Rect crossPlacement = placementRect;
-            crossPlacement.position = new Vector2(placementRect.xMax - 18, placementRect.position.y);
+            crossPlacement.width = crossSize;
+            crossPlacement.height = crossSize;
+            crossPlacement.position = new Vector2(placementRect.xMax - crossDistFromEndOfSearch, placementRect.position.y);
             crossPlacement = CenterRectVertically(placementRect, crossPlacement);
             
             // Handle X input before drawing search field because it eats the input of overlayed elements
+            string searchText = PersistentData.SearchString(inspectingObject);
             bool showX = searchText != string.Empty;
             bool pressedX = false;
             if (showX) {
@@ -501,9 +569,12 @@ namespace WingmanInspector {
                 }
             }
 
-            // Draw X after search field so it shows ontop
+            // Draw X after search field so it shows on top
             if (showX) {
+                Color prevColor = GUI.color;
+                GUI.color = new Vector4(prevColor.r, prevColor.g, prevColor.b, 0.7f);
                 GUI.Button(crossPlacement, XIcon, GUIStyle.none);
+                GUI.color = prevColor;
             }
             
             if (prevSearchLen != searchText.Length) {
@@ -559,7 +630,6 @@ namespace WingmanInspector {
             }
             return selComps;
         }
-
         
         private class ComponentSearchResults {
             public Component Comp;
@@ -759,7 +829,7 @@ namespace WingmanInspector {
             if (initialDragMousePos != Vector2.zero && mouseDragEvent && Vector2.Distance(initialDragMousePos, Event.current.mousePosition) >= DragThreshold) {
                 DragAndDrop.PrepareStartDrag();
                 DragAndDrop.SetGenericData(DragAndDropKey, true);
-                DragAndDrop.StartDrag(MiniMapName);
+                DragAndDrop.StartDrag(MainWingmanName);
                 isDragging = true;
             }
             
@@ -772,7 +842,16 @@ namespace WingmanInspector {
             }
         }
 
-        private void CheckForComponentListUpdate(List<Component> comps, out bool orderOfCompsChanged) {
+        private void CheckForComponentListUpdate(out List<Component> comps, out bool orderOfCompsChanged) {
+            comps = GetAllVisibleComponents();
+            
+            compFromIndex.Clear();
+            validCompIds.Clear();
+            for (int i = 0; i < comps.Count; i++) {
+                compFromIndex.Add(i, comps[i]);
+                validCompIds.Add(comps[i].GetInstanceID());
+            }
+            
             int newCompCount = comps.Count;
             if (newCompCount != lastCompCount) {
                 ResizeGuiContainer();
@@ -812,8 +891,10 @@ namespace WingmanInspector {
         }
 
         private void ResizeGuiContainer() {
-            miniMapGuiContainer.style.width = new StyleLength(StyleKeyword.Auto);
-            miniMapGuiContainer.style.height = CalculateMiniMapHeight();
+            float height = CalculateMiniMapHeight();
+            miniMapGuiContainer.style.height = height; 
+            miniMapGuiContainer.style.minHeight = height; 
+            miniMapGuiContainer.style.width = FullLength();
         }
         
         private void DrawSearchResultsGui() {
@@ -836,13 +917,11 @@ namespace WingmanInspector {
                 EditorGUI.indentLevel--;
                 
                 EditorGUILayout.Space();
-                
             }
         }
         
         private void UpdateComponentVisibility() {
             int startIndex = ComponentStartIndex();
-            List<int> ids = selectedCompIds;
             int skipedCount = 0;
             
             for (int i = startIndex; i < editorListVisual.childCount; i++) {
@@ -853,7 +932,7 @@ namespace WingmanInspector {
                 
                 int compIndex = i - startIndex - skipedCount;
                 if (compFromIndex.TryGetValue(compIndex, out Component comp)) {
-                    bool showComp = ids.Count <= 0 || ids.Contains(comp.GetInstanceID());
+                    bool showComp = selectedCompIds.Count <= 0 || selectedCompIds.Contains(comp.GetInstanceID());
                     editorListVisual[i].style.display = showComp ? DisplayStyle.Flex : DisplayStyle.None;
                 }
             }
@@ -866,7 +945,7 @@ namespace WingmanInspector {
             }
         }
 
-        private bool ShowingMiniMapGui() {
+        private bool ShowingWingmanGui() {
             int insertIndex = MiniMapIndex();
 
             if (insertIndex >= editorListVisual.childCount) {
@@ -874,9 +953,9 @@ namespace WingmanInspector {
             }
 
             VisualElement potentialMiniMap = editorListVisual.hierarchy.ElementAt(insertIndex);
-            return potentialMiniMap != null && potentialMiniMap.name == MiniMapName;
+            return potentialMiniMap != null && potentialMiniMap.name == MainWingmanName;
         }
-        
+
         private bool ShowingSearchResults() {
             int insertIndex = SearchResultsIndex();
             
@@ -890,6 +969,14 @@ namespace WingmanInspector {
         
         private bool HasSearchResults() {
             return searchResults != null && searchResults.Count > 0;
+        }
+
+        private bool OnlyHasTransform() {
+#if UNITY_2022 || UNITY_2022_1_OR_NEWER
+            return ((GameObject)inspectingObject).GetComponentCount() == 1;
+#else
+            return ((GameObject)inspectingObject).GetComponents<Component>().Length == 1;
+#endif
         }
 
         private int GetRowCount(float rowWidth, float[] buttonWidths) {
@@ -1014,15 +1101,17 @@ namespace WingmanInspector {
         private List<Component> GetAllVisibleComponents(GameObject gameObject) {
             Component[] comps = gameObject.GetComponents<Component>();
             List<Component> res = new List<Component>(comps.Length);
-            
             foreach (Component comp in comps) {
-                // Comp can be null if the associated script cannot be loaded
-                if (comp && !comp.hideFlags.HasFlag(HideFlags.HideInInspector) && !ComponentIsOnBanList(comp)) {
+                if (ComponentIsVisible(comp)) {
                     res.Add(comp);
                 }
             }
-            
             return res;
+        }
+
+        private bool ComponentIsVisible(Component comp) {
+            // Comp can be null if the associated script cannot be loaded
+            return comp && !comp.hideFlags.HasFlag(HideFlags.HideInInspector) && !ComponentIsOnBanList(comp);
         }
 
         private bool ComponentIsOnBanList(Component comp) {
@@ -1055,17 +1144,17 @@ namespace WingmanInspector {
         }
 
         private int MiniMapIndex() {
-            return isProjectPrefab ? 2 : 1;
+            return inspectingAssetType is AssetType.ProjectPrefab ? 2 : 1;
         }
 
         private int SearchResultsIndex() {
-            return isProjectPrefab ? 3 : 2;
+            return inspectingAssetType is AssetType.ProjectPrefab ? 3 : 2;
         }
 
         private int ComponentStartIndex() {
-            return isProjectPrefab ? 3 : 2;
+            return inspectingAssetType == AssetType.ProjectPrefab ? 3 : 2;
         }
-        
+
         private void RemoveSearchGui() {
             if (ShowingSearchResults()) {
                 editorListVisual.RemoveAt(SearchResultsIndex());
@@ -1078,23 +1167,28 @@ namespace WingmanInspector {
         }
 
         private float CalculateMiniMapHeight() {
+            float searchBarAndPadding = SearchBarHeight + SearchCompListSpace;
+            
+            if (Settings.TransOnlyKeepCopyPaste && OnlyHasTransform()) {
+                return SearchBarHeight;
+            }
+            
             float[] buttonWidths = GetButtonWidths(GetAllVisibleComponents());
             
             // Important! Use editor list width as container width as MiniMap.layout
             // is not always as up to date as it should be (if it were just created).
             // This prevents the container from flickering when changing objects.
             float guiContainerWidth = editorListVisual.layout.width - MiniMapMargin * 2f;
-            
-            float rowCount = Mathf.Clamp(GetRowCount(guiContainerWidth, buttonWidths), 1, MaxViewRows);
-            return (rowCount * RowHeight) + SearchBarHeight + SearchCompListSpace;
+            float rowCount = Mathf.Clamp(GetRowCount(guiContainerWidth, buttonWidths), 1, Settings.MaxNumberOfRows);
+            return (rowCount * RowHeight) + (Settings.HideToolbar ? 0f : searchBarAndPadding);
         }
-
-        // private StyleLength FullLength() {
-        //     return new StyleLength(StyleKeyword.Auto);
-        // }
-
+        
+        private StyleLength FullLength() {
+            return new StyleLength(StyleKeyword.Auto);
+        }
+        
         private bool InspectingObjectIsValid() {
-            return inspectingObject && inspectingObject is GameObject && !isProjectModel;
+            return inspectingObject && inspectingObject is GameObject && inspectingAssetType is not AssetType.NotImportant;
         }
         
         // Add all visual elements to the noMultiEditVisualElements set so we know which components are not
@@ -1121,6 +1215,79 @@ namespace WingmanInspector {
             }
         }
 
+        private void ShowContextMenu(List<Component> comps, List<Rect> buttonRects) {
+            GenericMenu menu = new GenericMenu();
+            menu.AddItem(new GUIContent("Copy Selection"), false, CopySelectedToClipboard);
+            menu.AddItem(new GUIContent("Paste Clipboard"), false, PasteFromClipboard);
+            
+            Component compUnderCursor = null;
+            for (int i = 0; i < buttonRects.Count - 1; i++) {
+                if (buttonRects[i + 1].Contains(Event.current.mousePosition)) {
+                    compUnderCursor = comps[i];
+                    break;
+                }
+            }
+
+            if (compUnderCursor) {
+                menu.AddSeparator("");
+                string compName = compUnderCursor.GetType().Name;
+                
+                // Copy component
+                menu.AddItem(new GUIContent($"Copy { compName }"), false, () => {
+                    PersistentData.Clipboard.CopyComponents(new() { compUnderCursor });
+                });
+                
+                // Open component as script
+                if (compUnderCursor is MonoBehaviour) {
+                    menu.AddItem(new GUIContent($"Edit { compName } Script"), false, () => {
+                        MonoScript script = MonoScript.FromMonoBehaviour(compUnderCursor as MonoBehaviour);
+                        if (script) AssetDatabase.OpenAsset(script);
+                    });
+                }
+
+                // Remove component
+                if (compUnderCursor is not Transform) {
+                    menu.AddSeparator("");
+                    menu.AddItem(new GUIContent($"Remove { compName }"), false, () => {
+                        RemoveComponentTypeFromSelection(compUnderCursor.GetType());
+                    });
+                }
+            }
+            
+            menu.ShowAsContext();
+        }
+
+        private void RemoveComponentTypeFromSelection(Type compType) {
+            GroupUndoAction("Remove Component", () => {
+                foreach (GameObject gameObject in Selection.gameObjects) {
+                    if (gameObject.TryGetComponent(compType, out Component component)) {
+                        Undo.DestroyObjectImmediate(component);
+                    }
+                }
+            });
+        }
+
+        private void CopySelectedToClipboard() {
+            PersistentData.Clipboard.CopyComponents(GetComponentsFromSelection());
+        }
+
+        private void PasteFromClipboard() {
+            if (InspectorIsLocked()) {
+                (inspectingObject as GameObject).PasteComponents(PersistentData.Clipboard.Copies);
+                return;
+            }
+            
+            foreach (GameObject gameObject in Selection.gameObjects) {
+                gameObject.PasteComponents(PersistentData.Clipboard.Copies);
+            }
+        }
+
+        private Rect ShiftRectStartVertically(Rect rect, float length) { 
+            rect.position += new Vector2(0f, length);
+            rect.height -= length;
+            return rect;
+        }
+        
         private void Fix2021EditorMargins() {
             bool ShowingTransform() {
                 if (!InspectingObjectIsValid()) {
@@ -1145,8 +1312,6 @@ namespace WingmanInspector {
                 miniMapGuiContainer.style.marginTop = 0f;
             }
         }
-
     }
-
 }
 #endif

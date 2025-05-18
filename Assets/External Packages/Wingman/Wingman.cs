@@ -22,7 +22,8 @@ namespace WingmanInspector {
         private const string PersistentName = "WingmanPersistentData";
         
         private static bool assetIsDisabled;
-        private const string MenuPath = "Tools/Wingman/Disable Wingman";
+        private const string DisableMenuPath = "Tools/Wingman/Disable Wingman";
+        private const string SettingsMenuPath = "Tools/Wingman/Settings";
         private const string AssetIsDisabledEditorPref = "Wingman Enable State";
         
         [InitializeOnLoadMethod] 
@@ -33,7 +34,7 @@ namespace WingmanInspector {
             EditorApplication.delayCall += InitAsset;
         }
 
-        [MenuItem(MenuPath)]
+        [MenuItem(DisableMenuPath)]
         private static void DisableAsset() {
             assetIsDisabled = !assetIsDisabled;
             EditorPrefs.SetBool(AssetIsDisabledEditorPref, assetIsDisabled);
@@ -46,10 +47,15 @@ namespace WingmanInspector {
             }
         }
         
-        [MenuItem(MenuPath, true)]
+        [MenuItem(DisableMenuPath, true)]
         private static bool DisableAssetValidate() {
-            Menu.SetChecked(MenuPath, assetIsDisabled);
+            Menu.SetChecked(DisableMenuPath, assetIsDisabled);
             return true;
+        }
+
+        [MenuItem(SettingsMenuPath)]
+        private static void OpenSettings() {
+            Settings.ShowWindow(); 
         }
 
         private static void InitAsset() {
@@ -75,6 +81,7 @@ namespace WingmanInspector {
                 
                 // Don't optionally assign if null because we need to switch icon when editor theme changes
                 WingmanContainer.AllIcon = EditorGUIUtility.IconContent(EditorGUIUtility.isProSkin ? "d_GridLayoutGroup Icon" : "GridLayoutGroup Icon").image;
+                Settings.Load();
             }
             catch {
                 EditorApplication.delayCall += InitAsset;
@@ -99,19 +106,22 @@ namespace WingmanInspector {
             EditorApplication.hierarchyWindowItemOnGUI -= OnHierarchyGUI;
             EditorApplication.hierarchyWindowItemOnGUI += OnHierarchyGUI;
             
-            Selection.selectionChanged -= OnSelectionChange;
-            Selection.selectionChanged += OnSelectionChange;
+            Selection.selectionChanged -= OnSelectionChanged;
+            Selection.selectionChanged += OnSelectionChanged;
             
             EditorApplication.quitting -= OnQuit;
             EditorApplication.quitting += OnQuit;
+
+            Settings.OnSettingsChanged += OnSettingsChanged;
         }
 
         private static void UnSubscribeToCallbacks() {
             EditorApplication.update -= RefreshInspectorWindows;
             EditorApplication.update -= Update;
             EditorApplication.hierarchyWindowItemOnGUI -= OnHierarchyGUI;
-            Selection.selectionChanged -= OnSelectionChange;
+            Selection.selectionChanged -= OnSelectionChanged;
             EditorApplication.quitting -= OnQuit;
+            Settings.OnSettingsChanged -= OnSettingsChanged;
         }
         
         private static void RefreshInspectorWindows() {
@@ -146,7 +156,7 @@ namespace WingmanInspector {
             return false;
         }
         
-        private static void OnSelectionChange() {
+        private static void OnSelectionChanged() {
             foreach (WingmanContainer container in containers) {
                 if (!container.InspectorIsLocked()) {
                     container.SetContainerSelectionToObject(Selection.activeObject);
@@ -200,6 +210,14 @@ namespace WingmanInspector {
 
         private static void OnQuit() {
             persistentData?.ClearAllData();
+        }
+
+        private static void OnSettingsChanged() {
+            foreach (WingmanContainer container in containers) {
+                container.RemoveGui();
+                container.Update();
+                container.InspectorWindow.Repaint();
+            }
         }
 
     }

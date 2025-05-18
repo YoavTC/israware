@@ -9,6 +9,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 303181
   packageName: "Wingman - Your Inspector\u2019s Best Friend"
-  packageVersion: 1.1.1
-  assetPath: Assets/Wingman/Wingman.asmdef
-  uploadId: 729022
+  packageVersion: 1.2.0
+  assetPath: Assets/External Packages/Wingman/Wingman.asmdef
+  uploadId: 744831

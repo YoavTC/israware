@@ -9,6 +9,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 167903
   packageName: PlayerPrefs Editor
-  packageVersion: 1.2.2
-  assetPath: Assets/PlayerPrefsEditor/CHANGELOG.md
-  uploadId: 554724
+  packageVersion: 1.2.3
+  assetPath: Assets/External Packages/PlayerPrefsEditor/CHANGELOG.md
+  uploadId: 739306
