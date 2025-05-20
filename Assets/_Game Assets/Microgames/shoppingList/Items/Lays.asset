@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec036be5b8b5f1e4587fbf216d76e5bd, type: 3}
   m_Name: Lays
   m_EditorClassIdentifier: 
-  itemTags: 0300000004000000
-  itemSprite: {fileID: 1192256590, guid: ee0c131640669144985c82b924748d67, type: 3}
+  itemSprite: {fileID: 1661091843, guid: 5fae8f2df09ec5e4aa0c775249db1ec3, type: 3}
   itemNameSprite: {fileID: 0}
