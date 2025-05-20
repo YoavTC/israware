@@ -15,7 +15,7 @@ namespace _Game_Assets.Microgames.shoppingList
 
                 itemSlot.GetOrAdd<RectTransform>();
                 itemSlot.GetOrAdd<CanvasRenderer>();
-                itemSlot.GetOrAdd<Image>().sprite = item.itemSprite;
+                itemSlot.GetOrAdd<Image>().sprite = item.itemNameSprite;
                 
                 Debug.Log($"Added {item.name} to shopping list");
             }

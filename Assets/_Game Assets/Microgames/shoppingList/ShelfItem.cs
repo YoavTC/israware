@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using External_Packages.Extensions;
+using UnityEngine;
 
 namespace _Game_Assets.Microgames.shoppingList
 {
@@ -16,13 +17,13 @@ namespace _Game_Assets.Microgames.shoppingList
         public void Init(ShelfItemScriptableObject item)
         {
             this.item = item;
-            spriteRenderer.sprite = item.itemSprite;
+            spriteRenderer.sprite = item.itemSprite.Random();
             
             // Spawn a shadow
             SpriteRenderer shadow = Instantiate(spriteRenderer, transform);
             shadow.transform.localPosition = shadowOffset;
             shadow.transform.localScale = Vector3.one;
-            shadow.sprite = item.itemSprite;
+            shadow.sprite = spriteRenderer.sprite;
             shadow.color = shadowColor;
         }
     }

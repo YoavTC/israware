@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec036be5b8b5f1e4587fbf216d76e5bd, type: 3}
+  m_Name: Klik
+  m_EditorClassIdentifier: 
+  itemSprite:
+  - {fileID: 856933185, guid: 5fae8f2df09ec5e4aa0c775249db1ec3, type: 3}
+  - {fileID: -35908422, guid: 5fae8f2df09ec5e4aa0c775249db1ec3, type: 3}
+  - {fileID: 952496941, guid: 5fae8f2df09ec5e4aa0c775249db1ec3, type: 3}
+  - {fileID: -806026246, guid: 5fae8f2df09ec5e4aa0c775249db1ec3, type: 3}
+  itemNameSprite: {fileID: -2125303772, guid: cec1ff0a452d1d94bb0fd708d32b6e56, type: 3}

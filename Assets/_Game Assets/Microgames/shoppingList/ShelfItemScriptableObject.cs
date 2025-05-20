@@ -8,7 +8,7 @@ namespace _Game_Assets.Microgames.shoppingList
     {
         [SerializeField, HorizontalGroup(nameof(itemSprite), nameof(itemNameSprite))] private Void spritesHolder;
         
-        [AssetPreview, HideInInspector] public Sprite itemSprite;
+        [AssetPreview, HideInInspector] public Sprite[] itemSprite;
         [AssetPreview, HideInInspector] public Sprite itemNameSprite;
     }
 }
