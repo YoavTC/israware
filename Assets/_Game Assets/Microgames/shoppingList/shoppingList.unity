@@ -452,7 +452,8 @@ MonoBehaviour:
         m_Calls: []
   DebugActive: 0
   InScriptDrivenPause: 0
-  FeedbacksList: []
+  FeedbacksList:
+  - rid: 4791872289798357120
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -460,7 +461,94 @@ MonoBehaviour:
   PlayCount: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4791872289798357120
+      type: {class: MMF_ScaleSpring, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
+      data:
+        Active: 1
+        UniqueID: -9285266
+        Label: Scale Spring
+        OriginalLabel: Scale Spring
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          PlayCount: 0
+          LimitPlayCount: 0
+          MaxPlayCount: 3
+          SetPlayCountToZeroOnReset: 0
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        AutomaticShakerSetupButton:
+          ButtonText: 
+        Owner: {fileID: 625115597}
+        DebugActive: 0
+        AnimateScaleTarget: {fileID: 1070757903}
+        DeclaredDuration: 0
+        DampingX: 0.4
+        FrequencyX: 6
+        DampingY: 0.4
+        FrequencyY: 6
+        DampingZ: 0.4
+        FrequencyZ: 6
+        Mode: 2
+        MoveToScaleMin: {x: 1, y: 1, z: 1}
+        MoveToScaleMax: {x: 2, y: 2, z: 2}
+        BumpScaleMin: {x: 20, y: 20, z: 20}
+        BumpScaleMax: {x: 30, y: 30, z: 30}
 --- !u!1 &755142730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,6 +1213,7 @@ GameObject:
   - component: {fileID: 1070757907}
   - component: {fileID: 1070757909}
   - component: {fileID: 1070757908}
+  - component: {fileID: 1070757910}
   m_Layer: 5
   m_Name: Shopping List
   m_TagString: Untagged
@@ -1236,10 +1325,22 @@ MonoBehaviour:
     delay: 0
     duration: 0.5
     ease: 13
-    invokeEventOnComplete: 0
+    invokeEventOnComplete: 1
     onComplete:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 625115597}
+          m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
+          m_MethodName: PlayFeedbacks
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     loops: 0
     loopType: 0
   shoppingListItemUIDictionary:
@@ -1247,19 +1348,7 @@ MonoBehaviour:
   takenShelfItems: []
   shelfItemTakenUnityEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 625115597}
-        m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Tools
-        m_MethodName: PlayFeedbacks
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   allShelfItemsTakenUnityEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1329,6 +1418,113 @@ PlayableDirector:
     value: {fileID: 1070757908}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &1070757910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070757902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd48b27a4bcde354a99ab15f0bd82486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEquilibriumReached:
+    m_PersistentCalls:
+      m_Calls: []
+  Target: {fileID: 1070757903}
+  TimeScaleMode: 1
+  ChannelMode: 0
+  Channel: 0
+  MMChannelDefinition: {fileID: 0}
+  SpringVector3:
+    SeparateAxis: 0
+    UnifiedSpring:
+      Damping: 0.4
+      Frequency: 6
+      ClampSettings:
+        ClampMin: 0
+        ClampMinValue: 0
+        ClampMinInitial: 0
+        ClampMinBounce: 0
+        ClampMax: 0
+        ClampMaxValue: 10
+        ClampMaxInitial: 0
+        ClampMaxBounce: 0
+      SpringDebug:
+        CurrentValue: 0
+        TargetValue: 0
+      UnifiedSpring: 1
+      CurrentValueDisplay: 0
+      TargetValueDisplay: 0
+      VelocityDisplay: 0
+    SpringX:
+      Damping: 0.4
+      Frequency: 6
+      ClampSettings:
+        ClampMin: 0
+        ClampMinValue: 0
+        ClampMinInitial: 0
+        ClampMinBounce: 0
+        ClampMax: 0
+        ClampMaxValue: 10
+        ClampMaxInitial: 0
+        ClampMaxBounce: 0
+      SpringDebug:
+        CurrentValue: 0
+        TargetValue: 0
+      UnifiedSpring: 0
+      CurrentValueDisplay: 0
+      TargetValueDisplay: 0
+      VelocityDisplay: 0
+    SpringY:
+      Damping: 0.4
+      Frequency: 6
+      ClampSettings:
+        ClampMin: 0
+        ClampMinValue: 0
+        ClampMinInitial: 0
+        ClampMinBounce: 0
+        ClampMax: 0
+        ClampMaxValue: 10
+        ClampMaxInitial: 0
+        ClampMaxBounce: 0
+      SpringDebug:
+        CurrentValue: 0
+        TargetValue: 0
+      UnifiedSpring: 0
+      CurrentValueDisplay: 0
+      TargetValueDisplay: 0
+      VelocityDisplay: 0
+    SpringZ:
+      Damping: 0.4
+      Frequency: 6
+      ClampSettings:
+        ClampMin: 0
+        ClampMinValue: 0
+        ClampMinInitial: 0
+        ClampMinBounce: 0
+        ClampMax: 0
+        ClampMaxValue: 10
+        ClampMaxInitial: 0
+        ClampMaxBounce: 0
+      SpringDebug:
+        CurrentValue: 0
+        TargetValue: 0
+      UnifiedSpring: 0
+      CurrentValueDisplay: 0
+      TargetValueDisplay: 0
+      VelocityDisplay: 0
+  MoveToRandomValueMin: {x: -2, y: -2, z: -2}
+  MoveToRandomValueMax: {x: 2, y: 2, z: 2}
+  BumpAmountRandomValueMin: {x: -20, y: 20, z: -20}
+  BumpAmountRandomValueMax: {x: 20, y: 20, z: 20}
+  TestMoveToValue: {x: 2, y: 2, z: 2}
+  MoveToToolbar: 0
+  TestBumpAmount: {x: 75, y: 100, z: 50}
+  BumpToToolbar: 0
+  OtherControlsToToolbar: 0
 --- !u!1 &1251608386
 GameObject:
   m_ObjectHideFlags: 0
