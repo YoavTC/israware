@@ -289,9 +289,9 @@ TextureImporter:
       name: items_15
       rect:
         serializedVersion: 2
-        x: 1050
+        x: 1094
         y: 1225
-        width: 350
+        width: 248
         height: 175
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -311,9 +311,9 @@ TextureImporter:
       name: items_16
       rect:
         serializedVersion: 2
-        x: 1400
+        x: 1351
         y: 1225
-        width: 204
+        width: 284
         height: 175
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -333,9 +333,9 @@ TextureImporter:
       name: items_17
       rect:
         serializedVersion: 2
-        x: 1604
+        x: 1649
         y: 1225
-        width: 496
+        width: 451
         height: 175
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

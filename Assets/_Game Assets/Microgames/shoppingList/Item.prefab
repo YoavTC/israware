@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 846373956744321342}
   - component: {fileID: 1290642359314601414}
+  - component: {fileID: -275756597961819208}
   - component: {fileID: 946094833914750492}
   m_Layer: 0
   m_Name: Item
@@ -77,17 +78,38 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -533881002, guid: 5fae8f2df09ec5e4aa0c775249db1ec3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.75, y: 3.7507322}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &-275756597961819208
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5781469453055524036}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 4, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &946094833914750492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,5 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1290642359314601414}
+  boxCollider: {fileID: -275756597961819208}
   shadowOffset: {x: 0.2, y: 0, z: 0.8}
   shadowColor: {r: 0, g: 0, b: 0, a: 0.6}
