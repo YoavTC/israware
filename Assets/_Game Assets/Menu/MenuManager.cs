@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Game_Assets.Scripts.Menu
+namespace _Game_Assets.Menu
 {
     public class MenuManager : MonoBehaviour
     {
