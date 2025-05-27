@@ -16,9 +16,15 @@ namespace _Game_Assets.Scripts.Definitions
         
         [Header("Settings")]
         public bool hideCursor;
+        
         public int positiveFeedbacksToWin;
         public int negativeFeedbacksToLose;
+        
         public float maxMicrogameTime;
         public bool winAtTimerFinish;
+        
+        [Header("Meta Information")]
+        public bool isBossLevel;
+        [Range(0f, 100f)] public float difficulty;
     }
 }

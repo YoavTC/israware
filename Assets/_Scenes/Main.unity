@@ -1852,6 +1852,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01f8ebfb1facfa4dbfcba4bab48ce32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadMicrogamesFromResources: 1
+  microgames: []
   currentMicrogame: {fileID: 0}
   nextMicrogame: {fileID: 0}
 --- !u!1 &1550301572

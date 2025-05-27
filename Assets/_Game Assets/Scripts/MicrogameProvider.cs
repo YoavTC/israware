@@ -7,20 +7,26 @@ namespace _Game_Assets.Scripts
 {
     public class MicrogameProvider : MonoBehaviour
     {
+        [Header("Settings")]
+        [SerializeField] private bool loadMicrogamesFromResources;
+        
+        [Header("Microgames")]
         [SerializeField] private MicrogameScriptableObject[] microgames;
 
-        [SerializeField, HideInEditMode] private MicrogameScriptableObject currentMicrogame;
-        [SerializeField, HideInEditMode] private MicrogameScriptableObject nextMicrogame;
+        [Header("Debug")]
+        [SerializeField, ReadOnly] private MicrogameScriptableObject currentMicrogame;
+        [SerializeField, ReadOnly] private MicrogameScriptableObject nextMicrogame;
         
         private void Awake()
         {
-            RetrieveMicrogames();
+            DontDestroyOnLoad(this);
+            
+            if (loadMicrogamesFromResources) LoadMicrogamesFiles();
             AdvanceQueue();
         }
 
-        private void RetrieveMicrogames()
+        private void LoadMicrogamesFiles()
         {
-            DontDestroyOnLoad(this);
             var loadedMicrogames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/").ToArray();
             
             // Filter out microgames that are not marked as playable if at least one is marked with "~"
