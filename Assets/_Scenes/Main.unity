@@ -1853,7 +1853,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadMicrogamesFromResources: 1
-  microgames: []
+  allMicrogames: []
+  microgamesIDs: []
+  bossLevelMicrogamesIDs: []
+  currentMicrogameIndex: 0
+  currentMicrogameSubgroupIndex: 0
+  microgamesSubgroupSize: 3
   currentMicrogame: {fileID: 0}
   nextMicrogame: {fileID: 0}
 --- !u!1 &1550301572
