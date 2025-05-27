@@ -1,21 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using _Game_Assets.Scripts.Definitions;
 using AYellowpaper.SerializedCollections;
-using EditorAttributes;
 using External_Packages.MonoBehaviour_Extensions;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Object = System.Object;
-using Random = UnityEngine.Random;
 
 namespace _Game_Assets.Scripts
 {
     public class GameManager : Singleton<GameManager>
     {
-        [Header("Managers")]
+        [Header("Managers")] 
+        [SerializeField] private MicrogameProvider microgameProvider;
         [SerializeField] private Timer timer;
         public Timer Timer => timer;
         
@@ -33,12 +30,10 @@ namespace _Game_Assets.Scripts
         [SerializeField] private MonoBehaviour[] microgameCallbacksListeners;
 
         // Microgames
-        private List<MicrogameScriptableObject> microgames;
         public MicrogameScriptableObject CurrentMicrogame { get; private set; }
         
         private void Start()
         {
-            InitializeGameManager();
             StartCoroutine(LoadMicrogame());
 
             lastMicrogameResult = false;
@@ -46,25 +41,10 @@ namespace _Game_Assets.Scripts
             score = 0;
         }
         
-        private void InitializeGameManager()
-        {
-            DontDestroyOnLoad(this);
-            var loadedMicrogames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/")
-                .ToList();
-            
-            // Filter out microgames that are not marked as playable if at least one is marked with "~"
-            if (loadedMicrogames.Any(microgame => microgame.name.Contains("~")))
-            {
-                loadedMicrogames = loadedMicrogames.Where(microgame => microgame.name.Contains("~")).ToList();
-            }
-            
-            microgames = loadedMicrogames;
-        }
-        
         private IEnumerator LoadMicrogame()
         {
             // Get random microgame
-            MicrogameScriptableObject microgame = microgames[Random.Range(0, microgames.Count)];;
+            MicrogameScriptableObject microgame = microgameProvider.GetMicrogame();
             CurrentMicrogame = microgame;
             
             // Start loading the microgame scene
