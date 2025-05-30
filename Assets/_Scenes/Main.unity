@@ -1780,6 +1780,7 @@ GameObject:
   - component: {fileID: 1529827643}
   - component: {fileID: 1529827642}
   - component: {fileID: 1529827644}
+  - component: {fileID: 1529827645}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1825,6 +1826,7 @@ MonoBehaviour:
   microgameCallbacksListeners:
   - {fileID: 1472823990}
   - {fileID: 2105746273}
+  - {fileID: 1529827645}
 --- !u!4 &1529827643
 Transform:
   m_ObjectHideFlags: 0
@@ -1861,6 +1863,21 @@ MonoBehaviour:
   microgamesSubgroupSize: 3
   currentMicrogame: {fileID: 0}
   nextMicrogame: {fileID: 0}
+--- !u!114 &1529827645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529827641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccdd5d0abcc54006871835f2a7ae161f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpeed: 0
+  normalSpeed: 0
+  speedStep: 0.05
 --- !u!1 &1550301572
 GameObject:
   m_ObjectHideFlags: 0
