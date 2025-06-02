@@ -47,6 +47,8 @@ namespace _Game_Assets.Scripts
             MicrogameScriptableObject microgame = microgameProvider.GetMicrogame();
             CurrentMicrogame = microgame;
             
+            Debug.Log("Loading Microgame: " + microgame.id);
+            
             // Start loading the microgame scene
             var loadSceneAsync = SceneManager.LoadSceneAsync(microgame.id);
             if (loadSceneAsync == null) yield break;
