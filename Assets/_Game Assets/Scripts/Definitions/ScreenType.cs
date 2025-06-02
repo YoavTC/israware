@@ -3,11 +3,7 @@
     public enum ScreenType
     {
         STATUS,
-        POSITIVE,
-        NEGATIVE,
         GAME_OVER,
-        BOSS,
-        FASTER,
         HEALTH,
     }
 }
