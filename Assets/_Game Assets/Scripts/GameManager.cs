@@ -92,8 +92,8 @@ namespace _Game_Assets.Scripts
             bool dead = UpdateHealth(win);
 
             // Show the feedback overlay
-            StartCoroutine(ShowScreen(ScreenType.HEALTH, -1f));
-            yield return StartCoroutine(ShowScreen(win ? ScreenType.POSITIVE : ScreenType.NEGATIVE, defaultShowScreenDuration));
+            StartCoroutine(ShowScreen(ScreenType.HEALTH, defaultShowScreenDuration));
+            // yield return StartCoroutine(ShowScreen(win ? ScreenType.POSITIVE : ScreenType.NEGATIVE, defaultShowScreenDuration));
             
             StartCoroutine(dead ? ShowScreen(ScreenType.GAME_OVER, -1f) : 
                 LoadMicrogame());
@@ -107,6 +107,7 @@ namespace _Game_Assets.Scripts
 
         private IEnumerator ShowScreen(ScreenType screenType, float duration)
         {
+            Debug.Log($"Showing screen: {screenType}");
             yield return StartCoroutine(screenHandlersDictionary[screenType].Show(duration, lastMicrogameResult, health, score));
         }
 
