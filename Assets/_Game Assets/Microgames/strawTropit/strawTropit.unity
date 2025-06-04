@@ -294,7 +294,7 @@ MonoBehaviour:
   microgame: {fileID: 11400000, guid: 38edca37970464e4b9dbea8869ed0256, type: 2}
   positiveFeedbacksCount: 0
   negativeFeedbacksCount: 0
-  winFinishDelay: 0
+  winFinishDelay: 1.5
   LoseFinishDelay: 0
 --- !u!4 &755142732
 Transform:
