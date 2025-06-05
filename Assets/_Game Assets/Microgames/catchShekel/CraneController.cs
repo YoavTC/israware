@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using EditorAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +12,7 @@ namespace _Game_Assets.Microgames.catchShekel
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Transform craneTransform;
         [SerializeField] private ShekelController shekel;
+        [SerializeField] private AudioSource craneMovingAudioSource;
         
         [Header("Move Settings")]
         [SerializeField] private float craneMoveSpeed;
@@ -20,6 +22,11 @@ namespace _Game_Assets.Microgames.catchShekel
         [SerializeField] private float craneDescendSpeed;
         [SerializeField] private float craneAscendDelay;
         
+        [Header("Audio Settings")]
+        [SerializeField] Vector2 moveVolumeMinMax;
+        [SerializeField] private int maxFramesPreventMute;
+        [SerializeField, HideInEditMode] private int framesPreventMute;
+        
         [Header("Rotation Settings")]
         [SerializeField] private float rotationTiltSpeed;
         [SerializeField] private float rotationReturnSpeed;
@@ -28,6 +35,8 @@ namespace _Game_Assets.Microgames.catchShekel
         [Header("Grab Settings")]
         [SerializeField] private float grabRadius;
         [SerializeField] private Vector3 craneGrabPositionOffset;
+        [Space]
+        [SerializeField, ReadOnly ,HideInEditMode] private bool isDescended;
         
         [Header("Events")]
         [SerializeField] private UnityEvent caughtShekelUnityEvent;
@@ -84,7 +93,17 @@ namespace _Game_Assets.Microgames.catchShekel
             mousePosition.z = craneYZPosition.y;
             
             // Move the crane towards the mouse position
-            craneTransform.position = Vector3.Lerp(craneTransform.position, mousePosition, craneMoveSpeed * Time.deltaTime);
+            Vector3 targetPosition = Vector3.Lerp(craneTransform.position, mousePosition, craneMoveSpeed * Time.deltaTime);
+            craneTransform.position = targetPosition;
+            
+            // Check if the crane is moving for sound handling
+            float distance = Vector3.Distance(craneTransform.position, mousePosition);
+            float volume = Mathf.Clamp(distance, moveVolumeMinMax.x, moveVolumeMinMax.y);
+
+            if (isDescended) volume = 0f;
+            
+            craneMovingAudioSource.volume = volume;
+            craneMovingAudioSource.panStereo = craneTransform.position.x / 10;
         }
 
         private IEnumerator DescendCraneCoroutine()
@@ -93,6 +112,7 @@ namespace _Game_Assets.Microgames.catchShekel
             craneTransform.DORotate(Vector3.zero, 0.2f);
             
             // Lower the crane
+            isDescended = true;
             craneStartDescendingUnityEvent?.Invoke();
             yield return craneTransform
                 .DOMoveY(craneTransform.position.y - craneDescendDistance, craneDescendSpeed)
@@ -111,6 +131,8 @@ namespace _Game_Assets.Microgames.catchShekel
                 DOMoveY(craneTransform.position.y + craneDescendDistance, craneDescendSpeed)
                 .WaitForCompletion();
 
+            isDescended = false;
+            
             // Reset crane if not caught
             if (!caught)
             {

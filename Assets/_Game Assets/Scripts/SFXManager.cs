@@ -5,10 +5,6 @@ namespace _Game_Assets.Scripts
 {
     public class SFXManager : MonoBehaviour, IMicrogameCallbacksListener
     {
-        [Header("Music")] 
-        [SerializeField] private AudioClip backgroundMusic;
-        [SerializeField, Range(0f, 1f)] private float backgroundMusicVolume;
-
         public void PlaySFX(AudioClip audioClip)
         {
             PlaySFX(new AudioClipSettings(audioClip));
