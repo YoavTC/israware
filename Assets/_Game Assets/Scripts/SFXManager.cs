@@ -21,10 +21,10 @@ namespace _Game_Assets.Scripts
             Destroy(audioSource, audioClipSettings.audioClip.length);
         }
     
-        public void OnMicrogameLoaded(MicrogameScriptableObject microgame) => StopALlSounds();
-        public void OnMicrogameFinished(bool result) => StopALlSounds();
+        public void OnMicrogameLoaded(MicrogameScriptableObject microgame) => StopAllSounds();
+        public void OnMicrogameFinished(bool result) => StopAllSounds();
     
-        private void StopALlSounds()
+        public void StopAllSounds()
         {
             AudioSource[] audioSources = GetComponents<AudioSource>();
             foreach (AudioSource audioSource in audioSources)
