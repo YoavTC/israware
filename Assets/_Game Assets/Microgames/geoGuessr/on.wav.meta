@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d6e36e160c8e024598b01a44c1683c0
+guid: d6323ccc5155ac04d91ece6137fdfe95
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -22,8 +22,8 @@ AudioImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 239372
-  packageName: Free UI Soundpack
-  packageVersion: 1.0
-  assetPath: Assets/ThirdParty/UI Soundpack/MP3/Minimalist10.mp3
-  uploadId: 712014
+  productId: 228468
+  packageName: Flare Engine - 2D Tools
+  packageVersion: 1.8.14
+  assetPath: Assets/ThirdParty/TwoBitMachines/FlareEngine/Demo/Audio/UI-Sounds/on.wav
+  uploadId: 707133
