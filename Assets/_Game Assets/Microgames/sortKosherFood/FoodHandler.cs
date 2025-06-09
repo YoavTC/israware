@@ -25,6 +25,10 @@ namespace _Game_Assets.Microgames.sortKosherFood
         private int currentFoodIndex;
         
         [SerializeField] private UnityEvent<bool> finishedFoodsUnityEvent;
+        [SerializeField] private UnityEvent transitionNextFoodUnityEvent;
+        
+        [SerializeField] private UnityEvent kosherFoodThrownUnityEvent;
+        [SerializeField] private UnityEvent noneKosherFoodThrownUnityEvent;
 
         private IEnumerator Start()
         {
@@ -79,6 +83,8 @@ namespace _Game_Assets.Microgames.sortKosherFood
                 foods[currentFoodIndex].gameObject.transform.DOMove(Vector3.zero, transitionSpeed);
                 foods[currentFoodIndex].EnableChildren();
                 currentFoodIndex++;
+                
+                transitionNextFoodUnityEvent?.Invoke();
             }
             else
             {
@@ -95,6 +101,9 @@ namespace _Game_Assets.Microgames.sortKosherFood
             {
                 finishedFoodsUnityEvent?.Invoke(false);
             } else TransitionNextFood();
+            
+            if (isKosher) kosherFoodThrownUnityEvent?.Invoke();
+            else noneKosherFoodThrownUnityEvent?.Invoke();
         }
     }
 }
