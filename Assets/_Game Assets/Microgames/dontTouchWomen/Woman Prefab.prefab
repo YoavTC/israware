@@ -32,7 +32,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.95, y: 3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7822626388483068496}
   - {fileID: 2732909808682382155}
@@ -168,6 +168,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a768c412668b4064b02fec1ca70b8c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: fcc2af3f898cffa4ca8e805c8d3c8096, type: 3}
+  - {fileID: 8300000, guid: 8c0d639645b2cf442bfad6a993475561, type: 3}
+  - {fileID: 8300000, guid: 9c9075d829943d94eb1fdab3831cf927, type: 3}
+  - {fileID: 8300000, guid: 846531e46e50b7f45b22c5de55546671, type: 3}
+  - {fileID: 8300000, guid: 2d029fe423ebfc84e9e569aac952be92, type: 3}
+  - {fileID: 8300000, guid: 23fa679123b381145aa2a528f245f2ac, type: 3}
+  - {fileID: 8300000, guid: 49d6681c0af76ed40afa28c19b2b2c6e, type: 3}
+  - {fileID: 8300000, guid: 4a94867645df0fe489b2cc6fa6cfb73b, type: 3}
+  - {fileID: 8300000, guid: b9a26af47234edf4faa1ea79ca39907f, type: 3}
+  - {fileID: 8300000, guid: 622a55ec3240970498ac79e088965b37, type: 3}
+  - {fileID: 8300000, guid: 202ddede9040e7c498af1ee83740feb8, type: 3}
+  - {fileID: 8300000, guid: a95186b1798707e4096e3f7b2ed0577f, type: 3}
+  - {fileID: 8300000, guid: c88c68e3a44a97c42a4bdab85a69ed9d, type: 3}
+  audioPitchRange: {x: 1, y: 1.2}
+  catcallInterval: 0.5
+  catcallVolume: 0.1
+  catcallProbability: 0.2
+  catcallDelayRange: {x: 0, y: 0.5}
 --- !u!114 &3392320035254313188
 MonoBehaviour:
   m_ObjectHideFlags: 0

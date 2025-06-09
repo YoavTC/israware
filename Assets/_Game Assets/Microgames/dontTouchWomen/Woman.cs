@@ -13,6 +13,16 @@ namespace _Game_Assets.Microgames.dontTouchWomen
 
         private bool allowMove;
         
+        [SerializeField] private AudioClip[] audioClips;
+        [SerializeField] private Vector2 audioPitchRange = new Vector2(0.8f, 1.2f);
+        [Space]
+        [SerializeField] private float catcallInterval;
+        [SerializeField] private float catcallVolume;
+        [SerializeField, Range(0f, 1f)] private float catcallProbability = 0.1f;
+        [SerializeField] private Vector2 catcallDelayRange = new Vector2(0.5f, 1.5f);
+        
+        private float catcallTimer;
+        
         public void Init(Transform hasidicTransform, float speed, float touchDistance)
         {
             this.hasidicTransform = hasidicTransform;
@@ -22,6 +32,8 @@ namespace _Game_Assets.Microgames.dontTouchWomen
             allowMove = true;
             
             GetComponentsInChildren<TweenScaleEffect>().ForEach(eye => eye.DoEffect());
+            
+            Catcall();
         }
 
         private void Update()
@@ -34,7 +46,29 @@ namespace _Game_Assets.Microgames.dontTouchWomen
                     hasidicTransform.GetComponentInParent<HasidicController>().TouchHasidic();
                     StopWoman();
                 }
+
+                catcallTimer += Time.deltaTime;
+                if (catcallTimer >= catcallInterval)
+                {
+                    catcallTimer = 0f;
+                    Catcall();
+                }
             }
+        }
+
+        private void Catcall()
+        {
+            if (catcallProbability < Random.value)
+                return;
+            
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = catcallVolume;
+            audioSource.clip = audioClips.Random();
+            audioSource.pitch = Random.Range(audioPitchRange.x, audioPitchRange.y);
+            
+            float delay = Random.Range(catcallDelayRange.x, catcallDelayRange.y);
+            audioSource.PlayDelayed(delay);
+            Destroy(audioSource, delay + audioSource.clip.length);
         }
 
         public void StopWoman()
