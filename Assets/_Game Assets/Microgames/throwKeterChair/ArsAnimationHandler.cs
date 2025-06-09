@@ -2,6 +2,7 @@ using EditorAttributes;
 using JetBrains.Annotations;
 using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = External_Packages.Random;
 
 namespace _Game_Assets.Microgames.throwKeterChair
