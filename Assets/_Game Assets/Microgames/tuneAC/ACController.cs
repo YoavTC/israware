@@ -31,7 +31,7 @@ namespace _Game_Assets.Microgames.tuneAC
         {
             int randomDirection = External_Packages.Random.RandomIntSign();
             
-            emojiDisplayParent.GetChild((1 - randomDirection) / 2).gameObject.SetActive(false);
+            emojiDisplayParent.GetChild((1 - (randomDirection * -1)) / 2).gameObject.SetActive(true);
             
             initialDegrees = Random.Range(initialDegreesRange.x, initialDegreesRange.y);
             currentDegrees = initialDegrees + (randomDirection * Random.Range(initialDegreesOffsetRange.x, initialDegreesOffsetRange.y));

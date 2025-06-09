@@ -18,7 +18,7 @@ namespace _Game_Assets.Scripts
             audioSource.pitch = audioClipSettings.pitch;
         
             audioSource.Play();
-            Destroy(audioSource, audioClipSettings.audioClip.length);
+            Destroy(audioSource, audioClipSettings.audioClip.length + 0.1f);
         }
     
         public void OnMicrogameLoaded(MicrogameScriptableObject microgame) => StopAllSounds();
