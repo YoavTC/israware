@@ -31,6 +31,7 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
         private Vector2 mousePosition;
         private bool isGrabbing;
         private Rigidbody2D grabbedRb;
+        private bool hasRipped;
         
         void Update()
         {
@@ -89,8 +90,9 @@ namespace _Game_Assets.Microgames.ripNebuchadnezzar
 
         public void JointBreak2D(Rigidbody2D rb)
         {
-            if (rb == torsoRb || rb == headRb)
+            if (!hasRipped && (rb == torsoRb || rb == headRb))
             {
+                hasRipped = true;
                 rippedUnityEvent?.Invoke();
             }
             
