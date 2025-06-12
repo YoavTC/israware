@@ -18,5 +18,7 @@ MonoBehaviour:
   hideCursor: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
-  maxMicrogameTime: 7
+  maxMicrogameTime: 10
   winAtTimerFinish: 0
+  isBossLevel: 0
+  difficulty: 0
