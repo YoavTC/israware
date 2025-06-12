@@ -24,6 +24,10 @@ namespace _Game_Assets.Microgames.matzaSplit
 
         [Header("Events")]
         [SerializeField] private UnityEvent<bool> matzaChosenUnityEvent;
+        [SerializeField] private UnityEvent matzaFlyInUnityEvent;
+        [SerializeField] private UnityEvent playGroanUnityEvent;
+        
+        private void PlayGroanSound() => playGroanUnityEvent?.Invoke();
 
         private Vector2[] slicePolygon;
         private MatzaSlice biggerMatza;
@@ -82,8 +86,9 @@ namespace _Game_Assets.Microgames.matzaSplit
         void BringMatza()
         {
             RemoveSpriteMasks();
-            // animator.Play("FlyIn");
             biggerMatza = null;
+            
+            matzaFlyInUnityEvent?.Invoke();
 
             matzaLeft.Reset();
             matzaRight.Reset();

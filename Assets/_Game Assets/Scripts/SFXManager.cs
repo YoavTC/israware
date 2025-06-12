@@ -5,6 +5,14 @@ namespace _Game_Assets.Scripts
 {
     public class SFXManager : MonoBehaviour, IMicrogameCallbacksListener
     {
+        [SerializeField] private AudioClipSettings winSFX;
+        [SerializeField] private AudioClipSettings loseSFX;
+
+        public void PlayWinLoseSFX(bool win)
+        {
+            PlaySFX(win ? winSFX : loseSFX);
+        }
+        
         public void PlaySFX(AudioClip audioClip)
         {
             PlaySFX(new AudioClipSettings(audioClip));
