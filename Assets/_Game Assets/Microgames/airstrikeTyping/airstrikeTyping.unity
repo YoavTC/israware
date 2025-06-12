@@ -2270,8 +2270,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c7a5f143c3a114c9a22c380b9b8a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 0}
-  backgroundMusicVolume: 0
+  winSFX:
+    audioClip: {fileID: 8300000, guid: 00deaf9f13e7abf4e8adfba5723819b5, type: 3}
+    volume: 1
+    pitch: 2
+  loseSFX:
+    audioClip: {fileID: 8300000, guid: 00deaf9f13e7abf4e8adfba5723819b5, type: 3}
+    volume: 1
+    pitch: 0.8
 --- !u!1 &760743118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3862,11 +3868,11 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 755142733}
         m_TargetAssemblyTypeName: _Game_Assets.Scripts.SFXManager, Assembly-CSharp
-        m_MethodName: PlaySFX
-        m_Mode: 2
+        m_MethodName: PlayWinLoseSFX
+        m_Mode: 0
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: c945dac2af9f66c4dbf844e74a92d8e3, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
