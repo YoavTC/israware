@@ -33,17 +33,47 @@ MonoBehaviour:
     SOSetForRightSide: {fileID: 0}
   leftSide:
   - isActive: 1
-    isExpanded: 0
+    isExpanded: 1
     type: 1
     labelType: 2
-    labelText: Main Scene
+    labelText: Menu
     labelIcon: {fileID: 2800000, guid: 70da670bce2bf8e4eae981e5ed2dd89e, type: 3}
     useStyle: 0
     editorStyle: 0
     styleName: 
     skin: {fileID: 0}
     useWidth: 1
-    width: 100
+    width: 65
+    useColors: 1
+    globalColor: {r: 1, g: 0.8392157, b: 0.9442053, a: 1}
+    contentColor: {r: 1, g: 1, b: 1, a: 1}
+    backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+    useTooltip: 0
+    linesCount: 0
+    labelTooltip: 
+    togglePrefName: 
+    actions:
+    - mouseButton: 0
+      keyboardButton: 0
+      buttonType: 1
+      buttonObject: {fileID: 102900000, guid: 350af109b1705b145985940423abcbd3, type: 3}
+      objectName: 
+      className: 
+      methodName: 
+    showNameField: 0
+    intNamesList: []
+  - isActive: 1
+    isExpanded: 0
+    type: 1
+    labelType: 2
+    labelText: Main
+    labelIcon: {fileID: 2800000, guid: 70da670bce2bf8e4eae981e5ed2dd89e, type: 3}
+    useStyle: 0
+    editorStyle: 0
+    styleName: 
+    skin: {fileID: 0}
+    useWidth: 1
+    width: 65
     useColors: 1
     globalColor: {r: 1, g: 0.8392157, b: 0.9442053, a: 1}
     contentColor: {r: 1, g: 1, b: 1, a: 1}
@@ -124,46 +154,16 @@ MonoBehaviour:
     intNamesList: []
   - isActive: 1
     isExpanded: 0
-    type: 3
-    labelType: 3
-    labelText: 
-    labelIcon: {fileID: 0}
-    useStyle: 0
-    editorStyle: 0
-    styleName: 
-    skin: {fileID: 0}
-    useWidth: 0
-    width: 180
-    useColors: 0
-    globalColor: {r: 0.8392157, g: 0.87371325, b: 1, a: 1}
-    contentColor: {r: 1, g: 1, b: 1, a: 1}
-    backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-    useTooltip: 0
-    linesCount: 0
-    labelTooltip: 
-    togglePrefName: 
-    actions:
-    - mouseButton: 0
-      keyboardButton: 0
-      buttonType: 5
-      buttonObject: {fileID: 0}
-      objectName: 
-      className: External_Packages.Super_Toolbelt.Editor.SuperToolbeltWindow
-      methodName: ToggleInspectorMode
-    showNameField: 0
-    intNamesList: []
-  - isActive: 1
-    isExpanded: 0
     type: 1
     labelType: 0
-    labelText: Microgames SO
+    labelText: Microgames
     labelIcon: {fileID: 2800000, guid: cc9c288a5c0f27749b6dafd1b6d95024, type: 3}
     useStyle: 1
     editorStyle: 0
     styleName: 
     skin: {fileID: 0}
     useWidth: 1
-    width: 105
+    width: 85
     useColors: 1
     globalColor: {r: 1, g: 0.93439454, b: 0.77493256, a: 1}
     contentColor: {r: 1, g: 1, b: 1, a: 1}
@@ -183,17 +183,17 @@ MonoBehaviour:
     showNameField: 0
     intNamesList: []
   - isActive: 1
-    isExpanded: 1
+    isExpanded: 0
     type: 1
     labelType: 0
-    labelText: Microgames Assets
+    labelText: Microgame Assets
     labelIcon: {fileID: 2800000, guid: cc9c288a5c0f27749b6dafd1b6d95024, type: 3}
     useStyle: 1
     editorStyle: 0
     styleName: 
     skin: {fileID: 0}
     useWidth: 1
-    width: 130
+    width: 120
     useColors: 1
     globalColor: {r: 1, g: 0.93439454, b: 0.77493256, a: 1}
     contentColor: {r: 1, g: 1, b: 1, a: 1}
