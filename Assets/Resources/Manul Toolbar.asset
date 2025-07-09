@@ -33,7 +33,7 @@ MonoBehaviour:
     SOSetForRightSide: {fileID: 0}
   leftSide:
   - isActive: 1
-    isExpanded: 1
+    isExpanded: 0
     type: 1
     labelType: 2
     labelText: Menu
@@ -86,7 +86,7 @@ MonoBehaviour:
     - mouseButton: 0
       keyboardButton: 0
       buttonType: 1
-      buttonObject: {fileID: 102900000, guid: b48081dacdcdbe14fa9c4239ec036200, type: 3}
+      buttonObject: {fileID: 102900000, guid: 14b83b9acd8d8b64eacd9b2d20efa938, type: 3}
       objectName: 
       className: 
       methodName: 

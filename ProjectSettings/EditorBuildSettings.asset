@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/_Scenes/Main.unity
-    guid: b48081dacdcdbe14fa9c4239ec036200
+    guid: 14b83b9acd8d8b64eacd9b2d20efa938
   - enabled: 1
     path: Assets/_Game Assets/Microgames/matkot/matkot.unity
     guid: 42a17a6908151ca47af6d9656be90d6e
@@ -77,9 +77,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game Assets/Microgames/defeatAdolf/defeatAdolf.unity
     guid: 9a94840944c56a84c95c8d44cb7bd015
-  - enabled: 1
-    path: Assets/_Game Assets/Microgames/davidAndGoliath/davidAndGoliath.unity
-    guid: e30f74cf5f9f8c949b805bee5fdcc08b
   - enabled: 1
     path: Assets/_Game Assets/Microgames/noahsArk/noahsArk.unity
     guid: b2045d551cabe1945b139c10d4cea702
