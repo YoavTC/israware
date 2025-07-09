@@ -1,8 +1,11 @@
 ﻿using System.Collections;
+using System.Linq;
 using _Game_Assets.Scripts.Definitions;
 using EditorAttributes;
+using External_Packages.MonoBehaviour_Extensions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Object = System.Object;
 
 namespace _Game_Assets.Scripts
 {
@@ -13,17 +16,24 @@ namespace _Game_Assets.Scripts
         DEATH,
     }
     
-    public class StateMachine : MonoBehaviour
+    public class StateMachine : Singleton<StateMachine>
     {
         [Header("Managers")] 
         [SerializeField] private MicrogameProvider microgameProvider;
         [SerializeField] private StatusScreen statusScreen;
+        [SerializeField] private Timer timer;
+        public Timer Timer => timer;
         
-        private AsyncOperation gameSceneLoadOperation;
-        private bool lastGameResult;
+        [Header("Microgame callbacks Listeners")] 
+        [SerializeField] private MonoBehaviour[] microgameCallbacksListeners;
         
         [SerializeField] private State currentState;
-
+        private AsyncOperation gameSceneLoadOperation;
+        
+        public MicrogameScriptableObject CurrentMicrogame { private set; get; }
+        
+        [SerializeField] private bool lastGameResult;
+        
         private void Start()
         {
             gameSceneLoadOperation = null;
@@ -50,6 +60,7 @@ namespace _Game_Assets.Scripts
                     StartCoroutine(LoadGame());
                     break;
                 case State.STATUS:
+                    NotifyMicrogameCallbackListeners(lastGameResult);
                     PrepareGame();
                     ShowStatus();
                     break;
@@ -72,7 +83,9 @@ namespace _Game_Assets.Scripts
             {
                 // Disable automatic scene switching
                 loadSceneAsync.allowSceneActivation = false;
+                
                 gameSceneLoadOperation = loadSceneAsync;
+                CurrentMicrogame = microgame;
             }
         }
 
@@ -89,6 +102,8 @@ namespace _Game_Assets.Scripts
 
             statusScreen.HideStatus();
             gameSceneLoadOperation = null;
+            
+            NotifyMicrogameCallbackListeners(CurrentMicrogame);
         }
         
         private void ShowStatus()
@@ -100,6 +115,14 @@ namespace _Game_Assets.Scripts
         private void Death()
         {
             Debug.Log("Death state reached, showing death screen");
+        }
+        
+        private void NotifyMicrogameCallbackListeners(Object parameter)
+        {
+            foreach (var listener in microgameCallbacksListeners.OfType<IMicrogameCallbacksListener>())
+            {
+                listener.ReceiveMicrogameCallback(parameter);
+            }
         }
     }
 }

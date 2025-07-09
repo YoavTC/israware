@@ -18,14 +18,14 @@ namespace _Game_Assets.Scripts
         [SerializeField] private float winFinishDelay;
         [SerializeField] private float LoseFinishDelay;
         
-        private GameManager gameManager;
+        private StateMachine stateMachine;
         
         private void Start()
         {
-            gameManager = GameManager.Instance;
+            stateMachine = StateMachine.Instance;
             
-            microgame = gameManager != null ? 
-                gameManager.CurrentMicrogame : GetMicrogame();
+            microgame = stateMachine != null ? 
+                stateMachine.CurrentMicrogame : GetMicrogame();
             
             Cursor.visible = !microgame.hideCursor;
         }
@@ -39,7 +39,7 @@ namespace _Game_Assets.Scripts
             if (positive) positiveFeedbacksCount++;
             else negativeFeedbacksCount++;
 
-            if (gameManager == null) return;
+            if (stateMachine == null) return;
             if (microgame.positiveFeedbacksToWin > 0 && positiveFeedbacksCount >= microgame.positiveFeedbacksToWin)
             {
                 StartCoroutine(Finish(true));
@@ -53,10 +53,10 @@ namespace _Game_Assets.Scripts
 
         private IEnumerator Finish(bool win)
         {
-            gameManager.Timer?.DisableTimer();
+            stateMachine.Timer?.DisableTimer();
 
             yield return new WaitForSeconds(win ? winFinishDelay : LoseFinishDelay);
-            gameManager?.StartCoroutine(gameManager.UnloadMicrogame(win));
+            stateMachine?.OnMicrogameFinished(win);
         }
         
         private MicrogameScriptableObject GetMicrogame()
@@ -75,7 +75,7 @@ namespace _Game_Assets.Scripts
 
         private void Update()
         {
-            if (!gameManager && Input.GetKeyDown(KeyCode.R))
+            if (!stateMachine && Input.GetKeyDown(KeyCode.R))
             {
                 EditorSceneManager.LoadSceneInPlayMode(SceneManager.GetActiveScene().path, new LoadSceneParameters(LoadSceneMode.Single));
             }
