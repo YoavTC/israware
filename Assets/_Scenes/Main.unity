@@ -420,7 +420,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1900127241}
   - {fileID: 810333286}
@@ -449,14 +449,14 @@ MonoBehaviour:
   positiveVideoPlayer: {fileID: 1900127242}
   negativeVideoPlayer: {fileID: 810333287}
   positiveVideos:
-  - {fileID: 32900000, guid: 5df9dde82d2f13348b0fbafa7db31bdd, type: 3}
-  - {fileID: 32900000, guid: 41e01963c877d1f42bc07c5ba4f5c338, type: 3}
-  - {fileID: 32900000, guid: c8a7feddbff68764b8b5a15b5dbe1178, type: 3}
-  - {fileID: 32900000, guid: da8a6017a0bcf7f4ea949696b19e9176, type: 3}
-  - {fileID: 32900000, guid: 1c3b3602318315248a4237262646b2b5, type: 3}
-  - {fileID: 32900000, guid: 96a08d3fac47e0241ad8b35da411cd45, type: 3}
+  - {fileID: 32900000, guid: c4f8be1a4cb3e1344933be63b7155424, type: 3}
+  - {fileID: 32900000, guid: 2ba2ab98ba1565242a43dc8941c7c80e, type: 3}
+  - {fileID: 32900000, guid: 45e2718991c1f7e4aafc563e6d48230a, type: 3}
+  - {fileID: 32900000, guid: 89a0fa458b1519946b57143d74a58f45, type: 3}
+  - {fileID: 32900000, guid: 2ace2e112431639418382f6b9cd5239a, type: 3}
+  - {fileID: 32900000, guid: 1e446a731f3a6be4abd61b011e41d285, type: 3}
   negativeVideos:
-  - {fileID: 32900000, guid: f6028457cf25ea64aaa0e4457cc93718, type: 3}
+  - {fileID: 32900000, guid: 274707237b341a4469f0d486adf4a322, type: 3}
   positiveRenderTexture: {fileID: 8400000, guid: 260c8d4fc25c3094396c21d8a601cbf5, type: 2}
   negativeRenderTexture: {fileID: 8400000, guid: 419bc779a59bc164eab43523f1e7990f, type: 2}
   videoRenderer: {fileID: 934353236}
@@ -947,7 +947,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810333285}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: f6028457cf25ea64aaa0e4457cc93718, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 274707237b341a4469f0d486adf4a322, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 349318222}
@@ -961,12 +961,14 @@ VideoPlayer:
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
   m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
@@ -2326,7 +2328,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900127240}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: f6028457cf25ea64aaa0e4457cc93718, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: c4f8be1a4cb3e1344933be63b7155424, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 349318222}
@@ -2340,12 +2342,14 @@ VideoPlayer:
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
   m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
