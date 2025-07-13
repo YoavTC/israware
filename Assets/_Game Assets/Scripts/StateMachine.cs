@@ -12,6 +12,7 @@ namespace _Game_Assets.Scripts
     public enum State
     {
         NONE,
+        START,
         GAME,
         STATUS,
         DEATH,
@@ -20,6 +21,7 @@ namespace _Game_Assets.Scripts
     public class StateMachine : Singleton<StateMachine>
     {
         [Header("Managers")] 
+        [SerializeField] private GameObject screensParent;
         [SerializeField] private MicrogameProvider microgameProvider;
         [SerializeField] private Timer timer;
         public Timer Timer => timer;
@@ -41,9 +43,8 @@ namespace _Game_Assets.Scripts
         private void Start()
         {
             gameSceneLoadOperation = null;
-            
+            screensParent.SetActive(false);
             PrepareGame();
-            ChangeState(State.GAME);
         }
 
         [Button]
@@ -63,6 +64,10 @@ namespace _Game_Assets.Scripts
             
             switch (state)
             {
+                case State.START:
+                    ChangeState(State.GAME);
+                    screensParent.SetActive(true);
+                    break;
                 case State.GAME:
                     StartCoroutine(LoadGame());
                     break;
