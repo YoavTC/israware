@@ -1,21 +1,17 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Video;
 
 namespace _Game_Assets.Scripts
 {
-    public class StatusScreen : MonoBehaviour
+    public class StatusScreen : BaseScreen
     {
-        [SerializeField] private StateMachine stateMachine;
-        
-        [SerializeField] private GameObject screenParent;
         [SerializeField] private VideoPlayer videoPlayer;
         [SerializeField] private RenderTexture renderTexture;
         
         [SerializeField] private VideoClip positiveVideoClip;
         [SerializeField] private VideoClip negativeVideoClip;
-
-        public void ShowStatus(bool won)
+        
+        public override void Show(bool won)
         {
             videoPlayer.clip = won ? positiveVideoClip : negativeVideoClip;
             
@@ -24,7 +20,7 @@ namespace _Game_Assets.Scripts
             videoPlayer.loopPointReached += source => stateMachine.ChangeState(State.GAME);
         }
 
-        public void HideStatus()
+        public override void Hide()
         {
             screenParent.SetActive(false);
             videoPlayer.clip = null;

@@ -11,6 +11,7 @@ namespace _Game_Assets.Scripts
 {
     public enum State
     {
+        NONE,
         GAME,
         STATUS,
         DEATH,
@@ -20,9 +21,12 @@ namespace _Game_Assets.Scripts
     {
         [Header("Managers")] 
         [SerializeField] private MicrogameProvider microgameProvider;
-        [SerializeField] private StatusScreen statusScreen;
         [SerializeField] private Timer timer;
         public Timer Timer => timer;
+        
+        [Header("Screens")]
+        [SerializeField] private StatusScreen statusScreen;
+        [SerializeField] private HealthScreen healthScreen;
         
         [Header("Microgame callbacks Listeners")] 
         [SerializeField] private MonoBehaviour[] microgameCallbacksListeners;
@@ -53,6 +57,9 @@ namespace _Game_Assets.Scripts
         public void ChangeState(State state)
         {
             Debug.Log($"Received new state [{state}]");
+            
+            // If already dead or same state, ignore
+            if (currentState == state || currentState == State.DEATH) return;
             
             switch (state)
             {
@@ -100,7 +107,9 @@ namespace _Game_Assets.Scripts
             Debug.Log("Game scene loaded");
             yield return null; // Wait for the next frame to ensure that the scene load operation is complete
 
-            statusScreen.HideStatus();
+            statusScreen.Hide();
+            healthScreen.Hide();
+            
             gameSceneLoadOperation = null;
             
             NotifyMicrogameCallbackListeners(CurrentMicrogame);
@@ -109,7 +118,8 @@ namespace _Game_Assets.Scripts
         private void ShowStatus()
         {
             Debug.Log("Showing status screen");
-            statusScreen.ShowStatus(lastGameResult);
+            statusScreen.Show(lastGameResult);
+            healthScreen.Show(lastGameResult);
         }
 
         private void Death()
