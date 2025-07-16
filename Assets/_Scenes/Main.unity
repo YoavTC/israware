@@ -1084,7 +1084,6 @@ GameObject:
   - component: {fileID: 1163522650}
   - component: {fileID: 1163522649}
   - component: {fileID: 1163522651}
-  - component: {fileID: 1163522652}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1111,7 +1110,6 @@ MonoBehaviour:
   healthScreen: {fileID: 1933339949}
   microgameCallbacksListeners:
   - {fileID: 1584600712}
-  - {fileID: 1163522652}
   - {fileID: 255777580}
   currentState: 0
   lastGameResult: 0
@@ -1151,21 +1149,6 @@ MonoBehaviour:
   microgamesSubgroupSize: 3
   currentMicrogame: {fileID: 0}
   nextMicrogame: {fileID: 0}
---- !u!114 &1163522652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1163522648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccdd5d0abcc54006871835f2a7ae161f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentSpeed: 0
-  normalSpeed: 0
-  speedStep: 0.1
 --- !u!1 &1258828907
 GameObject:
   m_ObjectHideFlags: 0
