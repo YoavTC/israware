@@ -43,6 +43,10 @@ namespace _Game_Assets.Scripts
         public void OnMicrogameFinished(bool won)
         {
             lastGameResult = won;
+            
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Main"));
+            SceneManager.UnloadSceneAsync(CurrentMicrogame.id);
+            
             ChangeState(State.STATUS);
         }
 
@@ -82,7 +86,7 @@ namespace _Game_Assets.Scripts
             MicrogameScriptableObject microgame = microgameProvider.GetMicrogame();
             
             // Load the scene asynchronously
-            var loadSceneAsync = SceneManager.LoadSceneAsync(microgame.id);
+            var loadSceneAsync = SceneManager.LoadSceneAsync(microgame.id, LoadSceneMode.Additive);
             if (loadSceneAsync != null)
             {
                 // Disable automatic scene switching
@@ -104,6 +108,8 @@ namespace _Game_Assets.Scripts
             Debug.Log("Game scene loaded");
             yield return null; // Wait for the next frame to ensure that the scene load operation is complete
 
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(CurrentMicrogame.id));
+            
             statusScreen.Hide();
             healthScreen.Hide();
             

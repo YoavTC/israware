@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 349318224}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1143,10 +1143,7 @@ MonoBehaviour:
   loadMicrogamesFromResources: 1
   allMicrogames: []
   microgamesIDs: []
-  bossLevelMicrogamesIDs: []
   currentMicrogameIndex: 0
-  currentMicrogameSubgroupIndex: 0
-  microgamesSubgroupSize: 3
   currentMicrogame: {fileID: 0}
   nextMicrogame: {fileID: 0}
 --- !u!1 &1258828907
