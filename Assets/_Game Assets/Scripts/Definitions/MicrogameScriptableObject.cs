@@ -22,9 +22,5 @@ namespace _Game_Assets.Scripts.Definitions
         
         public float maxMicrogameTime;
         public bool winAtTimerFinish;
-        
-        [Header("Meta Information")]
-        public bool isBossLevel;
-        [Range(0f, 100f)] public float difficulty;
     }
 }

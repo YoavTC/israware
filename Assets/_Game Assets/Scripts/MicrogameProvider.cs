@@ -14,12 +14,9 @@ namespace _Game_Assets.Scripts
         [Header("Microgames")]
         [SerializeField] private MicrogameScriptableObject[] allMicrogames;
         [SerializeField] private string[] microgamesIDs;
-        [SerializeField] private string[] bossLevelMicrogamesIDs;
 
         [Header("Debug")]
         [SerializeField, DisableInEditMode] private int currentMicrogameIndex;
-        [SerializeField, DisableInEditMode] private int currentMicrogameSubgroupIndex;
-        [SerializeField, DisableInEditMode] private int microgamesSubgroupSize;
         [Space]
         [SerializeField, ReadOnly] private MicrogameScriptableObject currentMicrogame;
         [SerializeField, ReadOnly] private MicrogameScriptableObject nextMicrogame;
@@ -31,7 +28,7 @@ namespace _Game_Assets.Scripts
             if (loadMicrogamesFromResources) 
                 LoadMicrogamesFiles();
             
-            SortMicrogames(); // Sort microgames by difficulty and split into boss and regular levels
+            SortMicrogames();
             InitializeQueue(); // Initialize the queue properly to avoid nulls
         }
 
@@ -50,25 +47,14 @@ namespace _Game_Assets.Scripts
         
         private void SortMicrogames()
         {
-            // Sort microgames by difficulty
-            allMicrogames = allMicrogames.OrderBy(microgame => microgame.difficulty).ToArray();
-
-            // Split microgames into boss levels and regular levels
-            bossLevelMicrogamesIDs = allMicrogames
-                .Where(microgame => microgame.isBossLevel)
-                .Select(microgame => microgame.id)
-                .ToArray();
-            
-            microgamesIDs = allMicrogames
-                .Where(microgame => !microgame.isBossLevel)
-                .Select(microgame => microgame.id)
-                .ToArray();
+            // Randomize the microgames array
+            allMicrogames = allMicrogames.Shuffle().ToArray();
+            microgamesIDs = allMicrogames.Select(micro => micro.id).ToArray();
         }
         
         private void InitializeQueue()
         {
             currentMicrogameIndex = -1;
-            currentMicrogameSubgroupIndex = -1;
             nextMicrogame = allMicrogames[0]; // Preload the first microgame
             AdvanceQueue(); // Set the first currentMicrogame
         }
@@ -79,35 +65,22 @@ namespace _Game_Assets.Scripts
             AdvanceQueue();
             return currentMicrogame;
         }
-
-        // Copilot Suggestion: Refactored to avoid repeated ToArray/Where allocations
+        
         private void AdvanceQueue()
         {
             currentMicrogame = nextMicrogame;
-
             currentMicrogameIndex++;
-            currentMicrogameSubgroupIndex++;
 
-            if (currentMicrogameSubgroupIndex >= microgamesSubgroupSize)
+            // Bounds check for overflow
+            if (currentMicrogameIndex >= 0 && currentMicrogameIndex < microgamesIDs.Length)
             {
-                currentMicrogameSubgroupIndex = 0;
-                
-                string randomBossLevelId = bossLevelMicrogamesIDs.Random();
-                nextMicrogame = allMicrogames.FirstOrDefault(microgame => microgame.id == randomBossLevelId);
+                string nextId = microgamesIDs[currentMicrogameIndex];
+                nextMicrogame = allMicrogames.FirstOrDefault(mg => mg.id == nextId);
             }
             else
             {
-                // Bounds check for overflow
-                if (currentMicrogameIndex >= 0 && currentMicrogameIndex < microgamesIDs.Length)
-                {
-                    string nextId = microgamesIDs[currentMicrogameIndex];
-                    nextMicrogame = allMicrogames.FirstOrDefault(mg => mg.id == nextId);
-                }
-                else
-                {
-                    Debug.Log("No more microgames available, resetting queue.");
-                    nextMicrogame = null; // Handle end of list gracefully
-                }
+                Debug.Log("No more microgames available, resetting queue.");
+                nextMicrogame = null; // Handle end of list gracefully
             }
         }
     }

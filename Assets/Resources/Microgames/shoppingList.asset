@@ -20,3 +20,5 @@ MonoBehaviour:
   negativeFeedbacksToLose: 1
   maxMicrogameTime: -1
   winAtTimerFinish: 0
+  isBossLevel: 0
+  difficulty: 78.9

@@ -21,4 +21,4 @@ MonoBehaviour:
   maxMicrogameTime: 15
   winAtTimerFinish: 0
   isBossLevel: 1
-  difficulty: 0
+  difficulty: 38
