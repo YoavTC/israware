@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Game_Assets.Scripts
+namespace _Game_Assets.Scripts.Definitions
 {
     public abstract class BaseScreen : MonoBehaviour
     {

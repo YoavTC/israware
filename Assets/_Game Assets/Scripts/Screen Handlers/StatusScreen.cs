@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using _Game_Assets.Scripts.Definitions;
+using UnityEngine;
 using UnityEngine.Video;
 
-namespace _Game_Assets.Scripts
+namespace _Game_Assets.Scripts.Screen_Handlers
 {
     public class StatusScreen : BaseScreen
     {

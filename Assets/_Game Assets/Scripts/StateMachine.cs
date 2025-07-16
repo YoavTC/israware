@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using _Game_Assets.Scripts.Definitions;
+using _Game_Assets.Scripts.Screen_Handlers;
 using EditorAttributes;
 using External_Packages.MonoBehaviour_Extensions;
 using UnityEngine;
@@ -9,15 +10,6 @@ using Object = System.Object;
 
 namespace _Game_Assets.Scripts
 {
-    public enum State
-    {
-        NONE,
-        START,
-        GAME,
-        STATUS,
-        DEATH,
-    }
-    
     public class StateMachine : Singleton<StateMachine>
     {
         [Header("Managers")] 

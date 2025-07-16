@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _Game_Assets.Scripts.Definitions;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Game_Assets.Scripts
+namespace _Game_Assets.Scripts.Screen_Handlers
 {
     public class HealthScreen : BaseScreen
     {

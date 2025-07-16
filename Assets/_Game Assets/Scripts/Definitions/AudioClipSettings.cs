@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace _Game_Assets.Scripts
+namespace _Game_Assets.Scripts.Definitions
 {
     [Serializable]
     public class AudioClipSettings
