@@ -21,7 +21,7 @@ namespace _Game_Assets.Microgames.dontTouchWomen
         {
             for (int i = 0; i < spawnCount; i++)
             {
-                Woman woman = Instantiate(womanPrefab, GetRandomSpawnPosition(), Quaternion.identity);
+                Woman woman = Instantiate(womanPrefab, GetRandomSpawnPosition(), Quaternion.identity, transform);
                 woman.Init(hasidicTransform, Random.Range(speedRange.x, speedRange.y), touchDistance);
                 womenList.Add(woman);
             }

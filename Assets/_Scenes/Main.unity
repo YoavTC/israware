@@ -412,14 +412,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349318220}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -960.00006, y: -538.06885, z: -21.309658}
+  m_LocalScale: {x: 2.1309657, y: 2.1309657, z: 2.1309657}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1705258827}
   - {fileID: 636783461}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 530898192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &349318224
 MonoBehaviour:
@@ -567,9 +567,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 940347614}
+  - {fileID: 349318223}
   m_Father: {fileID: 1550301576}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -593,8 +594,15 @@ MonoBehaviour:
   screenParent: {fileID: 940347613}
   videoPlayer: {fileID: 940347618}
   renderTexture: {fileID: 8400000, guid: cd7523c90785d3042967b2d39b98182f, type: 2}
-  positiveVideoClip: {fileID: 32900000, guid: c4f8be1a4cb3e1344933be63b7155424, type: 3}
-  negativeVideoClip: {fileID: 32900000, guid: 274707237b341a4469f0d486adf4a322, type: 3}
+  positiveVideoClips:
+  - {fileID: 32900000, guid: c4f8be1a4cb3e1344933be63b7155424, type: 3}
+  - {fileID: 32900000, guid: 2ba2ab98ba1565242a43dc8941c7c80e, type: 3}
+  - {fileID: 32900000, guid: 45e2718991c1f7e4aafc563e6d48230a, type: 3}
+  - {fileID: 32900000, guid: 89a0fa458b1519946b57143d74a58f45, type: 3}
+  - {fileID: 32900000, guid: 1e446a731f3a6be4abd61b011e41d285, type: 3}
+  negativeVideoClips:
+  - {fileID: 32900000, guid: 274707237b341a4469f0d486adf4a322, type: 3}
+  - {fileID: 32900000, guid: 2ace2e112431639418382f6b9cd5239a, type: 3}
 --- !u!1 &635892977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2204,6 +2212,5 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 349318223}
   - {fileID: 1550301576}
   - {fileID: 1163522650}
