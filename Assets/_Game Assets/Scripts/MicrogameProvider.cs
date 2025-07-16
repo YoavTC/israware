@@ -2,6 +2,7 @@ using System.Linq;
 using _Game_Assets.Scripts.Definitions;
 using EditorAttributes;
 using External_Packages.Extensions;
+using UnityEditor;
 using UnityEngine;
 
 namespace _Game_Assets.Scripts
@@ -35,6 +36,11 @@ namespace _Game_Assets.Scripts
         private void LoadMicrogamesFiles()
         {
             var loadedMicrogames = Resources.LoadAll<MicrogameScriptableObject>($"Microgames/").ToArray();
+
+            if (loadedMicrogames.Any(microgame => microgame.name.Contains("-")))
+            {
+                loadedMicrogames = loadedMicrogames.Where(microgame => !microgame.name.Contains("-")).ToArray();
+            }
             
             // If any microgame names contain "~", filter the ones that don't out
             if (loadedMicrogames.Any(microgame => microgame.name.Contains("~")))
@@ -71,17 +77,15 @@ namespace _Game_Assets.Scripts
             currentMicrogame = nextMicrogame;
             currentMicrogameIndex++;
 
-            // Bounds check for overflow
-            if (currentMicrogameIndex >= 0 && currentMicrogameIndex < microgamesIDs.Length)
-            {
-                string nextId = microgamesIDs[currentMicrogameIndex];
-                nextMicrogame = allMicrogames.FirstOrDefault(mg => mg.id == nextId);
-            }
-            else
+            if (microgamesIDs.Length <= currentMicrogameIndex)
             {
                 Debug.Log("No more microgames available, resetting queue.");
-                nextMicrogame = null; // Handle end of list gracefully
+                currentMicrogameIndex = 0;
+                microgamesIDs.Shuffle();
             }
+                
+            string nextId = microgamesIDs[currentMicrogameIndex];
+            nextMicrogame = allMicrogames.FirstOrDefault(mg => mg.id == nextId);
         }
     }
 }
