@@ -69,7 +69,6 @@ namespace _Game_Assets.Microgames.pourBeer
 
         private void PourBeer()
         {
-            Debug.Log("Pouring Beer");
             float newHeight = Mathf.Clamp(beer.localPosition.y + (beerFillSpeed * Time.deltaTime), Mathf.Min(minMaxBeerHeight.x, minMaxBeerHeight.y), Mathf.Max(minMaxBeerHeight.x, minMaxBeerHeight.y));
             beer.localPosition = new Vector3(0, newHeight, 0);
             

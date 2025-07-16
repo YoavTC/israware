@@ -195,12 +195,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -863181643, guid: dcb0264d216d1f64f8b59ae5bfd9a121, type: 3}
+  m_Sprite: {fileID: 533724779, guid: dcb0264d216d1f64f8b59ae5bfd9a121, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10, y: 10.003043}
+  m_Size: {x: 5.400267, y: 9.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -341,7 +341,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 217286138, guid: dcb0264d216d1f64f8b59ae5bfd9a121, type: 3}
+  m_Sprite: {fileID: -1871897425, guid: dcb0264d216d1f64f8b59ae5bfd9a121, type: 3}
   m_MaskAlphaCutoff: 0.2
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -749,12 +749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   microgame: {fileID: 11400000, guid: 5a71bf46bf23a2549b2fbb37f0b01f7e, type: 2}
-  microgameSettings:
-    positiveFeedbacksToWin: 1
-    negativeFeedbacksToLose: 1
-    maxMicrogameTime: 7
-    winAtTimerFinish: 0
-    hideCursor: 1
+  positiveFeedbacksCount: 0
+  negativeFeedbacksCount: 0
   winFinishDelay: 1
   LoseFinishDelay: 1
 --- !u!4 &755142732
