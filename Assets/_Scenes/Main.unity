@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lorem Ipsum
   m_isRightToLeft: 1
-  m_fontAsset: {fileID: 11400000, guid: 7df46e8a2193c5144bba9a0d80ec0867, type: 2}
-  m_sharedMaterial: {fileID: -5050225365450578321, guid: 7df46e8a2193c5144bba9a0d80ec0867, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5e2c1b456adb8d24eb18db4d5e401f5b, type: 2}
+  m_sharedMaterial: {fileID: -5050225365450578321, guid: 5e2c1b456adb8d24eb18db4d5e401f5b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
