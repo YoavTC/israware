@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: tuneAC
   m_EditorClassIdentifier: 
   id: tuneAC
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Tune the AC!
+  HEBREW_PROMPT: "\u05EA\u05E9\u05E0\u05D5 \u05DE\u05E2\u05DC\u05D5\u05EA!"
   hideCursor: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 4
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 50

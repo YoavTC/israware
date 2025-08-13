@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: geoGuessr
   m_EditorClassIdentifier: 
   id: geoGuessr
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Where Are We?
+  HEBREW_PROMPT: "\u05D0\u05D9\u05E4\u05D4 \u05D0\u05E0\u05D7\u05E0\u05D5?"
   hideCursor: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 8
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 63.2

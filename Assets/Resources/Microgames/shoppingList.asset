@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: shoppingList
   m_EditorClassIdentifier: 
   id: shoppingList
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Buy Groceries!
+  HEBREW_PROMPT: "\u05E2\u05D5\u05E9\u05D9\u05DD \u05E7\u05E0\u05D9\u05D5\u05EA!"
   hideCursor: 0
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: -1
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 78.9

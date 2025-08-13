@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: strawTropit
   m_EditorClassIdentifier: 
   id: strawTropit
-  ENGLISH_PROMPT: 
-  HEBREW_PROMPT: 
+  ENGLISH_PROMPT: Poke the Tropit!
+  HEBREW_PROMPT: "\u05E9\u05D9\u05DE\u05D5 \u05E7\u05E9!"
   hideCursor: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 5
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 10.9
