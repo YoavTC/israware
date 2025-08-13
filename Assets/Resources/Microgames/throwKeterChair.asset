@@ -16,9 +16,8 @@ MonoBehaviour:
   ENGLISH_PROMPT: Hit the Ars!
   HEBREW_PROMPT: "\u05EA\u05E4\u05D2\u05E2\u05D5 \u05D1\u05E2\u05E8\u05E1!"
   hideCursor: 1
+  promptVisual: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 6
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 37.6

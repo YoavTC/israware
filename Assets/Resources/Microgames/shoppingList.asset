@@ -16,6 +16,7 @@ MonoBehaviour:
   ENGLISH_PROMPT: Buy Groceries!
   HEBREW_PROMPT: "\u05E2\u05D5\u05E9\u05D9\u05DD \u05E7\u05E0\u05D9\u05D5\u05EA!"
   hideCursor: 0
+  promptVisual: 5
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: -1

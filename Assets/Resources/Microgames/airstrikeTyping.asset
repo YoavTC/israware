@@ -16,9 +16,8 @@ MonoBehaviour:
   ENGLISH_PROMPT: Enter the Code!
   HEBREW_PROMPT: "\u05DE\u05D4 \u05D4\u05E7\u05D5\u05D3?"
   hideCursor: 1
+  promptVisual: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 7
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 80

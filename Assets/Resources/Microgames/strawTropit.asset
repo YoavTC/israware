@@ -16,6 +16,7 @@ MonoBehaviour:
   ENGLISH_PROMPT: Poke the Tropit!
   HEBREW_PROMPT: "\u05E9\u05D9\u05DE\u05D5 \u05E7\u05E9!"
   hideCursor: 1
+  promptVisual: 5
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 5

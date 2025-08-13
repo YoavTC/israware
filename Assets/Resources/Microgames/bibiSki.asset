@@ -16,9 +16,8 @@ MonoBehaviour:
   ENGLISH_PROMPT: Hit the skier!
   HEBREW_PROMPT: "\u05EA\u05E4\u05D9\u05DC\u05D5 \u05D0\u05D5\u05EA\u05DD!"
   hideCursor: 1
+  promptVisual: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: -1
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 48.9

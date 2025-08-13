@@ -16,9 +16,8 @@ MonoBehaviour:
   ENGLISH_PROMPT: Make Coffee!
   HEBREW_PROMPT: "\u05EA\u05DB\u05D9\u05E0\u05D5 \u05E7\u05E4\u05D4!"
   hideCursor: 1
+  promptVisual: 5
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 6.5
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 31.6

@@ -16,9 +16,8 @@ MonoBehaviour:
   ENGLISH_PROMPT: Pour Beer!
   HEBREW_PROMPT: "\u05EA\u05DE\u05D6\u05D2\u05D5 \u05D1\u05D9\u05E8\u05D4!"
   hideCursor: 1
+  promptVisual: 1
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 7
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 39.5

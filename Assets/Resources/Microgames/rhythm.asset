@@ -16,9 +16,8 @@ MonoBehaviour:
   ENGLISH_PROMPT: Play the Anthem!
   HEBREW_PROMPT: "\u05EA\u05E0\u05D2\u05E0\u05D5 \u05D0\u05EA \u05D4\u05D4\u05DE\u05E0\u05D5\u05DF!"
   hideCursor: 1
+  promptVisual: 2
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 9.5
   winAtTimerFinish: 1
-  isBossLevel: 0
-  difficulty: 83.5

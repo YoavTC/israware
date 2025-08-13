@@ -16,6 +16,7 @@ namespace _Game_Assets.Scripts.Definitions
         
         [Header("Settings")]
         public bool hideCursor;
+        public PromptVisual promptVisual;
         
         public int positiveFeedbacksToWin;
         public int negativeFeedbacksToLose;

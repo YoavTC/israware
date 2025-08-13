@@ -16,6 +16,7 @@ MonoBehaviour:
   ENGLISH_PROMPT: Help Noah!
   HEBREW_PROMPT: "\u05EA\u05E2\u05D6\u05E8\u05D5 \u05DC\u05E0\u05D5\u05D7!"
   hideCursor: 0
+  promptVisual: 5
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 11

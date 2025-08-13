@@ -16,9 +16,8 @@ MonoBehaviour:
   ENGLISH_PROMPT: Catch the Shekel!
   HEBREW_PROMPT: "\u05EA\u05E4\u05E1\u05D5 \u05D0\u05EA \u05D4\u05E9\u05E7\u05DC!"
   hideCursor: 1
+  promptVisual: 6
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 7
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 68.8

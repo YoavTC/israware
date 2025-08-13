@@ -16,9 +16,8 @@ MonoBehaviour:
   ENGLISH_PROMPT: Play Matkot!
   HEBREW_PROMPT: "\u05E9\u05D7\u05E7\u05D5 \u05DE\u05D8\u05E7\u05D5\u05EA!"
   hideCursor: 1
+  promptVisual: 5
   positiveFeedbacksToWin: 10
   negativeFeedbacksToLose: 1
   maxMicrogameTime: -1
   winAtTimerFinish: 1
-  isBossLevel: 0
-  difficulty: 84.2
