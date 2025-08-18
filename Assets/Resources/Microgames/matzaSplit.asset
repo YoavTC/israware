@@ -17,9 +17,8 @@ MonoBehaviour:
   HEBREW_PROMPT: "\u05D1\u05D7\u05E8\u05D5 \u05D0\u05EA \u05D4\u05D7\u05EA\u05D9\u05DB\u05D4
     \u05E2\u05D1\u05D5\u05E8 \u05D4\u05D0\u05E4\u05D9\u05E7\u05D5\u05DE\u05DF"
   hideCursor: 0
+  promptVisual: 5
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
   maxMicrogameTime: 7
   winAtTimerFinish: 0
-  isBossLevel: 0
-  difficulty: 44.4
