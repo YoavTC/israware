@@ -18,10 +18,43 @@ namespace _Game_Assets.Microgames.gatherProtestors
         [SerializeField] private UnityEvent<float> showProtestorUnityEvent;
         [SerializeField] private UnityEvent showedAllProtestorsUnityEvent;
 
+        [Serializable]
+        public class ColorSet
+        {
+            [SerializeField] public Color colorA;
+            [SerializeField] public Color colorB;
+        }
+
+        [SerializeField] private List<ColorSet> colorSets;
+        
         private void Start()
         {
-            protestors = GetComponentsInChildren<SpriteRenderer>(true).ToList();
-            showProtestorUnityEvent?.Invoke(protestors.Count);
+            protestors = GetComponentsInChildren<SpriteRenderer>(true)
+                .OrderBy(p => p.transform.position.y)
+                .ToList();
+        
+            ApplyGradientColors();
+            SortRenderingLayers();
+        
+            // showProtestorUnityEvent?.Invoke(protestors.Count);
+        }
+        
+        private void ApplyGradientColors()
+        {
+            for (int i = 0; i < protestors.Count; i++)
+            {
+                ColorSet colorSet = colorSets.Random();
+                float t = (float)i / (protestors.Count - 1);
+                protestors[i].color = Color.Lerp(colorSet.colorA, colorSet.colorB, t);
+            }
+        }
+        
+        private void SortRenderingLayers()
+        {
+            for (int i = 0; i < protestors.Count; i++)
+            {
+                protestors[i].sortingOrder = protestors.Count - 1 - i;
+            }
         }
 
         void Update()
@@ -36,6 +69,7 @@ namespace _Game_Assets.Microgames.gatherProtestors
         {
             var protestor = protestors[Random.Range(0, protestors.Count)];
             protestor.sprite = protestorSprites[Random.Range(0, protestorSprites.Length)];
+            protestor.flipX = Random.value > 0.5f;
             protestor.gameObject.SetActive(true);
             showProtestorUnityEvent?.Invoke(protestors.Count);
             
