@@ -888,7 +888,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.2166667
+  - time: 0.68333334
     functionName: InvokeEvent
     data: healChurchill
     objectReferenceParameter: {fileID: 0}

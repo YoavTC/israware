@@ -8,10 +8,12 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] private Vector2 randomChoosingDurationRange;
-        [SerializeField, Range(0, 100)] private int attemptHealingThreshold;
+        [SerializeField, Range(0, 200)] private int attemptHealingThreshold;
         [SerializeField, Range(0f, 1f)] private float healChancePercentage;
         
         [SerializeField] private UnityEvent<ActionType> actionChosenUnityEvent;
+
+        private float currentHealth;
         
         public IEnumerator GetEnemyAction()
         {
@@ -32,11 +34,15 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
             
             actionChosenUnityEvent?.Invoke(actionChosen);
         }
+
+        public void UpdateEnemyHealth(float health)
+        {
+            currentHealth = health;
+        }
         
         private float GetEnemyHealth()
         {
-            // Placeholder for actual health retrieval logic
-            return 100f;
+            return currentHealth;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using _Game_Assets.Microgames.defeatAdolf.Code.Enums;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 
 namespace _Game_Assets.Microgames.defeatAdolf.Code
@@ -126,10 +127,17 @@ namespace _Game_Assets.Microgames.defeatAdolf.Code
             {
                 stateMachineActive = false;
                 StopAllCoroutines();
+                
                 ActionChosen(win ? ActionType.ENEMY_DEATH : ActionType.PLAYER_DEATH);
+                if (win) playerWonUnityEvent?.Invoke();
+                else playerLossUnityEvent?.Invoke();
+                
                 NotifyAnimator();
             }
         }
         #endregion
+        
+        [SerializeField] private UnityEvent playerLossUnityEvent;
+        [SerializeField] private UnityEvent playerWonUnityEvent;
     }
 }
