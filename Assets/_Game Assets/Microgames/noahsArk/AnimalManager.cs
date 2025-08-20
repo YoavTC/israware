@@ -20,6 +20,7 @@ namespace _Game_Assets.Microgames.noahsArk
         [SerializeField] private Vector2[] AITargetPoints;
         
         [Header("Events")]
+        [SerializeField] private UnityEvent animalClickedOnUnityEvent;
         [SerializeField] private UnityEvent allAnimalsClickedOnUnityEvent;
 
         private IEnumerator Start()
@@ -46,6 +47,8 @@ namespace _Game_Assets.Microgames.noahsArk
         {
             Instantiate(animalClickedParticlePrefab, animal.transform.position, Quaternion.identity);
             Destroy(animal.gameObject);
+            
+            animalClickedOnUnityEvent?.Invoke();
             
             if (transform.childCount == 1)
             {
