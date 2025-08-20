@@ -1342,7 +1342,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 619f4957914650c49af40ae0cc6cd293, type: 3}
   m_Resource: {fileID: 8300000, guid: 619f4957914650c49af40ae0cc6cd293, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4070,7 +4070,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: ea2c1036589c94e4dbcab4ed414392ea, type: 3}
   m_Resource: {fileID: 8300000, guid: ea2c1036589c94e4dbcab4ed414392ea, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -9540,7 +9540,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomChoosingDurationRange: {x: 0.1, y: 1}
   attemptHealingThreshold: 100
-  healChancePercentage: 0.3
+  healChancePercentage: 0.4
   actionChosenUnityEvent:
     m_PersistentCalls:
       m_Calls:
