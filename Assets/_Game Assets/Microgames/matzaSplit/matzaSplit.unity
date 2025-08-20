@@ -1143,11 +1143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winSFX:
     audioClip: {fileID: 8300000, guid: 9d12098ed55364e7e80e277242e2c77e, type: 3}
-    volume: 0.7
+    volume: 0.4
     pitch: 1
   loseSFX:
     audioClip: {fileID: 8300000, guid: c1bc40e9075534f9883915554a92020f, type: 3}
-    volume: 0.7
+    volume: 0.4
     pitch: 0.85
 --- !u!1 &803347160
 GameObject:
