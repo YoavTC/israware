@@ -22,6 +22,7 @@ namespace _Game_Assets.Microgames.makeCoffee
         [SerializeField] private Camera mainCamera;
         [SerializeField] private Transform spoonTransform;
         [SerializeField] private SpriteRenderer spoonItemSpriteRenderer;
+        [SerializeField] private GameObject kettleGameObject;
 
         [Header("Sprites")] 
         [SerializeField] private SerializedDictionary<Transform, Sprite> itemSprites;
@@ -33,7 +34,7 @@ namespace _Game_Assets.Microgames.makeCoffee
         private Vector3 inactiveRotation;
         
         [Header("Events")]
-        [SerializeField] private UnityEvent glassClickedUnityEvent;
+        [SerializeField] private UnityEvent usedAnyItemUnityEvent;
         [SerializeField] private UnityEvent usedSugarUnityEvent;
         [SerializeField] private UnityEvent usedCoffeeUnityEvent;
         [SerializeField] private UnityEvent usedWaterUnityEvent;
@@ -92,12 +93,12 @@ namespace _Game_Assets.Microgames.makeCoffee
             if (SelectItem(item))
             {
                 currentItem = SpoonItem.WATER;
+                kettleGameObject.SetActive(false);
             }
         }
 
         public void ClickedGlass(TweenSBobEffect item)
         {
-            glassClickedUnityEvent?.Invoke();
             DeselectLastInteractedItem();
 
             if (lastInteractedItem != null)
@@ -138,12 +139,16 @@ namespace _Game_Assets.Microgames.makeCoffee
             lastInteractedItem.DoEffect();
 
             spoonItemSpriteRenderer.sprite = itemSprites[item.transform];
+            
+            usedAnyItemUnityEvent?.Invoke();
 
             return true;
         }
 
         private void DeselectLastInteractedItem()
         {
+            kettleGameObject.SetActive(true);
+            
             lastInteractedItem?.transform.DOKill();
             lastInteractedItem?.transform.DOMove(lastInteractedItemPosition, 0.5f);
 
