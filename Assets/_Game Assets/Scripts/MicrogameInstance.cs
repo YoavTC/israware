@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using _Game_Assets.Scripts.Definitions;
 using EditorAttributes;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
+using UnityEditor.SceneManagement;
+#endif
 
 namespace _Game_Assets.Scripts
 {
