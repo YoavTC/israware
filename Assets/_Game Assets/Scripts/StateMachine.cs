@@ -26,6 +26,7 @@ namespace _Game_Assets.Scripts
         [SerializeField] private MonoBehaviour[] microgameCallbacksListeners;
         
         [SerializeField] private State currentState;
+        private bool isDead;
         private AsyncOperation gameSceneLoadOperation;
         
         public MicrogameScriptableObject CurrentMicrogame { private set; get; }
@@ -35,6 +36,8 @@ namespace _Game_Assets.Scripts
         private void Start()
         {
             gameSceneLoadOperation = null;
+            isDead = false;
+            PlayerPrefs.SetInt("_SCORE", 0);
             screensParent.SetActive(false);
             PrepareGame();
         }
@@ -54,10 +57,10 @@ namespace _Game_Assets.Scripts
         public void ChangeState(State state)
         {
             Debug.Log($"Received new state [{state}]");
-            
+
             // If already dead or same state, ignore
             if (currentState == state || currentState == State.DEATH) return;
-            
+
             switch (state)
             {
                 case State.START:
@@ -72,11 +75,12 @@ namespace _Game_Assets.Scripts
                     PrepareGame();
                     ShowStatus();
                     break;
-                case State.DEATH:
-                    Death();
-                    break;
+                    case State.DEATH:
+                        // Death();
+                        isDead = true;
+                        break;
             }
-            
+
             Debug.Log($"Changing current state to [{state}]");
             currentState = state;
         }
@@ -99,8 +103,15 @@ namespace _Game_Assets.Scripts
 
         private IEnumerator LoadGame()
         {
+            if (isDead)
+            {
+                Death();
+                yield break;
+            }
+
             Debug.Log("Loading game scene...");
             yield return new WaitUntil(() => gameSceneLoadOperation.progress >= 0.9f);
+
             
             // Allow the scene switch
             gameSceneLoadOperation.allowSceneActivation = true;
@@ -127,7 +138,9 @@ namespace _Game_Assets.Scripts
 
         private void Death()
         {
+            StopAllCoroutines();
             Debug.Log("Death state reached, showing death screen");
+            SceneManager.LoadScene("Death", LoadSceneMode.Single);
         }
         
         private void NotifyMicrogameCallbackListeners(Object parameter)

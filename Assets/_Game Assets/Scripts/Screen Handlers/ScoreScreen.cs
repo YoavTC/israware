@@ -15,10 +15,11 @@ namespace _Game_Assets.Scripts.Screen_Handlers
         public override void Show(bool won)
         {
             if (won)
-            {    
+            {
                 screenParent.SetActive(true);
                 feedback.PlayFeedbacks();
                 score++;
+                PlayerPrefs.SetInt("_SCORE", score);
             }
         }
 
