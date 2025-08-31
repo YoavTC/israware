@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using _Game_Assets.Scripts.Definitions;
 using _Game_Assets.Scripts.Screen_Handlers;
@@ -19,9 +20,8 @@ namespace _Game_Assets.Scripts
         public Timer Timer => timer;
         
         [Header("Screens")]
-        [SerializeField] private StatusScreen statusScreen;
-        [SerializeField] private HealthScreen healthScreen;
-        
+        [SerializeField] private List<BaseScreen> screens;
+
         [Header("Microgame callbacks Listeners")] 
         [SerializeField] private MonoBehaviour[] microgameCallbacksListeners;
         
@@ -110,9 +110,9 @@ namespace _Game_Assets.Scripts
 
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(CurrentMicrogame.id));
             
-            statusScreen.Hide();
-            healthScreen.Hide();
-            
+            // Hide screens
+            screens.ForEach(screen => screen.Hide());
+
             gameSceneLoadOperation = null;
             
             NotifyMicrogameCallbackListeners(CurrentMicrogame);
@@ -121,8 +121,8 @@ namespace _Game_Assets.Scripts
         private void ShowStatus()
         {
             Debug.Log("Showing status screen");
-            statusScreen.Show(lastGameResult);
-            healthScreen.Show(lastGameResult);
+            // Hide screens
+            screens.ForEach(screen => screen.Show(lastGameResult));
         }
 
         private void Death()
