@@ -3,6 +3,7 @@ using DG.Tweening;
 using External_Packages.Extra_Components;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Game_Assets.Scripts
 {
@@ -28,6 +29,14 @@ namespace _Game_Assets.Scripts
 
         void Start()
         {
+
+            var mainSceneObjects = GameObject.FindGameObjectsWithTag("MainSceneObject");
+            foreach (var obj in mainSceneObjects)
+            {
+                Destroy(obj);
+            }
+
+
             // Show cursor
             Cursor.visible = true;
 
@@ -45,6 +54,11 @@ namespace _Game_Assets.Scripts
 
             // Scale score text
             scoreText.transform.DOScale(scoreTextTargetScale, scoreTextScaleTweenSettings.duration).SetAs(scoreTextScaleTweenSettings.GetParams());
+        }
+
+        public void OnRestartButton()
+        {
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         }
     }
 }

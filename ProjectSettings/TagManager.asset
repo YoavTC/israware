@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - NotPlayer
+  - MainSceneObject
   layers:
   - Default
   - TransparentFX

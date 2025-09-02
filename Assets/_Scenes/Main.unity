@@ -1400,8 +1400,8 @@ GameObject:
   - component: {fileID: 1163522649}
   - component: {fileID: 1163522651}
   m_Layer: 0
-  m_Name: Manager
-  m_TagString: Untagged
+  m_Name: -- Manager
+  m_TagString: MainSceneObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2598,8 +2598,8 @@ GameObject:
   - component: {fileID: 1550301573}
   - component: {fileID: 1550301577}
   m_Layer: 5
-  m_Name: Main Canvas
-  m_TagString: Untagged
+  m_Name: -- Main Canvas
+  m_TagString: MainSceneObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
