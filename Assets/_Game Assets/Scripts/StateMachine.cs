@@ -56,10 +56,16 @@ namespace _Game_Assets.Scripts
         [Button]
         public void ChangeState(State state)
         {
-            Debug.Log($"Received new state [{state}]");
+            if (state == State.GAME && currentState == State.DEATH)
+            {
+                Death();
+                return;
+            }
 
             // If already dead or same state, ignore
             if (currentState == state || currentState == State.DEATH) return;
+
+            Debug.Log($"[{Time.time}]" + $"Received new state [{state}]");
 
             switch (state)
             {
@@ -81,7 +87,7 @@ namespace _Game_Assets.Scripts
                         break;
             }
 
-            Debug.Log($"Changing current state to [{state}]");
+            Debug.Log($"[{Time.time}]" + $"Changing current state to [{state}]");
             currentState = state;
         }
 

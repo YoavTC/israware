@@ -655,8 +655,8 @@ MonoBehaviour:
   microgame: {fileID: 11400000, guid: 6cbf5024391103b4798df26d00d9d1e4, type: 2}
   positiveFeedbacksCount: 0
   negativeFeedbacksCount: 0
-  winFinishDelay: 2
-  LoseFinishDelay: 2
+  winFinishDelay: 0.5
+  LoseFinishDelay: 0
 --- !u!4 &755142732
 Transform:
   m_ObjectHideFlags: 0
@@ -1414,7 +1414,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.4
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

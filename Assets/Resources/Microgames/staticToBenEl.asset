@@ -20,5 +20,5 @@ MonoBehaviour:
   promptVisual: 3
   positiveFeedbacksToWin: 1
   negativeFeedbacksToLose: 1
-  maxMicrogameTime: 8.5
+  maxMicrogameTime: 9
   winAtTimerFinish: 0

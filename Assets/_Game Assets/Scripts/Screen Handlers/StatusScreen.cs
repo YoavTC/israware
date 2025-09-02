@@ -1,6 +1,8 @@
-﻿using _Game_Assets.Scripts.Definitions;
+﻿using System;
+using _Game_Assets.Scripts.Definitions;
 using External_Packages.Extensions;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Video;
 
 namespace _Game_Assets.Scripts.Screen_Handlers
@@ -15,14 +17,29 @@ namespace _Game_Assets.Scripts.Screen_Handlers
 
         private int lastPositiveVideoHashcode;
         private int lastNegativeVideoHashcode;
+
+
+        private bool finishedPlaying = false;
+
         
         public override void Show(bool won)
         {
+            finishedPlaying = false;
+
             videoPlayer.clip = GetVideoClip(won);
-            
+
             screenParent.SetActive(true);
             videoPlayer.Play();
-            videoPlayer.loopPointReached += source => stateMachine.ChangeState(State.GAME);
+            videoPlayer.loopPointReached += OnVideoFinished;
+        }
+
+        private void OnVideoFinished(VideoPlayer source)
+        {
+            if (finishedPlaying) return;
+
+            finishedPlaying = true;
+            Debug.Log($"Video {source.clip.name} finished playing");
+            stateMachine.ChangeState(State.GAME);
         }
 
         public override void Hide()

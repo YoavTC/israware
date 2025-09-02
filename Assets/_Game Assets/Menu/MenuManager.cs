@@ -13,6 +13,9 @@ namespace _Game_Assets.Menu
         
         private void Start()
         {
+            // Lock cursor
+            Cursor.lockState = CursorLockMode.Confined;
+
             var asyncSceneLoadOperation = SceneManager.LoadSceneAsync("Main", LoadSceneMode.Additive);
             asyncSceneLoadOperation.completed += (operation) =>
             {
