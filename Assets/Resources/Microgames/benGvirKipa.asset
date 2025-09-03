@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32918d70757248b8816b6119d043acc9, type: 3}
+  m_Name: benGvirKipa
+  m_EditorClassIdentifier: 
+  id: benGvirKipa
+  ENGLISH_PROMPT: Return his Kippah!
+  HEBREW_PROMPT: "\u05EA\u05D7\u05D6\u05D9\u05E8\u05D5 \u05DC\u05D1\u05DF \u05D2\u05D1\u05D9\u05E8
+    \u05D0\u05EA \u05D4\u05DB\u05D9\u05E4\u05D4!"
+  hideCursor: 1
+  promptVisual: 3
+  positiveFeedbacksToWin: 1
+  negativeFeedbacksToLose: 1
+  maxMicrogameTime: -1
+  winAtTimerFinish: 0
